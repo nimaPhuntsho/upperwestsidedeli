@@ -1,0 +1,33 @@
+<div
+  fxLayout="row wrap"
+  fxLayoutAlign="center center"
+  class="container-fluid menu"
+>
+  <div
+    fxFlex.xs="80%"
+    fxFlex.lt-md="46%"
+    fxFlex.lt-sm="80%"
+    fxFlex.gt-lg="25%"
+    *ngFor="let item of products"
+    class="card"
+    style="width: 18rem"
+  >
+    <img
+      src="../../../assets/images/pexels-michaela-290975-removebg-preview.png"
+      class="card-img-top"
+      alt="..."
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ item.name }}</h5>
+      <p class="card-text">
+        {{ item.description }}
+      </p>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h5 class="card-title">
+          {{ item.price }}
+        </h5>
+        <a class="btn btn-secondary">Order Now</a>
+      </div>
+    </div>
+  </div>
+</div>
