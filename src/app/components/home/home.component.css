@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Freehand&family=Major+Mono+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Freehand&family=Rajdhani&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@200&family=Freehand&display=swap");
+
+img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.grid-one {
+  /* Created with https://www.css-gradient.com */
+  background: #3a503b;
+  background: -webkit-linear-gradient(top left, #3a503b, #290633);
+  background: -moz-linear-gradient(top left, #3a503b, #290633);
+  background: linear-gradient(to bottom right, #3a503b, #290633);
+}
+
+.grid-one .quote p {
+  font-size: 20px;
+  font-family: "Freehand", cursive;
+  font-family: "Major Mono Display", monospace;
+  text-align: end;
+  color: rgb(216, 241, 247);
+}
+
+.grid-one .author p {
+  text-align: left;
+  font-family: "Oswald", sans-serif;
+  text-align: end;
+  color: rgb(140, 140, 159);
+}
+
+.grid-two {
+  background-image: url(../../../assets/images/coffee_1.jpg);
+  background-size: cover;
+}
+
+.coffee-one {
+  background-image: url(../../../assets/images/img_1.jpeg);
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.facts-wrapper {
+  /* Created with https://www.css-gradient.com */
+  background: #ffffff;
+  background: -webkit-linear-gradient(top, #ffffff, #f1ffdd);
+  background: -moz-linear-gradient(top, #ffffff, #f1ffdd);
+  background: linear-gradient(to bottom, #ffffff, #f1ffdd);
+}
+
+.facts h1 {
+  font-family: "Rajdhani", sans-serif;
+}
+
+.facts p {
+  font-family: "Barlow", sans-serif;
+  font-size: 20px;
+}
+
+@media (max-width: 700px) {
+  .grid-one .quote p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .grid-one .author p {
+    text-align: center;
+  }
+}

@@ -5,3 +5,6 @@ li {
   padding: none;
   margin: none;
 }
+.wrapper {
+  height: 500px;
+}

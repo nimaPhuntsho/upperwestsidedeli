@@ -1,66 +1,20 @@
-<div
-  class="side-nav"
-  fxLayout="column"
-  fxLayoutAlign="center center"
-  fxHide.gt-xs="true"
-  *ngIf="sideNav"
->
-  <li routerLink="home" (click)="closeSideBar()" routerLinkActive="active">
-    Home
-  </li>
-  <li routerLink="menu" (click)="closeSideBar()" routerLinkActive="active">
-    Menu
-  </li>
-  <li routerLink="contact" (click)="closeSideBar()" routerLinkActive="active">
-    Contact
-  </li>
-  <li routerLink="about" (click)="closeSideBar()" routerLinkActive="active">
-    About Us
-  </li>
-</div>
-
-<!-- <div>
-  <img src="../../../assets/images/img_1.jpeg" alt="" />
-</div> -->
-
-<div
-  class="container-fluid"
-  fxLayout="row wrap"
-  fxLayoutAlign="space-around center"
->
-  <div fxLayoutAlign="start center" fxFlex="50%">
-    <img class="logo" src="../../../assets/images//Upper (1).png" alt="" />
-  </div>
-  <div
-    class="nav"
-    fxFlex="50%"
-    fxLayout="row"
-    fxLayoutAlign="space-around center"
-    fxHide.xs="true"
-  >
-    <li routerLink="home" routerLinkActive="active">Home</li>
-    <li routerLink="menu" routerLinkActive="active">Menu</li>
-    <li routerLink="contact" routerLinkActive="active">Contact</li>
-    <li routerLink="about" routerLinkActive="active">About Us</li>
-  </div>
-  <div>
-    <fa-icon
-      fxHide.gt-xs="true"
-      (click)="displayClose()"
-      class="close-bar"
-      [icon]="menuBar"
-      *ngIf="bar"
-    ></fa-icon>
-    <fa-icon
-      fxHide.gt-xs="true"
-      *ngIf="closeBtn"
-      (click)="displayBar()"
-      class="close-bar"
-      [icon]="close"
-    ></fa-icon>
+<div class="container-fluid logo-wrapper" fxLayoutAlign="center center">
+  <div class="logo">
+    <h1>Upper Westside Deli</h1>
+    <h2>BNE | AU</h2>
   </div>
 </div>
 
-<div class="wrapper">
-  <img class="logo" src="../../../assets/images//Upper (1).png" alt="" />
+<div class="menu-wrapper">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <div class="nav" fxLayout="row" fxLayoutAlign="space-around center">
+      <li routerLink="home" routerLinkActive="active">Home</li>
+      <!-- <li routerLink="menu" routerLinkActive="active">Menu</li> -->
+      <!-- <li routerLink="contact" routerLinkActive="active">Contact</li> -->
+      <li routerLink="about" routerLinkActive="active">About Us</li>
+      <button color="primary" mat-raised-button routerLink="menu">
+        ORDER NOW
+      </button>
+    </div>
+  </div>
 </div>

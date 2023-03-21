@@ -1,1 +1,22 @@
-<p>footer works!</p>
+<div class="footer" fxLayout="row" fxLayoutAlign="center center">
+  <div
+    class="items"
+    fxLayout="row"
+    fxFlex="40%"
+    fxLayoutAlign="space-evenly center"
+    fxFlex.lt-md="70%"
+    fxFlex.gt-sm="50%"
+    fxLayout.lt-sm="column"
+  >
+    <li>Terms and Conditions</li>
+    <li fxHide.lt-sm="true">|</li>
+    <li>Privacy and Policy</li>
+    <li fxHide.lt-sm="true">|</li>
+    <li>About</li>
+    <li fxHide.lt-sm="true">|</li>
+    <li>Contact</li>
+  </div>
+</div>
+<div class="copyright" fxLayout="row" fxLayoutAlign="center center">
+  <li>&copy; Copyright {{ year }}, Upper Westside Deli</li>
+</div>
