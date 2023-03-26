@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+mat-sidenav {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+h1 {
+  font-family: "Bebas Neue", cursive;
+  color: rgb(234, 240, 234);
+  letter-spacing: 4px;
+}
+
+mat-sidenav-content {
+  min-height: 85vh;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+}

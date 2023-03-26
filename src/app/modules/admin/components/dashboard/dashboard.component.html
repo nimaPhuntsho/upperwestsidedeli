@@ -1,6 +1,57 @@
-<app-header></app-header>
-<button routerLink="orders">Order</button>
-<button routerLink="upload">upload</button>
-<button routerLink="update">Update</button>
-<router-outlet></router-outlet>
-<h1>dashboard</h1>
+<mat-toolbar
+  color="primary"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
+  <div>
+    <h1>Upper Westside Deli</h1>
+  </div>
+  <div>
+    <fa-icon
+      (click)="sidenav.toggle()"
+      (click)="removeBarIcon()"
+      [icon]="faBars"
+      *ngIf="activeBar"
+    ></fa-icon>
+    <fa-icon
+      [icon]="faXmark"
+      (click)="addBarIcon()"
+      (click)="sidenav.toggle()"
+      *ngIf="activeClose"
+    ></fa-icon>
+  </div>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="'side'">
+    <li
+      routerLink="update"
+      (click)="addBarIcon()"
+      routerLink="orders"
+      (click)="sidenav.close()"
+    >
+      Orders
+    </li>
+    <li
+      routerLink="update"
+      (click)="addBarIcon()"
+      *ngIf="activeClose"
+      (click)="sidenav.close()"
+    >
+      Update
+    </li>
+    <li
+      routerLink="update"
+      (click)="addBarIcon()"
+      routerLink="upload"
+      (click)="sidenav.close()"
+    >
+      Upload
+    </li>
+    <button mat-raised-button color="primary">OFFLINE</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-orders *ngIf="router.url.includes('orders')"></app-orders>
+    <app-upload *ngIf="router.url.includes('upload')"></app-upload>
+    <app-update *ngIf="router.url.includes('update')"></app-update>
+  </mat-sidenav-content>
+</mat-sidenav-container>

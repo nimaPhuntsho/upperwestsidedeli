@@ -1,33 +1,103 @@
-<div
-  fxLayout="row wrap"
-  fxLayoutAlign="center center"
-  class="container-fluid menu"
->
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Our Menu</h1>
   <div
-    fxFlex.xs="80%"
-    fxFlex.lt-md="46%"
-    fxFlex.lt-sm="80%"
-    fxFlex.gt-lg="25%"
-    *ngFor="let item of products"
-    class="card"
-    style="width: 18rem"
+    class="category"
+    fxLayout="row wrap"
+    fxLayout.md="row wrap"
+    fxLayoutAlign="center center"
+    fxLayout.lt-md="column"
   >
-    <img
-      src="../../../assets/images/pexels-michaela-290975-removebg-preview.png"
-      class="card-img-top"
-      alt="..."
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{ item.name }}</h5>
-      <p class="card-text">
-        {{ item.description }}
-      </p>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <h5 class="card-title">
-          {{ item.price }}
-        </h5>
-        <a class="btn btn-secondary">Order Now</a>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="50%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="coffee"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Coffee</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="50%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="beer"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="beer"></fa-icon>
+        <h5 class="card-title">Beer</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="30%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="bagel"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Bagels</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="40%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="sandwich"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Sandwich</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="40%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="drinks"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Drinks</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="40%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="pies"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Pies</h5>
+      </div>
+    </div>
+    <div
+      fxFlex.md="20%"
+      fxFlex.sm="40%"
+      class="card"
+      style="width: 9rem; height: 9rem"
+      routerLink="croissant"
+      routerLinkActive="active"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <fa-icon [icon]="coffee"></fa-icon>
+        <h5 class="card-title">Croissants</h5>
       </div>
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>

@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+.price {
+  font-family: "Righteous", cursive;
+  font-size: 25px;
+}
+
+.card {
+  overflow: scroll;
+  margin: 10px;
+}
+
+fa-icon {
+  font-size: 30px;
+}

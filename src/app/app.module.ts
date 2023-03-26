@@ -21,6 +21,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { AdminModule } from './modules/admin/admin.module';
+import { FormsModule } from '@angular/forms';
+import { CoffeeComponent } from './components/coffee/coffee.component';
+import { BeerComponent } from './components/beer/beer.component';
+import { BagelComponent } from './components/bagel/bagel.component';
+import { SandwichComponent } from './components/sandwich/sandwich.component';
+import { DrinksComponent } from './components/drinks/drinks.component';
+import { PiesComponent } from './components/pies/pies.component';
+import { CroissantComponent } from './components/croissant/croissant.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -32,6 +41,13 @@ import { AdminModule } from './modules/admin/admin.module';
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
+    CoffeeComponent,
+    BeerComponent,
+    BagelComponent,
+    SandwichComponent,
+    DrinksComponent,
+    PiesComponent,
+    CroissantComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +64,8 @@ import { AdminModule } from './modules/admin/admin.module';
     MatSidenavModule,
     MatListModule,
     AdminModule,
+    FormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

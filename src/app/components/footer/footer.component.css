@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Lepcha&display=swap");
 
 .footer {
-  height: 200px;
   background-color: rgb(38, 37, 37);
+  padding: 30px;
 }
 
 .copyright {
@@ -13,4 +13,16 @@
 li {
   color: rgb(112, 120, 120);
   font-family: "Noto Sans Lepcha", sans-serif;
+  font-size: 13px;
+}
+
+img {
+  margin: 10px;
+}
+
+.items {
+  border: 1px solid rgb(140, 96, 96);
+  padding: 10px;
+  width: 70%;
+  border-radius: 5px;
 }

@@ -1,3 +1,4 @@
+import { PiesComponent } from './components/pies/pies.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -5,6 +6,12 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CoffeeComponent } from './components/coffee/coffee.component';
+import { CroissantComponent } from './components/croissant/croissant.component';
+import { DrinksComponent } from './components/drinks/drinks.component';
+import { SandwichComponent } from './components/sandwich/sandwich.component';
+import { BagelComponent } from './components/bagel/bagel.component';
+import { BeerComponent } from './components/beer/beer.component';
 
 const routes: Routes = [
   {
@@ -18,6 +25,36 @@ const routes: Routes = [
   {
     path: 'menu',
     component: MenuComponent,
+    children: [
+      {
+        path: 'coffee',
+        component: CoffeeComponent,
+      },
+      {
+        path: 'beer',
+        component: BeerComponent,
+      },
+      {
+        path: 'bagel',
+        component: BagelComponent,
+      },
+      {
+        path: 'sandwich',
+        component: SandwichComponent,
+      },
+      {
+        path: 'drinks',
+        component: DrinksComponent,
+      },
+      {
+        path: 'pies',
+        component: PiesComponent,
+      },
+      {
+        path: 'croissant',
+        component: CroissantComponent,
+      },
+    ],
   },
   {
     path: 'contact',

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faCoffee, faBeer } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu',
@@ -6,40 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-  products = [
-    {
-      name: 'Mocha',
-      productID: 1,
-      price: 5.5,
-      description:
-        'A mocha coffee comfortably takes its place in the crossroads between a coffee and  ',
-    },
-    {
-      name: 'Mocha',
-      productID: 1,
-      price: 5.5,
-      description:
-        'A mocha coffee comfortably takes its place in the crossr white chocolate. ',
-    },
-    {
-      name: 'Mocha',
-      productID: 1,
-      price: 5.5,
-      description:
-        'A mocha coffee comfortably takes its place in the crossrocolate. ',
-    },
-    {
-      name: 'Mocha',
-      productID: 1,
-      price: 5.5,
-      description: 'A mocha coffee comfortably takes its place in the crate. ',
-    },
-    {
-      name: 'Mocha',
-      productID: 1,
-      price: 5.5,
-      description:
-        'A mocha coffee comfortably takes its place in the croscolate. ',
-    },
-  ];
+  coffee = faCoffee;
+  beer = faBeer;
+  products = [];
 }

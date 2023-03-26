@@ -1,6 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 .card {
   margin: 10px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
   border: none;
+}
+
+.card:hover {
+  border: 1px solid rgb(132, 132, 170);
+  cursor: pointer;
+}
+
+fa-icon {
+  font-size: 40px;
+  color: rgb(8, 30, 94);
+}
+
+.active {
+  border: 1px solid rgb(132, 132, 170);
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+  padding: 30px;
+  color: rgb(209, 37, 120);
 }

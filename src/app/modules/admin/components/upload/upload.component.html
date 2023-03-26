@@ -1,1 +1,80 @@
-<p>upload works!</p>
+<div class="upload" fxlayout="column" fxLayoutAlign="center center">
+  <form class="form" action="" fxFlex="60%" #userInput="ngForm">
+    <h1>Enter Product Information</h1>
+    <div class="product-name">
+      <label for="">Product Name</label>
+      <input
+        [(ngModel)]="_productName"
+        name="productName"
+        type="text"
+        class="form-control"
+      />
+    </div>
+
+    <div class="price">
+      <label for="">Price</label>
+      <input
+        [(ngModel)]="_price"
+        name="price"
+        type="number"
+        class="form-control"
+      />
+    </div>
+
+    <div>
+      <label for="">Availabilty</label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="status"
+          value="Sold out"
+          id="flexRadioDefault1"
+          [(ngModel)]="_availability"
+        />
+        <label class="form-check-label" for="flexRadioDefault1">
+          Sold out
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="status"
+          id="flexRadioDefault2"
+          value="Available"
+          [(ngModel)]="_availability"
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          Available
+        </label>
+      </div>
+    </div>
+    <div>
+      <label for="">Category</label>
+      <select
+        [(ngModel)]="_category"
+        name="category"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option selected>Select category</option>
+        <option [value]="element" *ngFor="let element of category">
+          {{ element }}
+        </option>
+      </select>
+    </div>
+    <div class="ingredients">
+      <label for="">Ingredients</label>
+      <textarea
+        name="ingredients"
+        id=""
+        cols="30"
+        rows="6"
+        class="form-control"
+        [(ngModel)]="_ingredients"
+      ></textarea>
+    </div>
+    <button (click)="log()" mat-raised-button>Upload</button>
+  </form>
+</div>
