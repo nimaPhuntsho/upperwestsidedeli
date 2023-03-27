@@ -1,3 +1,4 @@
+import { CartComponent } from './components/cart/cart.component';
 import { PiesComponent } from './components/pies/pies.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
@@ -54,8 +55,13 @@ const routes: Routes = [
         path: 'croissant',
         component: CroissantComponent,
       },
+      {
+        path: 'check-out',
+        component: CartComponent,
+      },
     ],
   },
+
   {
     path: 'contact',
     component: ContactComponent,
@@ -64,6 +70,7 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
+
   {
     path: 'myadmin',
     loadChildren: () =>

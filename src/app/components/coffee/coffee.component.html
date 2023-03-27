@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row">
+<div class="container" fxLayout="row" id="coffee">
   <div
     class="card"
     style="width: 18rem; height: 20rem"
@@ -6,54 +6,50 @@
     fxLayout="row"
   >
     <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-      <h5 class="card-title">{{ element.name | uppercase }}</h5>
-      <p class="card-text">{{ element.ingredients }}</p>
-      <div fxLayout="row" fxLayoutGap="10px">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h5 class="card-title">{{ element.name | uppercase }}</h5>
+        <p class="card-text">{{ element.ingredients }}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
         <select
-          [(ngModel)]="selectedSize"
+          [(ngModel)]="element.size"
           name="size"
           class="form-select"
-          aria-label="Default select example"
+          aria-label=".form-select-sm example"
         >
           <option [value]="element.price.small">Small</option>
           <option [value]="element.price.medium">Medium</option>
           <option [value]="element.price.large">Large</option>
         </select>
         <div>
-          <p class="price">{{ selectedSize | currency }}</p>
+          <p class="price">{{ element.size }}</p>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center space-between">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            (click)="increment()"
-            (click)="getTotal()"
-          >
-            +
+          <button mat-flat-button (click)="increment(i)" (click)="getTotal(i)">
+            <fa-icon [icon]="add"></fa-icon>
           </button>
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            (click)="decrement()"
-            (click)="getTotal()"
-          >
-            -
+          <div>
+            <h4>{{ element.value }}</h4>
+          </div>
+          <button mat-flat-button (click)="decrement(i)" (click)="getTotal(i)">
+            <fa-icon [icon]="minus"></fa-icon>
           </button>
         </div>
+      </div>
+      <div
+        class="check-out"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
         <div>
-          <h4>{{ value }}</h4>
+          <h4>Total</h4>
+          <p id="total">{{ element.total | currency }}</p>
         </div>
       </div>
-    </div>
-    <div class="check-out" fxLayout="row" fxLayoutAlign="space-between center">
       <div>
-        <h4>Total</h4>
-        <p>{{ totalAmount | currency }}</p>
-      </div>
-      <div>
-        <fa-icon [icon]="cart"></fa-icon>
+        <button color="primary" mat-raised-button>Add to cart</button>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 li {
   list-style-type: none;
   padding: none;

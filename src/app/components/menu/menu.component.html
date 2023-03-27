@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center">
+<div fxLayout="column" class="menu-container" fxLayoutAlign="center center">
   <h1>Our Menu</h1>
   <div
     class="category"
@@ -14,6 +14,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="coffee"
       routerLinkActive="active"
+      (click)="scroll('coffee')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -27,6 +28,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="beer"
       routerLinkActive="active"
+      (click)="scroll('beer')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="beer"></fa-icon>
@@ -40,6 +42,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="bagel"
       routerLinkActive="active"
+      (click)="scroll('bagel')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -53,6 +56,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="sandwich"
       routerLinkActive="active"
+      (click)="scroll('sandwich')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -66,6 +70,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="drinks"
       routerLinkActive="active"
+      (click)="scroll('drinks')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -79,6 +84,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="pies"
       routerLinkActive="active"
+      (click)="scroll('pies')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -92,6 +98,7 @@
       style="width: 9rem; height: 9rem"
       routerLink="croissant"
       routerLinkActive="active"
+      (click)="scroll('croissant')"
     >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <fa-icon [icon]="coffee"></fa-icon>
@@ -100,4 +107,10 @@
     </div>
   </div>
 </div>
+<div class="cart" fxLayout="row" fxLayoutAlign="center center">
+  <button class="btn btn-primary">
+    <i class="bi bi-bag" routerLink="check-out" (click)="scroll('cart')"></i>
+  </button>
+</div>
+
 <router-outlet></router-outlet>

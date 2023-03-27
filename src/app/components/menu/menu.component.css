@@ -26,3 +26,23 @@ h1 {
   padding: 30px;
   color: rgb(209, 37, 120);
 }
+
+.cart {
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+}
+
+.cart i {
+  font-size: 25px;
+}
+
+.menu-container::after {
+  content: "";
+  width: 90%;
+  height: 2px;
+  background-color: rgb(241, 187, 187);
+  margin: 10px 0 10px 0;
+}

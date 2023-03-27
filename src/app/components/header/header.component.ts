@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { faBars, faL } from '@fortawesome/free-solid-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import {
+  faBars,
+  faXmark,
+  faCartShopping,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +12,14 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  constructor(public router: Router) {}
   menuBar = faBars;
   close = faXmark;
   closeBtn = false;
   bar = true;
   sideNav = false;
   hide = true;
+  cart = faCartShopping;
 
   displayClose() {
     this.closeBtn = true;

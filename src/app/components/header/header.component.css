@@ -49,6 +49,11 @@ img {
   transition: transform 0.5s;
 }
 
+fa-icon {
+  color: rgb(195, 227, 255);
+  font-size: 25px;
+}
+
 @keyframes fade-out {
   0% {
     opacity: 0;

@@ -30,6 +30,7 @@ import { DrinksComponent } from './components/drinks/drinks.component';
 import { PiesComponent } from './components/pies/pies.component';
 import { CroissantComponent } from './components/croissant/croissant.component';
 import { MatSelectModule } from '@angular/material/select';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MatSelectModule } from '@angular/material/select';
     DrinksComponent,
     PiesComponent,
     CroissantComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
