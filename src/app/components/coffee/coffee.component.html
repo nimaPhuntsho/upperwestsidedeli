@@ -1,55 +1,80 @@
-<div class="container" fxLayout="row" id="coffee">
+<div class="container">
+  <h3>Our coffee</h3>
   <div
-    class="card"
-    style="width: 18rem; height: 20rem"
-    *ngFor="let element of coffee; let i = index"
-    fxLayout="row"
+    class="card-container"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    id="coffee"
   >
-    <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-      <div fxLayout="column" fxLayoutAlign="center center">
-        <h5 class="card-title">{{ element.name | uppercase }}</h5>
-        <p class="card-text">{{ element.ingredients }}</p>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-        <select
-          [(ngModel)]="element.size"
-          name="size"
-          class="form-select"
-          aria-label=".form-select-sm example"
-        >
-          <option [value]="element.price.small">Small</option>
-          <option [value]="element.price.medium">Medium</option>
-          <option [value]="element.price.large">Large</option>
-        </select>
-        <div>
-          <p class="price">{{ element.size }}</p>
+    <div
+      class="card"
+      style="width: 18rem; height: 18rem"
+      *ngFor="let element of coffee; let i = index"
+      fxLayout="column"
+      fxFlex.lt-sm="80%"
+      fxFlex.gt-md="33%"
+    >
+      <div class="card-header">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <h5 class="card-title">{{ element.productName | titlecase }}</h5>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button mat-flat-button (click)="increment(i)" (click)="getTotal(i)">
-            <fa-icon [icon]="add"></fa-icon>
-          </button>
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
           <div>
-            <h4>{{ element.value }}</h4>
+            <select
+              [(ngModel)]="quantity"
+              name="size"
+              class="form-select"
+              aria-label=".form-select-sm example"
+            >
+              <option [value]="element.price.small">Small</option>
+              <option [value]="element.price.medium">Medium</option>
+              <option [value]="element.price.large">Large</option>
+            </select>
           </div>
-          <button mat-flat-button (click)="decrement(i)" (click)="getTotal(i)">
-            <fa-icon [icon]="minus"></fa-icon>
+          <div>
+            <p>{{ quantity | currency }}</p>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="!element.availability"
+              (click)="increment(i)"
+            >
+              <fa-icon [icon]="addIcon"></fa-icon>
+            </button>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <h6 class="quantity">{{ element }}</h6>
+            </div>
+            <button type="button" class="btn btn-primary" [disabled]="!element">
+              <fa-icon [icon]="minusIcon"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div
+          class="check-out"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <p>{{ element.price.large | currency }}</p>
+        </div>
+        <div fxLayout="row">
+          <button
+            [disabled]="!element"
+            color="primary"
+            (click)="order(i)"
+            mat-raised-button
+          >
+            Add to cart
           </button>
+          <!-- <div *ngIf="success">
+            <i class="bi bi-check2"></i>
+          </div> -->
         </div>
-      </div>
-      <div
-        class="check-out"
-        fxLayout="row"
-        fxLayoutAlign="space-between center"
-      >
-        <div>
-          <h4>Total</h4>
-          <p id="total">{{ element.total | currency }}</p>
-        </div>
-      </div>
-      <div>
-        <button color="primary" mat-raised-button>Add to cart</button>
       </div>
     </div>
   </div>

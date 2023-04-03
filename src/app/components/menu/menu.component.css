@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
 
 .card {
   margin: 10px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(230, 236, 239, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(234, 222, 222, 0.07) 0px 16px 16px;
   border: none;
 }
 
@@ -39,10 +41,22 @@ h1 {
   font-size: 25px;
 }
 
-.menu-container::after {
+/* .menu-container::after {
   content: "";
   width: 90%;
   height: 2px;
   background-color: rgb(241, 187, 187);
   margin: 10px 0 10px 0;
+} */
+.ok {
+  border: 3px solid red;
+}
+img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.card-title {
+  font-family: "Josefin Sans", sans-serif;
 }

@@ -20,15 +20,26 @@
 }
 
 fa-icon {
-  font-size: 20px;
+  font-size: 15px;
 }
-
+/*
 #total {
   font-family: "Hammersmith One", sans-serif;
   color: rgb(20, 128, 88);
   font-size: 25px;
+} */
+
+.test {
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
-button {
-  width: 100%;
+select {
+  width: 50px;
+}
+.quantity {
+  margin: 0 10px 0 10px;
 }

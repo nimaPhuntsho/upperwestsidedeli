@@ -1,6 +1,25 @@
 <div class="upload" fxlayout="column" fxLayoutAlign="center center">
-  <form class="form" action="" fxFlex="60%" #userInput="ngForm">
+  <form
+    class="form"
+    action=""
+    fxFlex="60%"
+    fxFlex.lt-sm="90%"
+    #userInput="ngForm"
+  >
     <h1>Enter Product Information</h1>
+    <div class="form-check" class="coffee-item">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        name="coffee-item"
+        [(ngModel)]="isCoffee"
+      />
+      <label class="form-check-label" for="flexCheckDefault">
+        (IF you are uploading coffee products, please tick)
+      </label>
+    </div>
+
     <div class="product-name">
       <label for="">Product Name</label>
       <input
@@ -8,17 +27,25 @@
         name="productName"
         type="text"
         class="form-control"
+        required=""
       />
+      <p class="error" *ngIf="hasError">
+        Name should have only aplha characters
+      </p>
     </div>
 
-    <div class="price">
+    <div class="price" *ngIf="!isCoffee">
       <label for="">Price</label>
       <input
         [(ngModel)]="_price"
         name="price"
         type="number"
         class="form-control"
+        required=""
       />
+      <p class="error" *ngIf="hasError">
+        Price should have only numeric characters
+      </p>
     </div>
 
     <div>
@@ -31,6 +58,7 @@
           value="Sold out"
           id="flexRadioDefault1"
           [(ngModel)]="_availability"
+          required=""
         />
         <label class="form-check-label" for="flexRadioDefault1">
           Sold out
@@ -44,27 +72,31 @@
           id="flexRadioDefault2"
           value="Available"
           [(ngModel)]="_availability"
+          required=""
         />
         <label class="form-check-label" for="flexRadioDefault2">
           Available
         </label>
       </div>
+      <p class="error" *ngIf="hasError">Availabilty is required</p>
     </div>
-    <div>
+    <div *ngIf="!isCoffee">
       <label for="">Category</label>
       <select
         [(ngModel)]="_category"
         name="category"
         class="form-select"
         aria-label="Default select example"
+        required=""
       >
         <option selected>Select category</option>
         <option [value]="element" *ngFor="let element of category">
           {{ element }}
         </option>
       </select>
+      <p class="error" *ngIf="hasError">Category required</p>
     </div>
-    <div class="ingredients">
+    <div class="ingredients" *ngIf="!isCoffee">
       <label for="">Ingredients</label>
       <textarea
         name="ingredients"
@@ -73,8 +105,29 @@
         rows="6"
         class="form-control"
         [(ngModel)]="_ingredients"
+        required=""
       ></textarea>
+      <p class="error" *ngIf="hasError">Ingredients required</p>
     </div>
-    <button (click)="log()" mat-raised-button>Upload</button>
+    <button
+      (click)="upload()"
+      mat-raised-button
+      [disabled]="userInput.invalid"
+      *ngIf="!isCoffee"
+    >
+      Upload
+    </button>
+    <p *ngIf="isSuccess">Product uploaded</p>
+    <div>
+      <button
+        (click)="uploadCoffee(userInput)"
+        mat-raised-button
+        [disabled]="userInput.invalid"
+        *ngIf="isCoffee"
+      >
+        Upload coffee
+      </button>
+      <p *ngIf="isSuccess">Product uploaded</p>
+    </div>
   </form>
 </div>

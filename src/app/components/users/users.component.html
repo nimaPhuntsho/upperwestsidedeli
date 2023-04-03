@@ -1,0 +1,14 @@
+<div class="user">
+  <li class="nav-item dropdown" *ngIf="auth.userData as user">
+    <a
+      class="nav-link dropdown-toggle"
+      data-bs-toggle="dropdown"
+      role="button"
+      aria-expanded="false"
+      >Hello, {{ auth.userName }}
+    </a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" (click)="auth.logout()">Log out</a></li>
+    </ul>
+  </li>
+</div>

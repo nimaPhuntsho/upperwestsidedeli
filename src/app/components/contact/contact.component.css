@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+.business-container {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  margin: 10px;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.business-container h4 {
+  font-family: "Raleway", sans-serif;
+}
+
+li {
+  padding: 5px;
+  font-family: "Poppins", sans-serif;
+}

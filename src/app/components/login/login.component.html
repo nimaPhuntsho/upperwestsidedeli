@@ -1,0 +1,23 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <div
+    class="sign-in"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="40px"
+  >
+    <div>
+      <img src="../../../assets/images/LOGO_black.png" alt="" />
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <div>
+        <h1>Sign in</h1>
+      </div>
+      <firebase-ui
+        (signInSuccessWithAuthResult)="successCallback($event)"
+        (signInFailure)="errorCallback($event)"
+        (uiShown)="uiShownCallback()"
+      ></firebase-ui>
+    </div>
+  </div>
+</div>
+<button (click)="logout()">Log out</button>

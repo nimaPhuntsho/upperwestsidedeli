@@ -1,36 +1,22 @@
 <div class="container" fxLayout="row" id="cart" fxLayoutAlign="center center">
   <div class="card" style="width: 22rem">
     <div class="card-body">
-      <div class="header">
-        <h5 class="card-title">Your order</h5>
-        <h4>Order No: 7787</h4>
-      </div>
       <div class="item-container">
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="name">
-            <h5>Mocha</h5>
-            <h6>2 X small</h6>
-          </div>
-          <div class="item-price">
-            <p>$5.6</p>
-          </div>
+        <div class="header">
+          <h5 class="card-title">Your order</h5>
         </div>
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center">
+        <div
+          class="item"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          *ngFor="let element of orderList"
+        >
           <div class="name">
-            <h5>Mocha</h5>
-            <h6>2 X small</h6>
+            <h5>{{ element.productName | titlecase }}</h5>
+            <h6>{{ element.quantity }} x {{ element.price }}</h6>
           </div>
           <div class="item-price">
-            <p>$5.6</p>
-          </div>
-        </div>
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="name">
-            <h5>Mocha</h5>
-            <h6>2 X small</h6>
-          </div>
-          <div class="item-price">
-            <p>$5.6</p>
+            <p>{{ element.total }}</p>
           </div>
         </div>
       </div>
@@ -41,11 +27,11 @@
         fxLayoutAlign="space-between center"
       >
         <h5>Total</h5>
-        <p>$98.20</p>
+        <p>{{ grandTotal | currency }}</p>
       </div>
       <div class="edit-order" fxLayout="column" fxLayoutAlign="center center">
         <button color="primary" mat-raised-button>Edit</button>
-        <button color="primary" mat-raised-button>Place order</button>
+        <button color="primary" mat-raised-button>Check out</button>
       </div>
     </div>
   </div>

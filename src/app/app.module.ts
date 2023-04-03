@@ -31,6 +31,46 @@ import { PiesComponent } from './components/pies/pies.component';
 import { CroissantComponent } from './components/croissant/croissant.component';
 import { MatSelectModule } from '@angular/material/select';
 import { CartComponent } from './components/cart/cart.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import {
+  provideFirestore,
+  getFirestore,
+  Firestore,
+} from '@angular/fire/firestore';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { LoginComponent } from './components/login/login.component';
+import { firebase, FirebaseUIModule } from 'firebaseui-angular';
+import * as firebaseui from 'firebaseui';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { UsersComponent } from './components/users/users.component';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      scopes: ['public_profile', 'email', 'user_likes', 'user_friends'],
+      customParameters: {
+        auth_type: 'reauthenticate',
+      },
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    },
+    // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    // {
+    //   requireDisplayName: false,
+    //   provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    // },
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    // firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
+  ],
+  tosUrl: '<your-tos-link>',
+  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
+  credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
+};
 
 @NgModule({
   declarations: [
@@ -50,6 +90,9 @@ import { CartComponent } from './components/cart/cart.component';
     PiesComponent,
     CroissantComponent,
     CartComponent,
+    PrivacyComponent,
+    LoginComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +111,12 @@ import { CartComponent } from './components/cart/cart.component';
     AdminModule,
     FormsModule,
     MatSelectModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],

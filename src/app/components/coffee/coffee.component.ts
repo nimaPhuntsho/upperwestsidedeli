@@ -1,10 +1,23 @@
-import { Product } from './../../modules/admin/components/upload/upload.component';
-import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DataService } from './../../data.service';
+import {
+  Product,
+  Coffee,
+} from './../../modules/admin/components/upload/upload.component';
+import { Component, inject } from '@angular/core';
 import {
   faBagShopping,
   faPlus,
   faMinus,
 } from '@fortawesome/free-solid-svg-icons';
+import { NgFor } from '@angular/common';
+
+export interface CoffeeOrder {
+  productName: string;
+  price: number;
+  total: number;
+  quantity: number;
+}
 
 @Component({
   selector: 'app-coffee',
@@ -12,69 +25,54 @@ import {
   styleUrls: ['./coffee.component.css'],
 })
 export class CoffeeComponent {
+  myProducts: Product[] = [];
+  public coffee: Coffee[] = [];
   cart = faBagShopping;
-  add = faPlus;
-  minus = faMinus;
-  coffee = [
-    {
-      name: 'Mocha',
-      ingredients: 'Milk, sugar, marsh, water, cinnomon',
-      price: {
-        small: 4.5,
-        medium: 5.5,
-        large: 6.5,
-      },
-      size: 0,
-      value: 0, // store the number of particular order
-      total: 0,
-    },
+  addIcon = faPlus;
+  minusIcon = faMinus;
+  quantity: number = 0;
+  total = 0;
+  orderList: CoffeeOrder[] = [];
+  success = false;
 
-    {
-      name: 'Cuppacino',
-      ingredients: 'Milk, chocolate',
-      price: {
-        small: 4.5,
-        medium: 5.5,
-        large: 6.5,
-      },
-      size: 0,
-      value: 0,
+  test: CoffeeOrder[] = [];
+  constructor(private afs: DataService) {}
+
+  ngOnInit() {
+    let order = {
       total: 0,
-    },
-    {
-      name: 'Esspreso',
-      ingredients: 'water, sugar, marsh',
-      price: {
-        small: 4.5,
-        medium: 5.5,
-        large: 6.5,
-      },
       size: 0,
-      value: 0,
-      total: 0,
-    },
-  ];
+      quantity: 0,
+    };
+    this.afs.getCoffee().then((docs) => {
+      docs?.subscribe((data) => {
+        data.map((element) => {
+          const myOrder = Object.assign({}, element, order);
+          this.coffee.push(myOrder);
+        });
+      });
+    });
+  }
 
   increment(index: number) {
-    this.coffee[index].value++;
+    console.log(Object.keys(this.coffee[index]));
   }
 
-  decrement(index: number) {
-    if (this.coffee[index].value > 0) {
-      this.coffee[index].value--;
-    }
-  }
+  decrement(coffee: CoffeeOrder) {}
 
   getTotal(index: number) {
-    this.coffee[index].total =
-      this.coffee[index].size * this.coffee[index].value;
+    // this.coffee[index].total =
+    //   this.coffee[index].quantity * this.coffee[index].size;
   }
 
-  // clearAll(index: number) {
-  //   this.coffee[index].size = 0;
-  //   this.coffee[index].value = 0;
-  //   this.coffee[index].total = 0;
-  // }
-
-  addprob() {}
+  order(index: number) {
+    // let order: CoffeeOrder = {
+    //   productName: this.coffee[index].productName,
+    //   price: this.coffee[index].size,
+    //   total: this.coffee[index].total,
+    //   quantity: this.coffee[index].quantity,
+    // };
+    // this.orderList.push(order);
+    // this.afs.sendMessage(this.orderList);
+  }
 }

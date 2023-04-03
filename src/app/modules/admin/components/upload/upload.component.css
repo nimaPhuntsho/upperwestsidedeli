@@ -3,3 +3,19 @@
   padding: 30px;
   margin-top: 10px;
 }
+
+.coffee-item label {
+  letter-spacing: 1px;
+  font-style: italic;
+  color: rgb(61, 53, 44);
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.error {
+  color: red;
+}
+
+.error::before {
+  content: "*";
+}

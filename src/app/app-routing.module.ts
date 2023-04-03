@@ -1,3 +1,7 @@
+import { AuthGuardGuard } from './auth-guard.guard';
+import { UsersComponent } from './components/users/users.component';
+import { LoginComponent } from './components/login/login.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PiesComponent } from './components/pies/pies.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -25,6 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'menu',
+    canActivate: [AuthGuardGuard],
     component: MenuComponent,
     children: [
       {
@@ -61,7 +66,6 @@ const routes: Routes = [
       },
     ],
   },
-
   {
     path: 'contact',
     component: ContactComponent,
@@ -70,11 +74,23 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
-
+  {
+    path: 'privacy',
+    component: PrivacyComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'user',
+    component: UsersComponent,
+  },
   {
     path: 'myadmin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuardGuard],
   },
   {
     path: '**',
