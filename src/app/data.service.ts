@@ -1,4 +1,6 @@
-import { CoffeeOrder } from './components/coffee/coffee.component';
+import { firebase } from 'firebaseui-angular';
+import { Admin } from './modules/admin/components/adminlogin/adminlogin.component';
+import { CoffeeOrder, CartCoffee } from './components/coffee/coffee.component';
 import {
   Product,
   Coffee,
@@ -16,26 +18,45 @@ import {
   getDocs,
   addDoc,
   doc,
-  DocumentData,
+  Timestamp,
+  increment,
+  orderBy,
 } from 'firebase/firestore';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, timestamp } from 'rxjs';
 import { Customer } from './components/login/login.component';
+import { Sale } from './components/cart/cart.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private messageSource = new BehaviorSubject<CoffeeOrder[]>([]);
+  private messageSource = new BehaviorSubject<CartCoffee[]>([]);
   message$ = this.messageSource.asObservable();
 
   private numberOfItems = new BehaviorSubject<number>(0);
   order$ = this.numberOfItems.asObservable();
 
+  private userName = new BehaviorSubject<string>('');
+  name$ = this.userName.asObservable();
+
   constructor(private fs: Firestore) {}
 
-  async getProducts(name: string) {
+  async getProducts(dbName: string, category: string) {
     try {
-      const userProfileCollection = collection(this.fs, name);
+      const userProfileCollection = query(
+        collection(this.fs, dbName),
+        where('category', '==', category)
+      );
+      return collectionData(userProfileCollection) as Observable<Product[]>;
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
+  async getAllProducts() {
+    try {
+      const userProfileCollection = query(collection(this.fs, 'products'));
       return collectionData(userProfileCollection) as Observable<Product[]>;
     } catch (error) {
       console.log(error);
@@ -53,10 +74,23 @@ export class DataService {
     return;
   }
 
+  async getAllOrders() {
+    try {
+      const userProfileCollection = query(
+        collection(this.fs, 'orders'),
+        orderBy('createdAt')
+      );
+      return collectionData(userProfileCollection) as Observable<Sale[]>;
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
   async getAdminCredentials() {
     try {
       const userProfileCollection = collection(this.fs, 'Admin');
-      return collectionData(userProfileCollection) as Observable<Product[]>;
+      return collectionData(userProfileCollection) as Observable<Admin[]>;
     } catch (error) {
       console.log(error);
     }
@@ -68,9 +102,9 @@ export class DataService {
     const docRef = await addDoc(collection(db, 'products'), product);
   }
 
-  async addCoffee(coffee: Coffee) {
+  addCoffee(coffee: Coffee) {
     let db = getFirestore();
-    const docRef = await addDoc(collection(db, 'coffee'), coffee);
+    const docRef = addDoc(collection(db, 'coffee'), coffee);
   }
 
   async addUser(user: Customer) {
@@ -78,11 +112,15 @@ export class DataService {
     const docRef = await addDoc(collection(db, 'Users'), user);
   }
 
-  sendMessage(order: CoffeeOrder[]) {
+  sendMessage(order: CartCoffee[]) {
     this.messageSource.next(order);
   }
 
   sendOrderNumbers(orders: number) {
     this.numberOfItems.next(orders);
+  }
+
+  sendName(name: string) {
+    this.userName.next(name);
   }
 }

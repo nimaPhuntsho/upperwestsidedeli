@@ -1,3 +1,4 @@
+import { FaqComponent } from './components/faq/faq.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
@@ -87,10 +88,13 @@ const routes: Routes = [
     component: UsersComponent,
   },
   {
+    path: 'faq',
+    component: FaqComponent,
+  },
+  {
     path: 'myadmin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [AuthGuardGuard],
   },
   {
     path: '**',

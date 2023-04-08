@@ -1,4 +1,8 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center center">
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <h1>
+    This is an admin log in page, if you are a customer click
+    <span style="color: blue" routerlink="login">here</span>
+  </h1>
   <div
     class="sign-in"
     fxLayout="column"
@@ -20,4 +24,6 @@
     </div>
   </div>
 </div>
-<button (click)="logout('login')">Log out</button>
+<button (click)="logout('myadmin')">Log out</button>
+<button (click)="get()">Admin</button>
+<router-outlet></router-outlet>

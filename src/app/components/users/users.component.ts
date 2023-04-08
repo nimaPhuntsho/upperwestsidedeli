@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/data.service';
 import { AuthService } from './../../auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,11 +10,10 @@ import { Component, OnInit } from '@angular/core';
 export class UsersComponent {
   displayName = '';
 
-  constructor(public auth: AuthService) {}
+  constructor(public data: DataService, public auth: AuthService) {}
 
   ngOnInit() {
-    // this.auth.sendName();
-    // this.auth.message$.subscribe((name) => (this.displayName = name));
-    // console.log(this.displayName + 'name');
+    this.data.name$.subscribe((user) => (this.displayName = user));
+    console.log(this.displayName);
   }
 }

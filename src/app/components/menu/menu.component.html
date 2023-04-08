@@ -1,143 +1,50 @@
-<h3>Our menu</h3>
-<div class="menu-container" fxLayout="row wrap" fxLayoutAlign="center center">
-  <div
-    class="category"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-    *ngFor="let element of category; let i = index"
-  >
+<app-users></app-users>
+
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <h1>Our menu</h1>
+  <div class="menu-container" fxLayout="row wrap" fxLayoutAlign="center center">
     <div
-      class="card"
-      style="width: 9rem; height: 9rem"
-      [routerLink]="element.toLowerCase()"
-      routerLinkActive="element"
-      (click)="scroll(i, element)"
+      class="category"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      *ngFor="let element of category; let i = index"
     >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <div>
-          <img
-            src="{{ 'assets/images/' + element.toLowerCase() + '.png' }}"
-            alt="img"
-          />
-        </div>
-        <div>
-          <h5 class="card-title">
-            {{ element }}
-          </h5>
+      <div
+        class="card"
+        style="width: 9rem; height: 9rem"
+        [routerLink]="element.toLowerCase()"
+        routerLinkActive="element"
+        (click)="scroll(i, element)"
+      >
+        <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
+          <div>
+            <img
+              src="{{ 'assets/images/' + element.toLowerCase() + '.png' }}"
+              alt="img"
+            />
+          </div>
+          <div>
+            <h5 class="card-title">
+              {{ element }}
+            </h5>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="cart" fxLayout="row" fxLayoutAlign="center center">
-  <button class="btn btn-primary position-relative">
-    <i class="bi bi-bag" routerLink="check-out">
-      <span
-        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-      >
-        {{ numberOfOrders }}
-        <span class="visually-hidden">unread messages</span>
-      </span>
-    </i>
-  </button>
+  <div class="cart" fxLayout="row" fxLayoutAlign="center center">
+    <button class="btn btn-primary position-relative">
+      <i class="bi bi-bag" routerLink="check-out">
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          {{ numberOfOrders }}
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </i>
+    </button>
+  </div>
 </div>
 
+<!-- <app-cart (badgeCounter)="(badgeCounter)"></app-cart> -->
 <router-outlet></router-outlet>
-<!-- <div
-      fxFlex.lt-sm="33%"
-      fxFlex.sm="50%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="coffee"
-      routerLinkActive="active"
-      (click)="scroll('coffee')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Coffee</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="50%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="beer"
-      routerLinkActive="active"
-      (click)="scroll('beer')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="beer"></fa-icon>
-        <h5 class="card-title">Beer</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="30%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="bagel"
-      routerLinkActive="active"
-      (click)="scroll('bagel')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Bagels</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="40%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="sandwich"
-      routerLinkActive="active"
-      (click)="scroll('sandwich')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Sandwich</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="40%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="drinks"
-      routerLinkActive="active"
-      (click)="scroll('drinks')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Drinks</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="40%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="pies"
-      routerLinkActive="active"
-      (click)="scroll('pies')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Pies</h5>
-      </div>
-    </div>
-    <div
-      fxFlex.md="20%"
-      fxFlex.sm="40%"
-      class="card"
-      style="width: 9rem; height: 9rem"
-      routerLink="croissant"
-      routerLinkActive="active"
-      (click)="scroll('croissant')"
-    >
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <fa-icon [icon]="coffee"></fa-icon>
-        <h5 class="card-title">Croissants</h5>
-      </div>
-    </div> -->

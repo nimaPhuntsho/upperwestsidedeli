@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
+.container {
+  padding: 5rem 0 5rem 0;
+}
 .card {
   margin: 10px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
@@ -24,9 +27,12 @@ fa-icon {
 }
 
 h1 {
-  font-family: "Pacifico", cursive;
+  font-family: "Rampart One", cursive;
   padding: 30px;
-  color: rgb(209, 37, 120);
+  color: rgb(143, 88, 115);
+  letter-spacing: 3px;
+  word-spacing: 10px;
+  font-size: 50px;
 }
 
 .cart {

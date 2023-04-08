@@ -1,1 +1,49 @@
-<h1>Update products here</h1>
+<div class="container">
+  <div>
+    <h1>Coffee</h1>
+  </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let element of allCoffee; let i = index">
+        <tr>
+          <td>{{ element.productName }}</td>
+          <td>{{ element.price.large }}</td>
+          <td><button>Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container" *ngFor="let element of setProducts">
+  <div>
+    <h1>{{ element.category | titlecase }}</h1>
+    <div>
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product Name</th>
+              <th scope="col">Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let element of allProducts; let i = index">
+            <tr>
+              <td>{{ element.productName }}</td>
+              <td>{{ element.availability }}</td>
+              <td><button>Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div></div>
+</div>

@@ -1,5 +1,5 @@
 <div class="container">
-  <h3>Our coffee</h3>
+  <h1>Our coffee</h1>
   <div
     class="card-container"
     fxLayout="row wrap"
@@ -8,22 +8,28 @@
   >
     <div
       class="card"
-      style="width: 18rem; height: 18rem"
-      *ngFor="let element of coffee; let i = index"
+      style="width: 18rem; height: 30rem"
+      *ngFor="let element of orderList; let i = index"
       fxLayout="column"
       fxFlex.lt-sm="80%"
       fxFlex.gt-md="33%"
     >
-      <div class="card-header">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <h5 class="card-title">{{ element.productName | titlecase }}</h5>
-        </div>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h2 class="card-title">{{ element.productName | titlecase }}</h2>
       </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <img
+          src="{{
+            'assets/images/' + element.productName.toLowerCase() + '.png'
+          }}"
+        />
+      </div>
+
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
         <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
           <div>
             <select
-              [(ngModel)]="quantity"
+              [(ngModel)]="element.size"
               name="size"
               class="form-select"
               aria-label=".form-select-sm example"
@@ -34,7 +40,7 @@
             </select>
           </div>
           <div>
-            <p>{{ quantity | currency }}</p>
+            <p>{{ element.size | currency }}</p>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -42,15 +48,22 @@
             <button
               type="button"
               class="btn btn-primary"
-              [disabled]="!element.availability"
+              [disabled]="!element.size"
               (click)="increment(i)"
+              (click)="getTotal(i)"
             >
               <fa-icon [icon]="addIcon"></fa-icon>
             </button>
             <div fxLayout="row" fxLayoutAlign="center center">
-              <h6 class="quantity">{{ element }}</h6>
+              <h6 class="quantity">{{ element.quantity }}</h6>
             </div>
-            <button type="button" class="btn btn-primary" [disabled]="!element">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="decrement(i)"
+              (click)="getTotal(i)"
+              [disabled]="!element.size"
+            >
               <fa-icon [icon]="minusIcon"></fa-icon>
             </button>
           </div>
@@ -60,20 +73,20 @@
           fxLayout="row"
           fxLayoutAlign="space-between center"
         >
-          <p>{{ element.price.large | currency }}</p>
+          <p>{{ element.total | currency }}</p>
         </div>
         <div fxLayout="row">
           <button
-            [disabled]="!element"
+            [disabled]="!element.quantity"
             color="primary"
             (click)="order(i)"
             mat-raised-button
           >
             Add to cart
           </button>
-          <!-- <div *ngIf="success">
+          <div *ngIf="element.success">
             <i class="bi bi-check2"></i>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>

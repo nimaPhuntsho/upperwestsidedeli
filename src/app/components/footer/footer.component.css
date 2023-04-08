@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Lepcha&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap");
 .footer {
   background-color: rgb(38, 37, 37);
   padding: 30px;
@@ -26,4 +26,11 @@ img {
   padding: 10px;
   width: 70%;
   border-radius: 5px;
+}
+
+.sign {
+  font-family: "Libre Barcode 39 Text", cursive;
+  font-size: 30px;
+  color: aliceblue;
+  margin-left: 0.5rem;
 }

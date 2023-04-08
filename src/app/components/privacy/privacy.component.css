@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap");
+
+h1,
+h2 {
+  font-family: "Josefin Sans", sans-serif;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+.container {
+  padding: 3rem;
+}
+
+li {
+  list-style-type: decimal;
+  line-height: 2rem;
+}
+
+p {
+  line-height: 2rem;
+  text-align: justify;
+}

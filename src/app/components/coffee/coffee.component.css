@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 .price {
   font-family: "Righteous", cursive;
   font-size: 18px;
 }
 
 .card {
-  overflow: scroll;
   margin: 10px;
+  padding: 10px;
 }
 
 .card-text {
@@ -29,17 +30,26 @@ fa-icon {
   font-size: 25px;
 } */
 
-.test {
-  border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-}
-
 select {
   width: 50px;
 }
 .quantity {
   margin: 0 10px 0 10px;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+h1 {
+  font-family: "Poiret One", cursive;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+h2 {
+  font-family: "Ubuntu Condensed", sans-serif;
+  font-size: 25px;
 }

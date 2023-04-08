@@ -36,11 +36,11 @@ export class AuthService {
     });
   }
 
-  logout() {
+  logout(url: string) {
     this.auth.signOut().then(() => {
       localStorage.removeItem('user');
     });
-    this.router.navigate(['login']);
+    this.router.navigate([url]);
   }
 
   isLoggedIn(): boolean {

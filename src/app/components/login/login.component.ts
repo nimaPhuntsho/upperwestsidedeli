@@ -20,6 +20,7 @@ export interface Customer {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  currentUser = '';
   constructor(
     private auth: AuthService,
     private data: DataService,
@@ -28,21 +29,23 @@ export class LoginComponent {
 
   ngOnInit() {}
 
-  logout() {
-    this.auth.logout();
+  logout(url: string) {
+    this.auth.logout(url);
   }
 
   successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
-    let currentUser = signInSuccessData.authResult.user;
-    let user: Customer = {
-      uid: JSON.stringify(currentUser?.uid),
-      displayName: JSON.stringify(currentUser?.displayName),
-      email: JSON.stringify(currentUser?.email),
-      phone: JSON.stringify(currentUser?.phoneNumber),
-    };
-    this.data.addUser(user);
-    this.router.navigate(['menu']);
-    return true;
+    if (signInSuccessData.authResult.user?.displayName) {
+      this.currentUser = signInSuccessData.authResult.user?.displayName;
+      this.data.sendName(this.currentUser);
+
+      // let user: Customer = {
+      //   uid: JSON.stringify(currentUser?.uid),
+      //   displayName: JSON.stringify(currentUser?.displayName),
+      //   email: JSON.stringify(currentUser?.email),
+      //   phone: JSON.stringify(currentUser?.phoneNumber),
+      // };
+      // this.data.addUser(user);
+    }
   }
 
   errorCallback(errorData: FirebaseUISignInFailure) {}

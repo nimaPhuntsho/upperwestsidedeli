@@ -1,3 +1,5 @@
+import { timestamp } from 'rxjs';
+import { firebase } from 'firebaseui-angular';
 import { NgForm } from '@angular/forms';
 import { DataService } from './../../data.service';
 import {
@@ -10,13 +12,25 @@ import {
   faPlus,
   faMinus,
 } from '@fortawesome/free-solid-svg-icons';
-import { NgFor } from '@angular/common';
+import {
+  getFirestore,
+  Firestore,
+  collectionData,
+  serverTimestamp,
+} from '@angular/fire/firestore';
 
-export interface CoffeeOrder {
-  productName: string;
-  price: number;
+export interface CoffeeOrder extends Coffee {
   total: number;
   quantity: number;
+  size: number;
+  success: boolean;
+}
+
+export interface CartCoffee {
+  productName: string;
+  size: number;
+  quantity: number;
+  total: number;
 }
 
 @Component({
@@ -26,13 +40,14 @@ export interface CoffeeOrder {
 })
 export class CoffeeComponent {
   myProducts: Product[] = [];
-  public coffee: Coffee[] = [];
+  coffee: Coffee[] = [];
   cart = faBagShopping;
   addIcon = faPlus;
   minusIcon = faMinus;
   quantity: number = 0;
   total = 0;
   orderList: CoffeeOrder[] = [];
+  cartList: CartCoffee[] = [];
   success = false;
 
   test: CoffeeOrder[] = [];
@@ -46,33 +61,44 @@ export class CoffeeComponent {
     };
     this.afs.getCoffee().then((docs) => {
       docs?.subscribe((data) => {
-        data.map((element) => {
-          const myOrder = Object.assign({}, element, order);
-          this.coffee.push(myOrder);
+        this.coffee = data;
+        this.coffee.forEach((element) => {
+          let coffeeOrder = Object.assign(element, {
+            quantity: 0,
+            size: 0,
+            total: 0,
+            success: false,
+          });
+          this.orderList.push(coffeeOrder);
         });
       });
     });
   }
 
   increment(index: number) {
-    console.log(Object.keys(this.coffee[index]));
+    this.orderList[index].quantity++;
   }
 
-  decrement(coffee: CoffeeOrder) {}
+  decrement(index: number) {
+    if (this.orderList[index].quantity > 0) {
+      this.orderList[index].quantity--;
+    }
+  }
 
   getTotal(index: number) {
-    // this.coffee[index].total =
-    //   this.coffee[index].quantity * this.coffee[index].size;
+    this.orderList[index].total =
+      this.orderList[index].quantity * this.orderList[index].size;
   }
 
   order(index: number) {
-    // let order: CoffeeOrder = {
-    //   productName: this.coffee[index].productName,
-    //   price: this.coffee[index].size,
-    //   total: this.coffee[index].total,
-    //   quantity: this.coffee[index].quantity,
-    // };
-    // this.orderList.push(order);
-    // this.afs.sendMessage(this.orderList);
+    let order: CartCoffee = {
+      productName: this.orderList[index].productName,
+      size: this.orderList[index].size,
+      total: this.orderList[index].total,
+      quantity: this.orderList[index].quantity,
+    };
+    this.cartList.push(order);
+    this.afs.sendMessage(this.cartList);
+    this.orderList[index].success = true;
   }
 }

@@ -1,1 +1,24 @@
-<h1>All orders</h1>
+<div class="container">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Order Number</th>
+        <th>Total</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let element of allOrders; let i = index">
+      <tr>
+        <td>{{ element.orderID }}</td>
+        <td>
+          {{ element.total | currency }}
+        </td>
+        <td>{{ element.date | date : "EEEE, MMMM d, y" }}</td>
+        <td>{{ element.time | date : "h:mm:ss a" }}</td>
+        <td><Button class="btn btn-primary">Prepare</Button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

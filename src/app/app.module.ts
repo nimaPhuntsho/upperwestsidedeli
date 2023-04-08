@@ -46,9 +46,11 @@ import * as firebaseui from 'firebaseui';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { UsersComponent } from './components/users/users.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
+  signInSuccessUrl: 'menu',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     {
@@ -93,6 +95,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     PrivacyComponent,
     LoginComponent,
     UsersComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { AuthService } from './../../auth.service';
 import { ViewportScroller } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faCoffee,
@@ -17,7 +17,6 @@ import { DataService } from 'src/app/data.service';
 export class MenuComponent {
   coffee = faCoffee;
   beer = faBeer;
-  cart = faCartShopping;
   products = [];
   numberOfOrders = 0;
   category = [
@@ -39,11 +38,15 @@ export class MenuComponent {
   ) {}
 
   ngOnInit() {
-    this.data.order$.subscribe((data) => (this.numberOfOrders = data));
+    this.data.order$.subscribe((item) => (this.numberOfOrders = item));
   }
 
   scroll(index: number, category: string) {
     this.scroller.scrollToAnchor(category.toLowerCase());
     this.selectedCategory = index;
+  }
+
+  badgeCounter(counter: number) {
+    console.log(counter);
   }
 }

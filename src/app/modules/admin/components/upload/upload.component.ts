@@ -57,7 +57,6 @@ export class UploadComponent {
       ingredients: this._ingredients,
     };
     this.afs.addProduct(product);
-    this.isSuccess = true;
   }
 
   uploadCoffee(reset: NgForm) {
