@@ -3,52 +3,54 @@
     <h1>Drinks</h1>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div
-      class="card"
-      style="width: 18rem"
-      *ngFor="let element of drinks; let i = index"
-      id="drinks"
-    >
-      <div class="card-body">
-        <h5 class="card-title">{{ element.productName | titlecase }}</h5>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="increment(i)"
-              (click)="getTotal(i)"
-            >
-              <fa-icon [icon]="addIcon"></fa-icon>
-            </button>
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <h6 class="quantity">{{ element.quantity }}</h6>
+    <div *ngFor="let element of drinks; let i = index" class="card-wrapper">
+      <div
+        *ngIf="element.availability"
+        class="card"
+        style="width: 18rem"
+        id="drinks"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ element.productName | titlecase }}</h5>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="increment(i)"
+                (click)="getTotal(i)"
+              >
+                <fa-icon [icon]="addIcon"></fa-icon>
+              </button>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <h6 class="quantity">{{ element.quantity }}</h6>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="decrement(i)"
+                (click)="getTotal(i)"
+              >
+                <fa-icon [icon]="minusIcon"></fa-icon>
+              </button>
             </div>
-            <button
-              type="button"
-              class="btn btn-primary"
-              (click)="decrement(i)"
-              (click)="getTotal(i)"
-            >
-              <fa-icon [icon]="minusIcon"></fa-icon>
-            </button>
           </div>
-        </div>
-        <p class="card-text">{{ element.price | currency }}</p>
-        <div>
-          <p>{{ element.total | currency }}</p>
-        </div>
-        <div fxLayout="row">
-          <button
-            [disabled]="!element.quantity"
-            color="primary"
-            mat-raised-button
-            (click)="order(i)"
-          >
-            Add to cart
-          </button>
-          <div *ngIf="element.success">
-            <i class="bi bi-check2"></i>
+          <p class="card-text">{{ element.price | currency }}</p>
+          <div>
+            <p>{{ element.total | currency }}</p>
+          </div>
+          <div fxLayout="row">
+            <button
+              [disabled]="!element.quantity"
+              color="primary"
+              mat-raised-button
+              (click)="order(i)"
+            >
+              Add to cart
+            </button>
+            <div *ngIf="element.success">
+              <i class="bi bi-check2"></i>
+            </div>
           </div>
         </div>
       </div>

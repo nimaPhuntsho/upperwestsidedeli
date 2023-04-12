@@ -18,6 +18,11 @@
         (uiShown)="uiShownCallback()"
       ></firebase-ui>
     </div>
+    <div>
+      <p>{{ currentUser }}</p>
+      <button mat-raised-button *ngIf="hide" (click)="logout('login')">
+        Log out
+      </button>
+    </div>
   </div>
 </div>
-<button (click)="logout('login')">Log out</button>

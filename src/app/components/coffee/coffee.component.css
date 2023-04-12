@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .price {
   font-family: "Righteous", cursive;
   font-size: 18px;
@@ -21,9 +22,6 @@
   margin: 2px;
 }
 
-fa-icon {
-  font-size: 15px;
-}
 /*
 #total {
   font-family: "Hammersmith One", sans-serif;

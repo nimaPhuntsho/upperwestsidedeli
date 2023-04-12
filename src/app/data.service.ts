@@ -1,3 +1,7 @@
+import {
+  ProductID,
+  CoffeeID,
+} from './modules/admin/components/update/update.component';
 import { Feedback } from './components/feedback/feedback.component';
 import { firebase } from 'firebaseui-angular';
 import { Admin } from './modules/admin/components/adminlogin/adminlogin.component';
@@ -10,6 +14,7 @@ import {
   getFirestore,
   Firestore,
   collectionData,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { inject, Injectable, Type } from '@angular/core';
 import {
@@ -64,7 +69,7 @@ export class DataService<Type> {
   async getAllProducts() {
     try {
       const userProfileCollection = query(collection(this.fs, 'products'));
-      return collectionData(userProfileCollection) as Observable<Product[]>;
+      return collectionData(userProfileCollection) as Observable<ProductID[]>;
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +79,7 @@ export class DataService<Type> {
   async getCoffee() {
     try {
       const userProfileCollection = collection(this.fs, 'coffee');
-      return collectionData(userProfileCollection) as Observable<Coffee[]>;
+      return collectionData(userProfileCollection) as Observable<CoffeeID[]>;
     } catch (error) {
       console.log(error);
     }
@@ -107,6 +112,11 @@ export class DataService<Type> {
   async addProduct(product: Product) {
     let db = getFirestore();
     const docRef = await addDoc(collection(db, 'products'), product);
+    const ref = docRef.id;
+    const newDoc = doc(db, 'products', ref);
+    await updateDoc(newDoc, {
+      id: ref,
+    });
   }
 
   async sendFeedback(feedback: Feedback) {
@@ -124,9 +134,19 @@ export class DataService<Type> {
     return;
   }
 
-  addCoffee(coffee: Coffee) {
+  async addCoffee(coffee: Coffee) {
     let db = getFirestore();
-    const docRef = addDoc(collection(db, 'coffee'), coffee);
+    const docRef = await addDoc(collection(db, 'coffee'), coffee);
+    const ref = docRef.id;
+    const newDoc = doc(db, 'coffee', ref);
+    await updateDoc(newDoc, {
+      id: ref,
+    });
+  }
+
+  async deleteCoffee(id: string) {
+    let db = getFirestore();
+    await deleteDoc(doc(db, 'coffee', id));
   }
 
   async addUser(user: Customer) {
@@ -134,15 +154,9 @@ export class DataService<Type> {
     const docRef = await addDoc(collection(db, 'Users'), user);
   }
 
-  setCoffee$(order: Type[]) {
-    this.observableOne.next(order);
-  }
-
-  deleteItems(id: string, dbName: string) {
+  async deleteItems(id: string) {
     let db = getFirestore();
-    const collectionRef = collection(db, 'orders');
-    id = collectionRef.id;
-    deleteDoc(doc(db, dbName, id));
+    await deleteDoc(doc(db, 'products', id));
   }
 
   addItems(dbName: string, product: Product) {
@@ -150,7 +164,37 @@ export class DataService<Type> {
     const id = addDoc(collection(db, dbName), product).then((data) => {});
   }
 
-  updateItems() {}
+  async makeUnavailable(id: string) {
+    let db = getFirestore();
+    const ref = doc(db, 'products', id);
+    await updateDoc(ref, {
+      availability: false,
+    });
+  }
+
+  async makeAvailable(id: string) {
+    let db = getFirestore();
+    const ref = doc(db, 'products', id);
+    await updateDoc(ref, {
+      availability: true,
+    });
+  }
+
+  async coffeeUnavailable(id: string) {
+    let db = getFirestore();
+    const ref = doc(db, 'coffee', id);
+    await updateDoc(ref, {
+      availability: false,
+    });
+  }
+
+  async coffeeAvailable(id: string) {
+    let db = getFirestore();
+    const ref = doc(db, 'coffee', id);
+    await updateDoc(ref, {
+      availability: true,
+    });
+  }
 
   setAllItem$(order: Type[]) {
     this.observableTwo.next(order);

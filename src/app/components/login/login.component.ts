@@ -1,7 +1,7 @@
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { DataService } from 'src/app/data.service';
 import { AuthService } from './../../auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FirebaseUISignInFailure,
   FirebaseUISignInSuccessWithAuthResult,
@@ -21,30 +21,30 @@ export interface Customer {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  currentUser = '';
+  currentUser?: string;
+  jwt = '';
+  hide = false;
   constructor(
     private auth: AuthService,
     private data: DataService<Product>,
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('user')) {
+      this.hide = true;
+    }
+    console.log(this.currentUser);
+  }
 
   logout(url: string) {
+    this.hide = false;
     this.auth.logout(url);
   }
 
   successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
     if (signInSuccessData.authResult.user?.displayName) {
       this.currentUser = signInSuccessData.authResult.user?.displayName;
-
-      // let user: Customer = {
-      //   uid: JSON.stringify(currentUser?.uid),
-      //   displayName: JSON.stringify(currentUser?.displayName),
-      //   email: JSON.stringify(currentUser?.email),
-      //   phone: JSON.stringify(currentUser?.phoneNumber),
-      // };
-      // this.data.addUser(user);
     }
   }
 

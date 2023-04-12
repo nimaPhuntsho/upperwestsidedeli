@@ -12,3 +12,21 @@ li {
 .card {
   margin: 1rem;
 }
+
+h1 {
+  text-align: center;
+}
+
+.card-wrapper {
+  margin: 0.5rem;
+}
+
+.card-title {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 2px;
+  color: rgb(72, 59, 41);
+}
+
+.quantity {
+  padding: 0.5rem;
+}

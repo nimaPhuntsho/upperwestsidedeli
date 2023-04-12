@@ -17,7 +17,13 @@
           <td>{{ element.availability }}</td>
           <td>
             <div>
-              <button mat-raised-button color="primary">Delete</button>
+              <button
+                (click)="removeCoffee(element.id)"
+                mat-raised-button
+                color="primary"
+              >
+                Delete
+              </button>
             </div>
             <div>
               <div class="form-check">
@@ -27,9 +33,23 @@
                   name="flexRadioDefault"
                   id="sold out"
                   value="false"
+                  (click)="soldOutCoffee(element.id)"
                 />
                 <label class="form-check-label" for="flexRadioDefault1">
                   Sold out
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="sold out"
+                  value="false"
+                  (click)="availableCoffee(element.id)"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Available
                 </label>
               </div>
             </div>
@@ -63,7 +83,7 @@
                   <button
                     mat-raised-button
                     color="primary"
-                    (click)="removeItem(element)"
+                    (click)="removeItem(element.id)"
                   >
                     Delete
                   </button>
@@ -76,9 +96,25 @@
                       name="flexRadioDefault"
                       id="sold out"
                       value="false"
+                      (click)="soldOut(element.id)"
                     />
                     <label class="form-check-label" for="flexRadioDefault1">
                       Sold out
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="sold out"
+                      value="false"
+                      (click)="available(element.id)"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Available
                     </label>
                   </div>
                 </div>
