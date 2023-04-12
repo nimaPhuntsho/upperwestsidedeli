@@ -21,7 +21,7 @@ export class AdminloginComponent {
   adminCredentials: Admin[] = [];
   admin: Admin = {} as Admin;
   constructor(
-    private data: DataService,
+    private data: DataService<Admin>,
     private router: Router,
     private auth: AuthService
   ) {}

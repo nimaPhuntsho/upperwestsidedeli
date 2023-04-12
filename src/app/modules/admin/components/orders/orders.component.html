@@ -1,24 +1,82 @@
-<div class="container">
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Order Number</th>
-        <th>Total</th>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let element of allOrders; let i = index">
-      <tr>
-        <td>{{ element.orderID }}</td>
-        <td>
-          {{ element.total | currency }}
-        </td>
-        <td>{{ element.date | date : "EEEE, MMMM d, y" }}</td>
-        <td>{{ element.time | date : "h:mm:ss a" }}</td>
-        <td><Button class="btn btn-primary">Prepare</Button></td>
-      </tr>
-    </tbody>
-  </table>
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="container">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Number</th>
+          <th>Total</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody
+        *ngFor="let element of allOrders; let i = index"
+        (click)="prepare(element)"
+      >
+        <tr>
+          <td>{{ element.orderID }}</td>
+          <td>
+            {{ element.total | currency }}
+          </td>
+          <td>{{ element.date | date : "EEEE, MMMM d, y" }}</td>
+          <td>{{ element.time | date : "h:mm:ss a" }}</td>
+          <td>
+            <button
+              (click)="prepare(element)"
+              (click)="scroll('order')"
+              mat-raised-button
+            >
+              Prepare
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="selectedItem" class="card" style="width: 20rem">
+    <div class="card-title item" id="order">
+      <h1>Order No : {{ selectedItem.orderID }}</h1>
+    </div>
+    <div class="card-body">
+      <div class="item" *ngFor="let item of selectedItem.items">
+        <h2>{{ item.productName | titlecase }}</h2>
+        <li>Quantity : {{ item.quantity }}</li>
+      </div>
+      <div class="item" *ngFor="let coffee of selectedItem.coffee">
+        <h2>{{ coffee.productName | titlecase }}</h2>
+        <li>Quantity :{{ coffee.quantity }}</li>
+        <li>Size : {{ coffee.size }}</li>
+      </div>
+      <div class="item">
+        <h2>Total</h2>
+        <li>{{ selectedItem.total | currency }}</li>
+      </div>
+      <div>
+        <section class="example-section">
+          <mat-checkbox color="primary" class="example-margin"
+            >Order completed</mat-checkbox
+          >
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card total-sales" style="width: 14rem">
+  <div class="card-body">
+    <div><h1>Total Sales</h1></div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <div>
+        <p class="card-text">{{ totalSales | currency }}</p>
+      </div>
+      <div>
+        <button mat-fab color="primary" (click)="getTotal()">Push</button>
+      </div>
+    </div>
+    <div>
+      <p>{{ today | date }}</p>
+    </div>
+  </div>
 </div>

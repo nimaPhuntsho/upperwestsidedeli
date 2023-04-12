@@ -1,3 +1,5 @@
+import { ReviewComponent } from './components/review/review.component';
+import { FeedbackComponent } from './../../components/feedback/feedback.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UpdateComponent } from './components/update/update.component';
 import { UploadComponent } from './components/upload/upload.component';
@@ -26,6 +28,10 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrdersComponent,
+      },
+      {
+        path: 'review',
+        component: ReviewComponent,
       },
       {
         path: '',

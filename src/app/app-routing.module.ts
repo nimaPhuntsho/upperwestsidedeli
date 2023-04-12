@@ -1,3 +1,4 @@
+import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { UsersComponent } from './components/users/users.component';
@@ -61,11 +62,11 @@ const routes: Routes = [
         path: 'croissant',
         component: CroissantComponent,
       },
-      {
-        path: 'check-out',
-        component: CartComponent,
-      },
     ],
+  },
+  {
+    path: 'check-out',
+    component: CartComponent,
   },
   {
     path: 'contact',
@@ -90,6 +91,10 @@ const routes: Routes = [
   {
     path: 'faq',
     component: FaqComponent,
+  },
+  {
+    path: 'feedback',
+    component: FeedbackComponent,
   },
   {
     path: 'myadmin',

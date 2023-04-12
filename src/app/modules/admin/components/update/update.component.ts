@@ -1,6 +1,15 @@
+import { map } from 'rxjs';
+import {
+  addDoc,
+  collection,
+  collectionChanges,
+  collectionData,
+  getFirestore,
+} from '@angular/fire/firestore';
 import { Coffee, Product } from './../upload/upload.component';
 import { DataService } from 'src/app/data.service';
 import { Component } from '@angular/core';
+import { doc, deleteDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-update',
@@ -10,10 +19,9 @@ import { Component } from '@angular/core';
 export class UpdateComponent {
   allCoffee: Coffee[] = [];
   allProducts: Product[] = [];
-  setProducts = new Set<Product>();
-  serialNumber = 0;
+  selectedItem?: Product;
 
-  constructor(private data: DataService) {}
+  constructor(private data: DataService<Product>) {}
 
   ngOnInit() {
     this.data.getCoffee().then((coffee) => {
@@ -25,13 +33,19 @@ export class UpdateComponent {
     this.data.getAllProducts().then((products) => {
       products?.subscribe((element) => {
         this.allProducts = element;
-        this.setProducts = new Set(this.allProducts);
-        console.log(this.setProducts);
       });
     });
   }
 
-  increment() {
-    return this.serialNumber++;
+  removeItem(product: Product) {
+    let db = getFirestore();
+    const item$ = collectionChanges(collection(db, 'orders')).pipe(
+      map((items) => {
+        items.map((item) => {
+          // const id = item.doc.id;
+          // return { id };
+        });
+      })
+    );
   }
 }

@@ -1,0 +1,19 @@
+.container {
+  margin: 5rem;
+}
+
+.author {
+  font-weight: bolder;
+}
+
+p {
+  text-align: justify;
+}
+
+.card-body {
+  padding: 3rem;
+}
+
+h1 {
+  text-align: center;
+}

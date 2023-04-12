@@ -49,6 +49,23 @@ img {
   transition: transform 0.5s;
 }
 
+i {
+  font-size: 23px;
+}
+.login-wrapper {
+  padding: 1rem;
+  background-color: rgb(209, 185, 151);
+}
+
+.login-wrapper h1 {
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.user:hover {
+  cursor: pointer;
+}
+
 fa-icon {
   color: rgb(195, 227, 255);
   font-size: 25px;

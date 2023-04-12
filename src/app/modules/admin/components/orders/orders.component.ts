@@ -1,6 +1,9 @@
+import { CartCoffee } from './../../../../components/coffee/coffee.component';
+import { ViewportScroller } from '@angular/common';
 import { DataService } from 'src/app/data.service';
 import { Component } from '@angular/core';
 import { Sale } from 'src/app/components/cart/cart.component';
+import { Product } from '../upload/upload.component';
 
 @Component({
   selector: 'app-orders',
@@ -9,7 +12,13 @@ import { Sale } from 'src/app/components/cart/cart.component';
 })
 export class OrdersComponent {
   allOrders: Sale[] = [];
-  constructor(private data: DataService) {}
+  selectedItem?: Sale;
+  totalSales = 0;
+  today = '';
+  constructor(
+    private data: DataService<Sale>,
+    private scroller: ViewportScroller
+  ) {}
 
   ngOnInit() {
     this.data.getAllOrders().then((orders) => {
@@ -17,5 +26,20 @@ export class OrdersComponent {
         this.allOrders = element;
       });
     });
+
+    this.today = new Date().toDateString();
+  }
+
+  prepare(product: Sale) {
+    this.selectedItem = product;
+  }
+
+  scroll(id: string) {
+    this.scroller.scrollToAnchor(id);
+  }
+  getTotal() {
+    this.totalSales = this.allOrders.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.total;
+    }, 0);
   }
 }

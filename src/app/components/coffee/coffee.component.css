@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 .price {
   font-family: "Righteous", cursive;
   font-size: 18px;
@@ -44,12 +45,13 @@ img {
 }
 
 h1 {
-  font-family: "Poiret One", cursive;
-  font-size: 30px;
-  font-weight: bold;
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 h2 {
-  font-family: "Ubuntu Condensed", sans-serif;
+  font-family: "Bebas Neue", cursive;
   font-size: 25px;
+  letter-spacing: 2px;
+  color: rgb(72, 59, 41);
 }

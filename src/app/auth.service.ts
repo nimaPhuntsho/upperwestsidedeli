@@ -1,3 +1,4 @@
+import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { DataService } from 'src/app/data.service';
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -25,7 +26,7 @@ export class AuthService {
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
-    private data: DataService
+    private data: DataService<Product>
   ) {
     this.auth.authState.forEach((user) => {
       if (user) {

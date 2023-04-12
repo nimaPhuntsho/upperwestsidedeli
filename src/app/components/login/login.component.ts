@@ -1,3 +1,4 @@
+import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { DataService } from 'src/app/data.service';
 import { AuthService } from './../../auth.service';
 import { Component } from '@angular/core';
@@ -23,7 +24,7 @@ export class LoginComponent {
   currentUser = '';
   constructor(
     private auth: AuthService,
-    private data: DataService,
+    private data: DataService<Product>,
     private router: Router
   ) {}
 
@@ -36,7 +37,6 @@ export class LoginComponent {
   successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
     if (signInSuccessData.authResult.user?.displayName) {
       this.currentUser = signInSuccessData.authResult.user?.displayName;
-      this.data.sendName(this.currentUser);
 
       // let user: Customer = {
       //   uid: JSON.stringify(currentUser?.uid),

@@ -47,6 +47,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { UsersComponent } from './components/users/users.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FeedbackComponent } from './components/feedback/feedback.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -96,6 +98,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     LoginComponent,
     UsersComponent,
     FaqComponent,
+    FeedbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +123,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

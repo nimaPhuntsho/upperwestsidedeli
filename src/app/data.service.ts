@@ -1,3 +1,4 @@
+import { Feedback } from './components/feedback/feedback.component';
 import { firebase } from 'firebaseui-angular';
 import { Admin } from './modules/admin/components/adminlogin/adminlogin.component';
 import { CoffeeOrder, CartCoffee } from './components/coffee/coffee.component';
@@ -10,7 +11,7 @@ import {
   Firestore,
   collectionData,
 } from '@angular/fire/firestore';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 import {
   collection,
   query,
@@ -21,6 +22,8 @@ import {
   Timestamp,
   increment,
   orderBy,
+  CollectionReference,
+  deleteDoc,
 } from 'firebase/firestore';
 import { BehaviorSubject, Observable, timestamp } from 'rxjs';
 import { Customer } from './components/login/login.component';
@@ -29,15 +32,19 @@ import { Sale } from './components/cart/cart.component';
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
-  private messageSource = new BehaviorSubject<CartCoffee[]>([]);
-  message$ = this.messageSource.asObservable();
+export class DataService<Type> {
+  cartItem$: Product[] = [];
+  coffee$: CartCoffee[] = [];
+  docRef?: CollectionReference<Product>;
+  private observableOne: BehaviorSubject<Type[]> = new BehaviorSubject<Type[]>(
+    []
+  );
+  private observableTwo: BehaviorSubject<Type[]> = new BehaviorSubject<Type[]>(
+    []
+  );
 
   private numberOfItems = new BehaviorSubject<number>(0);
   order$ = this.numberOfItems.asObservable();
-
-  private userName = new BehaviorSubject<string>('');
-  name$ = this.userName.asObservable();
 
   constructor(private fs: Firestore) {}
 
@@ -102,6 +109,21 @@ export class DataService {
     const docRef = await addDoc(collection(db, 'products'), product);
   }
 
+  async sendFeedback(feedback: Feedback) {
+    let db = getFirestore();
+    const docRef = await addDoc(collection(db, 'feedbacks'), feedback);
+  }
+
+  async getFeedbacks() {
+    try {
+      const userProfileCollection = collection(this.fs, 'feedbacks');
+      return collectionData(userProfileCollection) as Observable<Feedback[]>;
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  }
+
   addCoffee(coffee: Coffee) {
     let db = getFirestore();
     const docRef = addDoc(collection(db, 'coffee'), coffee);
@@ -112,15 +134,45 @@ export class DataService {
     const docRef = await addDoc(collection(db, 'Users'), user);
   }
 
-  sendMessage(order: CartCoffee[]) {
-    this.messageSource.next(order);
+  setCoffee$(order: Type[]) {
+    this.observableOne.next(order);
+  }
+
+  deleteItems(id: string, dbName: string) {
+    let db = getFirestore();
+    const collectionRef = collection(db, 'orders');
+    id = collectionRef.id;
+    deleteDoc(doc(db, dbName, id));
+  }
+
+  addItems(dbName: string, product: Product) {
+    let db = getFirestore();
+    const id = addDoc(collection(db, dbName), product).then((data) => {});
+  }
+
+  updateItems() {}
+
+  setAllItem$(order: Type[]) {
+    this.observableTwo.next(order);
   }
 
   sendOrderNumbers(orders: number) {
     this.numberOfItems.next(orders);
   }
 
-  sendName(name: string) {
-    this.userName.next(name);
+  sendData(product: Product) {
+    this.cartItem$.push(product);
+  }
+
+  sendCoffee(product: CartCoffee) {
+    this.coffee$.push(product);
+  }
+
+  getData() {
+    return this.cartItem$;
+  }
+
+  getCoffeeCart() {
+    return this.coffee$;
   }
 }

@@ -17,6 +17,7 @@
   </div>
 </div>
 
+<!-- order review and edit options for coffee -->
 <div
   class="container"
   fxLayout="row"
@@ -24,40 +25,44 @@
   fxLayoutAlign="center center"
   *ngIf="checkOutSuccess && !isEmpty"
 >
-  <div class="card" style="width: 22rem">
+  <div class="card" style="width: 26rem">
     <div class="card-body">
       <div class="item-container">
         <div class="header">
           <h1 class="card-title">Your order</h1>
         </div>
         <div
-          class="item"
+          class="edit"
           fxLayout="row"
           fxLayoutAlign="space-between center"
-          *ngFor="let element of orderList; let i = index"
+          *ngFor="let coffee of coffee$; let i = index"
+          (click)="editItems(coffee)"
         >
           <div class="name">
-            <li>{{ element.productName | titlecase }}</li>
-            <li>{{ element.quantity }} x {{ element.size | currency }}</li>
+            <li>{{ coffee.productName | titlecase }}</li>
+            <li>{{ coffee.quantity }} x {{ coffee.size | currency }}</li>
           </div>
           <div class="item-price">
-            <p>{{ element.total | currency }}</p>
+            <p>{{ coffee.total | currency }}</p>
           </div>
-          <div (click)="editItems(i)">
+          <div>
             <li><i class="bi bi-pencil"></i></li>
           </div>
-          <div
-            *ngIf="edit"
-            class="edit"
-            fxLayout="row"
-            fxLayoutAlign="space-between center"
-          >
-            <div>
-              <li>{{ element.productName }}</li>
-            </div>
+        </div>
+
+        <div
+          *ngIf="selectedCoffee"
+          class="test"
+          fxLayout="column"
+          fxLayoutAlign="space-between center"
+        >
+          <div>
+            <li>{{ selectedCoffee.productName | titlecase }}</li>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
             <div>
               <select
-                [(ngModel)]="element.size"
+                [(ngModel)]="selectedCoffee.size"
                 name="size"
                 class="form-select"
                 aria-label=".form-select-sm example"
@@ -71,25 +76,106 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="increment(i)"
+                (click)="increment(selectedCoffee)"
                 (click)="getTotal()"
               >
                 <fa-icon [icon]="addIcon"></fa-icon>
               </button>
               <div fxLayout="row" fxLayoutAlign="center center">
-                <h6 class="quantity">{{ element.quantity }}</h6>
+                <h6 class="quantity">{{ selectedCoffee.quantity }}</h6>
               </div>
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="decrement(i)"
+                (click)="decrement(selectedCoffee)"
                 (click)="getTotal()"
               >
                 <fa-icon [icon]="minusIcon"></fa-icon>
               </button>
             </div>
             <div>
-              <button (click)="getTotalAfterEdit(i)">Confirm</button>
+              <button (click)="getTotalAfterEdit(selectedCoffee)">
+                Confirm
+              </button>
+            </div>
+            <div>
+              <button (click)="deleteCoffee(selectedCoffee)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- review/edit order for rest of the product -->
+        <div
+          class="edit"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          *ngFor="let item of allItem$; let i = index"
+          (click)="editProduct(item)"
+        >
+          <div class="name">
+            <li>{{ item.productName | titlecase }}</li>
+            <li>{{ item.quantity }} x {{ item.price | currency }}</li>
+          </div>
+          <div class="item-price">
+            <p>{{ item.total | currency }}</p>
+          </div>
+          <div (click)="(edit)">
+            <li><i class="bi bi-pencil"></i></li>
+          </div>
+        </div>
+
+        <!-- edit options for rest of the items-->
+        <div
+          *ngIf="selectedItem"
+          class="edit"
+          fxLayout="column"
+          fxLayoutAlign="center space-evenly"
+        >
+          <div>
+            <li>{{ selectedItem.productName }}</li>
+          </div>
+          <div>
+            <div
+              class="btn-group"
+              role="group"
+              aria-label="Basic example"
+              fxLayout="row"
+              fxLayoutAlign="center space-evenly"
+            >
+              <button
+                (click)="incrementItem(selectedItem)"
+                type="button"
+                class="btn btn-primary"
+              >
+                <fa-icon [icon]="addIcon"></fa-icon>
+              </button>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <h6 class="quantity">{{ selectedItem.quantity }}</h6>
+              </div>
+              <button
+                (click)="decrementItem(selectedItem)"
+                type="button"
+                class="btn btn-primary"
+              >
+                <fa-icon [icon]="minusIcon"></fa-icon>
+              </button>
+
+              <div>
+                <button
+                  mat-raised-button
+                  (click)="totalAfterEdit(selectedItem)"
+                >
+                  <i class="bi bi-check2-circle"></i>
+                </button>
+              </div>
+
+              <div>
+                <button (click)="deleteItem(selectedItem)" mat-raised-button>
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +187,7 @@
         fxLayoutAlign="space-between center"
       >
         <h5>Total</h5>
-        <p>{{ grandTotal | currency }}</p>
+        <p>{{ cartTotal | currency }}</p>
       </div>
       <div class="edit-order" fxLayout="column" fxLayoutAlign="center center">
         <!-- <button color="primary" (click)="editItems()" mat-raised-button>

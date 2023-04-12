@@ -13,32 +13,76 @@
       </thead>
       <tbody *ngFor="let element of allCoffee; let i = index">
         <tr>
-          <td>{{ element.productName }}</td>
-          <td>{{ element.price.large }}</td>
-          <td><button>Delete</button></td>
+          <td>{{ element.productName | titlecase }}</td>
+          <td>{{ element.availability }}</td>
+          <td>
+            <div>
+              <button mat-raised-button color="primary">Delete</button>
+            </div>
+            <div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  id="sold out"
+                  value="false"
+                />
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Sold out
+                </label>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<div class="container" *ngFor="let element of setProducts">
+<div class="container">
   <div>
-    <h1>{{ element.category | titlecase }}</h1>
+    <h1>Other items</h1>
     <div>
       <div>
         <table class="table">
           <thead>
             <tr>
               <th scope="col">Product Name</th>
+              <th>Category</th>
               <th scope="col">Status</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody *ngFor="let element of allProducts; let i = index">
+          <tbody *ngFor="let element of allProducts">
             <tr>
-              <td>{{ element.productName }}</td>
+              <td>{{ element.productName | titlecase }}</td>
+              <td>{{ element.category }}</td>
               <td>{{ element.availability }}</td>
-              <td><button>Delete</button></td>
+              <td>
+                <div>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="removeItem(element)"
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="sold out"
+                      value="false"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Sold out
+                    </label>
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

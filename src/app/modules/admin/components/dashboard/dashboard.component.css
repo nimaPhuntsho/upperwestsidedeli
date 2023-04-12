@@ -3,7 +3,8 @@
 mat-sidenav {
   width: 200px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: rgb(38, 42, 86);
+  background-color: rgb(36, 36, 38);
+  padding: 2rem;
 }
 
 h1 {
@@ -19,4 +20,5 @@ mat-sidenav-content {
 li {
   padding: 10px;
   cursor: pointer;
+  color: antiquewhite;
 }

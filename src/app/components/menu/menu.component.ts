@@ -1,3 +1,4 @@
+import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { AuthService } from './../../auth.service';
 import { ViewportScroller } from '@angular/common';
 import { Component, DoCheck, OnChanges } from '@angular/core';
@@ -33,7 +34,7 @@ export class MenuComponent {
   constructor(
     private scroller: ViewportScroller,
     public router: Router,
-    private data: DataService,
+    private data: DataService<Product>,
     private auth: AuthService
   ) {}
 

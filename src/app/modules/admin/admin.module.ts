@@ -20,6 +20,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 import * as firebaseui from 'firebaseui';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReviewComponent } from './components/review/review.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -56,6 +58,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     PagenotfoundComponent,
     DashboardComponent,
     AdminloginComponent,
+    ReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    MatCheckboxModule,
   ],
 })
 export class AdminModule {}

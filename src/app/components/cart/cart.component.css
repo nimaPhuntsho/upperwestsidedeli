@@ -20,6 +20,7 @@
 .item-container {
   height: 300px;
   overflow: auto;
+  position: relative;
 }
 
 .item {
@@ -52,7 +53,7 @@ button {
   font-size: 20px;
 }
 
-.edit {
+.edit-coffee {
   position: absolute;
   bottom: -50px;
   width: 100%;
@@ -83,4 +84,16 @@ button {
 .order-number h1,
 h2 {
   text-align: center;
+}
+
+.quantity {
+  padding: 0 1rem 0 1rem;
+}
+
+.edit {
+  padding: 0.5rem;
+}
+
+i {
+  font-size: 20px;
 }

@@ -3,12 +3,13 @@ import { DataService } from './../../../../data.service';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Order } from 'src/app/components/croissant/croissant.component';
 
-export interface Product {
+export interface Product extends Order {
   productName: string;
   category: string;
-  price: string;
-  availability: string;
+  price: number;
+  availability: boolean;
   ingredients: string;
 }
 export interface Coffee {
@@ -18,7 +19,15 @@ export interface Coffee {
     medium: number;
     large: number;
   };
-  availability: string;
+  extra: {
+    soy: number;
+    coconut: number;
+    oat: number;
+    extraShot: number;
+    lactoseFree: number;
+  };
+  availability: boolean;
+  category: string;
 }
 
 @Component({
@@ -27,7 +36,7 @@ export interface Coffee {
   styleUrls: ['./upload.component.css'],
 })
 export class UploadComponent {
-  constructor(private afs: DataService) {}
+  constructor(private afs: DataService<Product>) {}
   category = [
     'Croissant',
     'Bagel',
@@ -40,23 +49,27 @@ export class UploadComponent {
 
   _productName: string = '';
   _category: string = '';
-  _price: string = '';
-  _availability: string = '';
+  _price: number = 0;
+  _availability: boolean = true;
   _ingredients: string = '';
 
   isCoffee = false;
   isSuccess = false;
   hasError = false;
 
-  upload() {
+  upload(reset: NgForm) {
     let product: Product = {
       productName: this._productName,
       category: this._category,
       price: this._price,
       availability: this._availability,
       ingredients: this._ingredients,
+      total: 0,
+      quantity: 0,
+      success: false,
     };
     this.afs.addProduct(product);
+    reset.reset();
   }
 
   uploadCoffee(reset: NgForm) {
@@ -68,6 +81,14 @@ export class UploadComponent {
         medium: 5.5,
         large: 6.0,
       },
+      extra: {
+        soy: 1,
+        coconut: 1,
+        oat: 1,
+        extraShot: 0.5,
+        lactoseFree: 1,
+      },
+      category: this._category.toLowerCase(),
     };
     this.afs.addCoffee(coffee);
     reset.reset();

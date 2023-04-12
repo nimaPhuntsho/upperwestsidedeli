@@ -47,10 +47,14 @@
     >
       Upload
     </li>
-    <button mat-raised-button color="primary">OFFLINE</button>
+    <li routerLink="review" (click)="addBarIcon()" (click)="sidenav.close()">
+      Feedbacks
+    </li>
+    <!-- <button mat-raised-button color="primary">OFFLINE</button> -->
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-orders></app-orders>
+    <app-review *ngIf="router.url.includes('review')"></app-review>
+    <app-orders *ngIf="router.url.includes('orders')"></app-orders>
     <app-upload *ngIf="router.url.includes('upload')"></app-upload>
     <app-update *ngIf="router.url.includes('update')"></app-update>
   </mat-sidenav-content>

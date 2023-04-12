@@ -1,3 +1,20 @@
 table {
   margin-top: 5rem;
 }
+
+.item {
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.total-sales {
+  position: absolute;
+  bottom: 0;
+}

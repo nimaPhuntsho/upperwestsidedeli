@@ -10,10 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class UsersComponent {
   displayName = '';
 
-  constructor(public data: DataService, public auth: AuthService) {}
+  constructor(public data: DataService<string>, public auth: AuthService) {}
 
-  ngOnInit() {
-    this.data.name$.subscribe((user) => (this.displayName = user));
-    console.log(this.displayName);
-  }
+  ngOnInit() {}
 }

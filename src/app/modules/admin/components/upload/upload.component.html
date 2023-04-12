@@ -49,38 +49,38 @@
     </div>
 
     <div>
-      <label for="">Availabilty</label>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="status"
-          value="Sold out"
-          id="flexRadioDefault1"
-          [(ngModel)]="_availability"
-          required=""
-        />
-        <label class="form-check-label" for="flexRadioDefault1">
-          Sold out
-        </label>
+      <div>
+        <label for="">Availabilty</label>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="status"
+            id="sold out"
+            value="false"
+            [(ngModel)]="_availability"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Sold out
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="status"
+            id="available"
+            value="true"
+            [(ngModel)]="_availability"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Available
+          </label>
+        </div>
+        <p class="error" *ngIf="hasError">Availabilty is required</p>
       </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="status"
-          id="flexRadioDefault2"
-          value="Available"
-          [(ngModel)]="_availability"
-          required=""
-        />
-        <label class="form-check-label" for="flexRadioDefault2">
-          Available
-        </label>
-      </div>
-      <p class="error" *ngIf="hasError">Availabilty is required</p>
     </div>
-    <div *ngIf="!isCoffee">
+    <div>
       <label for="">Category</label>
       <select
         [(ngModel)]="_category"
@@ -110,7 +110,7 @@
       <p class="error" *ngIf="hasError">Ingredients required</p>
     </div>
     <button
-      (click)="upload()"
+      (click)="upload(userInput)"
       mat-raised-button
       [disabled]="userInput.invalid"
       *ngIf="!isCoffee"
@@ -118,6 +118,7 @@
       Upload
     </button>
     <p *ngIf="isSuccess">Product uploaded</p>
+
     <div>
       <button
         (click)="uploadCoffee(userInput)"

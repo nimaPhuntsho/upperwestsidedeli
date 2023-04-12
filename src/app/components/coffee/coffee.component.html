@@ -26,13 +26,16 @@
       </div>
 
       <div class="card-body" fxLayout="column" fxLayoutAlign="center center">
-        <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <label for="">Size</label>
+
           <div>
             <select
               [(ngModel)]="element.size"
               name="size"
               class="form-select"
               aria-label=".form-select-sm example"
+              (mouseleave)="getTotal(i)"
             >
               <option [value]="element.price.small">Small</option>
               <option [value]="element.price.medium">Medium</option>
@@ -41,6 +44,28 @@
           </div>
           <div>
             <p>{{ element.size | currency }}</p>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+          <label for="">Extras</label>
+          <div>
+            <select
+              [(ngModel)]="element.extra$"
+              name="size"
+              class="form-select"
+              aria-label=".form-select-sm example"
+              (mouseleave)="getTotal(i)"
+            >
+              <option value="0">None</option>
+              <option [value]="element.extra.coconut">Coconut</option>
+              <option [value]="element.extra.extraShot">Extra shot</option>
+              <option [value]="element.extra.oat">Oat</option>
+              <option [value]="element.extra.soy">Soy</option>
+              <option [value]="element.extra.lactoseFree">Lactose free</option>
+            </select>
+          </div>
+          <div>
+            <p>{{ element.extra$ | currency }}</p>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">

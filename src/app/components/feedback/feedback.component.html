@@ -1,0 +1,39 @@
+<div class="container" fxLayout="row wrap" fxLayoutAlign="center center">
+  <div class="form-container" fxFlex="60%" fxFlex.lt-sm="90%">
+    <div>
+      <h1>Help us improve. Share your feedback with us today.</h1>
+    </div>
+    <div class="form">
+      <form action="" #feedback="ngForm">
+        <div>
+          <label for="">Name</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            [(ngModel)]="name$"
+          />
+        </div>
+        <div>
+          <label for="">Comments</label>
+          <textarea
+            name="comment"
+            id=""
+            cols="30"
+            rows="10"
+            class="form-control"
+            [(ngModel)]="comment$"
+          ></textarea>
+        </div>
+      </form>
+      <button
+        color="primary"
+        mat-raised-button
+        (click)="postFeedbacks(feedback)"
+      >
+        Send
+      </button>
+      <p *ngIf="isSuccess">We have received your feedback, THANK YOU</p>
+    </div>
+  </div>
+</div>

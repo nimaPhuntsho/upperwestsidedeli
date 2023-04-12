@@ -24,6 +24,7 @@ export interface CoffeeOrder extends Coffee {
   quantity: number;
   size: number;
   success: boolean;
+  extra$: number;
 }
 
 export interface CartCoffee {
@@ -31,6 +32,7 @@ export interface CartCoffee {
   size: number;
   quantity: number;
   total: number;
+  category: string;
 }
 
 @Component({
@@ -51,7 +53,7 @@ export class CoffeeComponent {
   success = false;
 
   test: CoffeeOrder[] = [];
-  constructor(private afs: DataService) {}
+  constructor(private afs: DataService<CartCoffee>) {}
 
   ngOnInit() {
     let order = {
@@ -68,6 +70,7 @@ export class CoffeeComponent {
             size: 0,
             total: 0,
             success: false,
+            extra$: 0,
           });
           this.orderList.push(coffeeOrder);
         });
@@ -87,7 +90,9 @@ export class CoffeeComponent {
 
   getTotal(index: number) {
     this.orderList[index].total =
-      this.orderList[index].quantity * this.orderList[index].size;
+      Number(this.orderList[index].quantity) *
+        Number(this.orderList[index].size) +
+      Number(this.orderList[index].extra$);
   }
 
   order(index: number) {
@@ -96,9 +101,9 @@ export class CoffeeComponent {
       size: this.orderList[index].size,
       total: this.orderList[index].total,
       quantity: this.orderList[index].quantity,
+      category: this.orderList[index].category,
     };
-    this.cartList.push(order);
-    this.afs.sendMessage(this.cartList);
+    this.afs.sendCoffee(order);
     this.orderList[index].success = true;
   }
 }
