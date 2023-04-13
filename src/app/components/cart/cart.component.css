@@ -123,3 +123,11 @@ i {
 .edit-text {
   font-weight: bold;
 }
+
+.empty-cart {
+  height: 60dvh;
+}
+
+.empty-cart p {
+  color: red;
+}

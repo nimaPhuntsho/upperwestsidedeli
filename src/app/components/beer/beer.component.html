@@ -41,7 +41,7 @@
           </div>
           <div fxLayout="row">
             <button
-              [disabled]="!element.quantity"
+              [disabled]="!element.quantity && itemAdded"
               color="primary"
               mat-raised-button
               (click)="order(i)"

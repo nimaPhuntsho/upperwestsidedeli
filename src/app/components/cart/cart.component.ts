@@ -58,6 +58,7 @@ export class CartComponent<Type> {
   message = false;
   order: Sale = {} as Sale;
   isEmpty = false;
+  emptyCartMessage = false;
   allList: Product[] = [];
 
   allItem$: Product[] = [];
@@ -93,6 +94,10 @@ export class CartComponent<Type> {
   ngOnInit() {
     this.allItem$ = this.data.getData();
     this.coffee$ = this.data.getCoffeeCart();
+    if (this.allItem$.length === 0 && this.coffee$.length === 0) {
+      this.isEmpty = true;
+      this.emptyCartMessage = true;
+    }
     this.getTotal();
   }
 
