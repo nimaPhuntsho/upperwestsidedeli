@@ -27,12 +27,12 @@ fa-icon {
 }
 
 h1 {
-  font-family: "Rampart One", cursive;
+  font-family: "Josefin Sans", sans-serif;
   padding: 30px;
-  color: rgb(143, 88, 115);
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   word-spacing: 10px;
   font-size: 50px;
+  color: rgb(12, 85, 40);
 }
 
 .cart {

@@ -97,3 +97,10 @@ h2 {
 i {
   font-size: 20px;
 }
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

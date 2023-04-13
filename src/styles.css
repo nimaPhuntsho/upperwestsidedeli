@@ -13,8 +13,16 @@ li {
   margin: 1rem;
 }
 
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 h1 {
   text-align: center;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .card-wrapper {

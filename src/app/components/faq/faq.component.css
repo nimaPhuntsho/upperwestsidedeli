@@ -9,10 +9,6 @@ li {
   text-align: center;
 }
 
-div {
-  margin: 2rem;
-}
-
 h1 {
   text-align: center;
   font-family: "Josefin Sans", sans-serif;
@@ -27,4 +23,8 @@ h2 {
 p {
   font-family: "Noto Sans Zanabazar Square", sans-serif;
   line-height: 2rem;
+}
+
+.container {
+  margin: 3rem;
 }

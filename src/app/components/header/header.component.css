@@ -54,12 +54,12 @@ i {
 }
 .login-wrapper {
   padding: 1rem;
-  background-color: rgb(209, 185, 151);
+  background-color: rgb(93, 39, 55);
 }
 
 .login-wrapper h1 {
   font-size: 15px;
-  font-weight: bolder;
+  color: aliceblue;
 }
 
 .user:hover {

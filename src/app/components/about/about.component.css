@@ -33,3 +33,7 @@ h1 {
 .intro {
   padding: 10px;
 }
+
+.container {
+  padding: 2rem;
+}
