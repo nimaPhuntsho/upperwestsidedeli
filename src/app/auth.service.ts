@@ -30,7 +30,7 @@ export class AuthService {
   ) {
     this.auth.authState.forEach((user) => {
       if (user) {
-        this.userData = user;
+        this.userData = user.getIdToken();
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       }

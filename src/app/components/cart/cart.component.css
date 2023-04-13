@@ -43,8 +43,7 @@
 }
 
 button {
-  width: 100%;
-  margin: 3px;
+  margin: 2px;
 }
 
 .order-total p {
@@ -98,9 +97,29 @@ i {
   font-size: 20px;
 }
 
-.card-body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.edit,
+.order-total {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: scroll;
   align-items: center;
+  text-align: center;
+}
+
+.edit-section {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  align-items: center;
+  text-align: center;
+}
+
+.edit-section-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  text-align: center;
+}
+
+.edit-text {
+  font-weight: bold;
 }

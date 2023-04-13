@@ -66,6 +66,23 @@ export class CartComponent<Type> {
   selectedCoffee?: CartCoffee;
   selectedItem?: Product;
 
+  fake: CartCoffee[] = [
+    {
+      productName: 'NIMA',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuuuuuuuuuuuuuuuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+  ];
+
   constructor(
     private data: DataService<CartCoffee>,
     private dataCroissant: DataService<Product>,
@@ -86,17 +103,17 @@ export class CartComponent<Type> {
     }
     this.getTotal();
     this.selectedCoffee = undefined;
+    this.edit = false;
   }
 
   totalAfterEdit(product: Product) {
     if (this.selectedItem) {
       this.selectedItem.total =
         Number(this.selectedItem.price) * this.selectedItem.quantity;
-      console.log(Number(this.selectedItem.price));
-      console.log(this.selectedItem.quantity);
     }
     this.getTotal();
     this.selectedItem = undefined;
+    this.edit = false;
   }
 
   getTotal() {
@@ -119,6 +136,7 @@ export class CartComponent<Type> {
 
   editItems(coffee: CartCoffee) {
     this.selectedCoffee = coffee;
+    this.edit = true;
   }
 
   increment(coffee: CartCoffee) {
@@ -137,6 +155,7 @@ export class CartComponent<Type> {
 
   editProduct(product: Product) {
     this.selectedItem = product;
+    this.edit = true;
   }
 
   incrementItem(product: Product) {
