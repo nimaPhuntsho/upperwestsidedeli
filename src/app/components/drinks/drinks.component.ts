@@ -22,6 +22,7 @@ export class DrinksComponent {
     this.data.getProducts('products', 'Drinks').then((data) => {
       data?.subscribe((item) => {
         this.drinks = item;
+        console.log(this.drinks);
       });
     });
   }

@@ -38,3 +38,9 @@ h1 {
 .quantity {
   padding: 0.5rem;
 }
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}

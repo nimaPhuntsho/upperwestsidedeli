@@ -11,6 +11,15 @@
         id="pies"
       >
         <div class="card-body">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img
+              src="{{
+                'assets/images/' +
+                  element.productName.toLowerCase().trim() +
+                  '.png'
+              }}"
+            />
+          </div>
           <h5 class="card-title">{{ element.productName | titlecase }}</h5>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div class="btn-group" role="group" aria-label="Basic example">

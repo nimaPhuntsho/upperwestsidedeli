@@ -36,12 +36,6 @@ select {
   margin: 0 10px 0 10px;
 }
 
-img {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-}
-
 h1 {
   text-align: center;
   font-family: "Josefin Sans", sans-serif;
