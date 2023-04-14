@@ -2,6 +2,17 @@
   margin: 5rem;
 }
 
+.card-container {
+  width: 90%;
+}
+
+.cards {
+  width: 60%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 2rem;
+  margin: 1rem;
+}
+
 .author {
   font-weight: bolder;
 }
@@ -12,6 +23,7 @@ p {
 
 .card-body {
   padding: 3rem;
+  border: 1px solid red;
 }
 
 h1 {

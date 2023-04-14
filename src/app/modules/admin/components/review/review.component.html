@@ -1,14 +1,14 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
-  <div>
+  <div class="card-container">
     <h1>All feedbacks</h1>
     <div fxLayout="column" fxLayoutAlign="center center">
-      <div class="card" style="width: 70%" *ngFor="let element of feedback$">
-        <div class="card-body">
+      <div class="cards" *ngFor="let element of feedback$">
+        <div>
           <div>
             <p>{{ element.comment }}</p>
           </div>
           <div>
-            <p class="author">{{ element.name }}</p>
+            <p class="author">{{ element.name | titlecase }}</p>
           </div>
         </div>
       </div>
