@@ -27,6 +27,8 @@ export interface CoffeeID extends Coffee {
 export class UpdateComponent {
   allCoffee: CoffeeID[] = [];
   allProducts: ProductID[] = [];
+  isSoldedOut = false;
+  selectedCoffee: CoffeeID | undefined;
 
   constructor(private data: DataService<Product>) {}
 
@@ -77,6 +79,13 @@ export class UpdateComponent {
   availableCoffee(id: string) {
     if (confirm('Are you sure you want to make the coffee AVAILABLE?')) {
       this.data.coffeeAvailable(id);
+    }
+  }
+
+  displaySoldOut(coffee: CoffeeID) {
+    this.selectedCoffee = coffee;
+    if (!this.selectedCoffee.availability) {
+      this.isSoldedOut = true;
     }
   }
 }

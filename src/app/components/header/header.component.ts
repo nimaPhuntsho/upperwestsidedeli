@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Product } from './../../modules/admin/components/upload/upload.component';
+import { DataService } from 'src/app/data.service';
+import { Component, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   faBars,
@@ -12,7 +14,7 @@ import {
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(public router: Router) {}
+  constructor(public router: Router, private data: DataService<Product>) {}
   menuBar = faBars;
   close = faXmark;
   closeBtn = false;
@@ -20,6 +22,12 @@ export class HeaderComponent {
   sideNav = false;
   hide = true;
   cart = faCartShopping;
+  cartItemCount = 0;
+
+  ngOnInit() {
+    this.cartItemCount = this.data.getCartLength();
+    console.log(this.cartItemCount);
+  }
 
   displayClose() {
     this.closeBtn = true;

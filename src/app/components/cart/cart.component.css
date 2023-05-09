@@ -4,8 +4,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
+.container-fluid {
+  min-height: 50dvh;
+}
+
 .container {
   margin: 30px 0 30px 0;
+  height: auto;
 }
 .card {
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
@@ -13,19 +18,32 @@
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
+.header {
+  position: relative;
+}
+
 .header h5 {
   font-family: "Secular One", sans-serif;
   text-align: center;
 }
-.item-container {
-  height: 300px;
-  overflow: auto;
-  position: relative;
+
+.header h1::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: rgb(30, 154, 86);
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .item {
   position: relative;
   margin: 10px;
+}
+
+.item-container {
+  width: 100%;
 }
 
 .item::after {
@@ -42,8 +60,13 @@
   font-family: "PT Sans Narrow", sans-serif;
 }
 
-button {
+.edit-order {
+  width: 100%;
+}
+
+.edit-order button {
   margin: 2px;
+  width: 100%;
 }
 
 .order-total p {
@@ -101,9 +124,9 @@ i {
 .order-total {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  overflow: scroll;
-  align-items: center;
+  place-items: center;
   text-align: center;
+  margin: 1%;
 }
 
 .edit-section {
@@ -111,6 +134,10 @@ i {
   grid-template-columns: repeat(1, minmax(0, 1fr));
   align-items: center;
   text-align: center;
+  border: 1px solid rgb(81, 70, 70);
+  padding: 2%;
+  border-radius: 10px;
+  margin-bottom: 2%;
 }
 
 .edit-section-two {
@@ -124,10 +151,22 @@ i {
   font-weight: bold;
 }
 
+.emptycart-wrapper {
+  display: grid;
+  place-items: center;
+}
+
 .empty-cart {
-  height: 60dvh;
+  display: grid;
+  place-items: center;
 }
 
 .empty-cart p {
-  color: red;
+  color: rgb(208, 45, 45);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: bolder;
+  border: 1px solid black;
+  padding: 2%;
+  border-radius: 10px;
 }

@@ -95,7 +95,7 @@ export class CoffeeComponent {
       Number(this.orderList[index].extra$);
   }
 
-  order(index: number) {
+  order(index: number, form: NgForm) {
     let order: CartCoffee = {
       productName: this.orderList[index].productName,
       size: this.orderList[index].size,
@@ -105,5 +105,6 @@ export class CoffeeComponent {
     };
     this.afs.sendCoffee(order);
     this.orderList[index].success = true;
+    form.reset();
   }
 }

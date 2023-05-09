@@ -1,39 +1,76 @@
-<div class="container" fxLayout="row wrap" fxLayoutAlign="center center">
-  <div class="form-container" fxFlex="60%" fxFlex.lt-sm="90%">
+<!-- Feedbacks posted by Admin -->
+
+<div class="container-fluid" fxLayout="row" fxLayoutAlign="center">
+  <div *ngIf="hideFeedbacks" class="feedback-container">
     <div>
-      <h1>Help us improve. Share your feedback with us today.</h1>
+      <h1>Recent feedbacks</h1>
     </div>
-    <div class="form">
-      <form action="" #feedback="ngForm">
-        <div>
-          <label for="">Name</label>
-          <input
-            name="name"
-            type="text"
-            class="form-control"
-            [(ngModel)]="name$"
-          />
+    <div class="feedback-wrapper" *ngFor="let element of feedback$">
+      <div class="feedback">
+        <div class="author">
+          <p>{{ element.name | titlecase }}</p>
+          <p class="date">{{ element.date | date : "EEEE, MMMM d, y" }}</p>
         </div>
-        <div>
-          <label for="">Comments</label>
-          <textarea
-            name="comment"
-            id=""
-            cols="30"
-            rows="10"
-            class="form-control"
-            [(ngModel)]="comment$"
-          ></textarea>
+        <div></div>
+        <div class="comment">
+          <p>{{ element.comment }}</p>
         </div>
-      </form>
-      <button
-        color="primary"
-        mat-raised-button
-        (click)="postFeedbacks(feedback)"
-      >
-        Send
-      </button>
-      <p *ngIf="isSuccess">We have received your feedback, THANK YOU</p>
+      </div>
+    </div>
+
+    <button
+      *ngIf="hideBtn"
+      (click)="feedbackForm()"
+      color="primary"
+      mat-raised-button
+    >
+      Send your feedback
+    </button>
+  </div>
+
+  <!-- Feedback form for customers-->
+  <div
+    *ngIf="showForm"
+    class="container form-wrapper"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+  >
+    <div class="form-container" fxFlex="60%" fxFlex.lt-sm="90%">
+      <div>
+        <h1>Help us improve. Share your feedback with us today.</h1>
+      </div>
+      <div class="form">
+        <form action="" #feedback="ngForm">
+          <div>
+            <label for="">Name</label>
+            <input
+              name="name"
+              type="text"
+              class="form-control"
+              [(ngModel)]="name$"
+            />
+          </div>
+          <div>
+            <label for="">Comments</label>
+            <textarea
+              name="comment"
+              id=""
+              cols="30"
+              rows="10"
+              class="form-control"
+              [(ngModel)]="comment$"
+            ></textarea>
+          </div>
+        </form>
+        <button
+          color="primary"
+          mat-raised-button
+          (click)="postFeedbacks(feedback)"
+        >
+          Send
+        </button>
+        <p *ngIf="isSuccess">We have received your feedback, THANK YOU</p>
+      </div>
     </div>
   </div>
 </div>

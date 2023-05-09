@@ -17,7 +17,7 @@ export class BeerComponent {
   addIcon = faPlus;
   minusIcon = faMinus;
   cartList: Product[] = [];
-  itemAdded = false;
+
   constructor(private data: DataService<Product>) {}
   ngOnInit() {
     this.data.getProducts('products', 'Beer').then((beer) => {
@@ -57,6 +57,5 @@ export class BeerComponent {
     // this.data.sendData(this.cartList);
     this.data.sendData(order);
     this.beer[index].success = true;
-    this.itemAdded = true;
   }
 }

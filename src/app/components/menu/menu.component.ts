@@ -39,6 +39,7 @@ export class MenuComponent {
   ) {}
 
   ngOnInit() {
+    // this.stopOrders();
     this.data.order$.subscribe((item) => (this.numberOfOrders = item));
   }
 
@@ -49,5 +50,15 @@ export class MenuComponent {
 
   badgeCounter(counter: number) {
     console.log(counter);
+  }
+
+  stopOrders() {
+    let now = new Date().getHours();
+    let tradingHours = now >= 17 || now <= 8;
+    if (tradingHours) {
+      alert(
+        'Our store is closed at the moment and we are not taking any online orders, Please see our trading hours. THANK YOU'
+      );
+    }
   }
 }

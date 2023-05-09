@@ -49,6 +49,7 @@ import { UsersComponent } from './components/users/users.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FeedbackComponent } from './components/feedback/feedback.component';
+import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -99,6 +100,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     UsersComponent,
     FaqComponent,
     FeedbackComponent,
+    CartIconComponent,
   ],
   imports: [
     BrowserModule,

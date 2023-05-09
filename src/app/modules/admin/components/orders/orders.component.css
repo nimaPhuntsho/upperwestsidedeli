@@ -1,9 +1,6 @@
-table {
-  margin-top: 5rem;
-}
-
-.item {
-  margin: 1rem;
+.container-fluid {
+  position: relative;
+  width: 70%;
 }
 
 h1 {
@@ -14,7 +11,44 @@ h2 {
   font-size: 20px;
 }
 
+.card {
+  overflow: auto;
+  width: 100%;
+}
+
 .total-sales {
   position: absolute;
   bottom: 0;
+}
+
+.order-wrapper {
+  width: 100%;
+  display: grid;
+}
+
+.order {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+.order-child {
+  width: 100%;
+  place-items: center;
+}
+.prepare-btn {
+  position: absolute;
+  right: 100%;
+}
+
+.card-animate {
+  animation: slide-right 0.5s;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

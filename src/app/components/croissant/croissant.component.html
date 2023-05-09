@@ -27,10 +27,10 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="increment(i)"
+                (click)="decrement(i)"
                 (click)="getTotal(i)"
               >
-                <fa-icon [icon]="addIcon"></fa-icon>
+                <fa-icon [icon]="minusIcon"></fa-icon>
               </button>
               <div fxLayout="row" fxLayoutAlign="center center">
                 <h6 class="quantity">{{ element.quantity }}</h6>
@@ -38,10 +38,10 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="decrement(i)"
+                (click)="increment(i)"
                 (click)="getTotal(i)"
               >
-                <fa-icon [icon]="minusIcon"></fa-icon>
+                <fa-icon [icon]="addIcon"></fa-icon>
               </button>
             </div>
           </div>
@@ -49,7 +49,7 @@
           <div>
             <p>{{ element.total | currency }}</p>
           </div>
-          <div fxLayout="row">
+          <div fxLayout="column">
             <button
               [disabled]="!element.quantity"
               color="primary"
@@ -59,7 +59,7 @@
               Add to cart
             </button>
             <div *ngIf="element.success">
-              <i class="bi bi-check2"></i>
+              <p>Added to cart</p>
             </div>
           </div>
         </div>

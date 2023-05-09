@@ -2,7 +2,7 @@ import {
   ProductID,
   CoffeeID,
 } from './modules/admin/components/update/update.component';
-import { Feedback } from './components/feedback/feedback.component';
+import { Feedback, FeedbackID } from './components/feedback/feedback.component';
 import { firebase } from 'firebaseui-angular';
 import { Admin } from './modules/admin/components/adminlogin/adminlogin.component';
 import { CoffeeOrder, CartCoffee } from './components/coffee/coffee.component';
@@ -30,7 +30,7 @@ import {
   CollectionReference,
   deleteDoc,
 } from 'firebase/firestore';
-import { BehaviorSubject, Observable, timestamp } from 'rxjs';
+import { BehaviorSubject, Observable, retry, timestamp } from 'rxjs';
 import { Customer } from './components/login/login.component';
 import { Sale } from './components/cart/cart.component';
 
@@ -50,6 +50,7 @@ export class DataService<Type> {
 
   private numberOfItems = new BehaviorSubject<number>(0);
   order$ = this.numberOfItems.asObservable();
+  joined: any[] = [];
 
   constructor(private fs: Firestore) {}
 
@@ -122,12 +123,17 @@ export class DataService<Type> {
   async sendFeedback(feedback: Feedback) {
     let db = getFirestore();
     const docRef = await addDoc(collection(db, 'feedbacks'), feedback);
+    const ref = docRef.id;
+    const newDoc = doc(db, 'feedbacks', ref);
+    await updateDoc(newDoc, {
+      id: ref,
+    });
   }
 
   async getFeedbacks() {
     try {
       const userProfileCollection = collection(this.fs, 'feedbacks');
-      return collectionData(userProfileCollection) as Observable<Feedback[]>;
+      return collectionData(userProfileCollection) as Observable<FeedbackID[]>;
     } catch (error) {
       console.log(error);
     }
@@ -149,6 +155,11 @@ export class DataService<Type> {
     await deleteDoc(doc(db, 'coffee', id));
   }
 
+  async deleteFeedback(id: string) {
+    let db = getFirestore();
+    await deleteDoc(doc(db, 'feedbacks', id));
+  }
+
   async addUser(user: Customer) {
     let db = getFirestore();
     const docRef = await addDoc(collection(db, 'Users'), user);
@@ -162,6 +173,14 @@ export class DataService<Type> {
   addItems(dbName: string, product: Product) {
     let db = getFirestore();
     const id = addDoc(collection(db, dbName), product).then((data) => {});
+  }
+
+  async postFeedback(id: string) {
+    let db = getFirestore();
+    const ref = doc(db, 'feedbacks', id);
+    await updateDoc(ref, {
+      isPosted: true,
+    });
   }
 
   async makeUnavailable(id: string) {
@@ -205,11 +224,26 @@ export class DataService<Type> {
   }
 
   sendData(product: Product) {
+    let storedItems = localStorage.getItem('allItems');
+    if (storedItems) {
+      this.cartItem$ = JSON.parse(storedItems);
+    }
     this.cartItem$.push(product);
+    localStorage.setItem('allItems', JSON.stringify(this.cartItem$));
   }
 
   sendCoffee(product: CartCoffee) {
+    let storedCoffee = localStorage.getItem('coffee');
+    if (storedCoffee) {
+      this.coffee$ = JSON.parse(storedCoffee);
+    }
     this.coffee$.push(product);
+    localStorage.setItem('coffee', JSON.stringify(this.coffee$));
+  }
+
+  getCartLength() {
+    this.joined = Object.assign({}, this.coffee$, this.cartItem$);
+    return Array(this.joined).length;
   }
 
   getData() {

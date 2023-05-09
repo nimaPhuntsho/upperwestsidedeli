@@ -1,3 +1,4 @@
+import { Coffee } from './../../modules/admin/components/upload/upload.component';
 import { environment } from './../../../environments/environment.development';
 import { firebase } from 'firebaseui-angular';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
@@ -29,6 +30,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 export interface Sale {
   orderID: number;
@@ -66,6 +68,11 @@ export class CartComponent<Type> {
   cartTotal = 0;
   selectedCoffee?: CartCoffee;
   selectedItem?: Product;
+  cartItemsProducts: any = [];
+  cartItemsCoffee: any[] = [];
+  cartItems: any[] = [];
+  myJoin: any[] = [];
+  coffeeSize = '';
 
   fake: CartCoffee[] = [
     {
@@ -82,23 +89,83 @@ export class CartComponent<Type> {
       quantity: 45,
       size: 4.5,
     },
+    {
+      productName: 'uuuuuuuuuuuuuuuuuuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuuuuuuuuuuuuuuuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+  ];
+
+  fakeTwo: Product[] = [
+    {
+      productName: 'Gucci',
+      availability: true,
+      category: 'T-shirt',
+      price: 4000,
+      ingredients: 'cotten',
+      total: 4000,
+      quantity: 1,
+      success: true,
+    },
   ];
 
   constructor(
     private data: DataService<CartCoffee>,
     private dataCroissant: DataService<Product>,
     private fs: Firestore,
-    private router: Router
+    private router: Router,
+    private scroller: ViewportScroller
   ) {}
 
   ngOnInit() {
-    this.allItem$ = this.data.getData();
-    this.coffee$ = this.data.getCoffeeCart();
-    if (this.allItem$.length === 0 && this.coffee$.length === 0) {
+    if (this.checkLocalStorage('coffee')) {
+      let getCoffee = localStorage.getItem('coffee');
+      if (getCoffee) {
+        this.coffee$ = JSON.parse(getCoffee);
+      }
+    } else {
+      this.coffee$ = this.data.getCoffeeCart();
+    }
+
+    if (this.checkLocalStorage('allItems')) {
+      let getAllItems = localStorage.getItem('allItems');
+      if (getAllItems) {
+        this.allItem$ = JSON.parse(getAllItems);
+      }
+    } else this.allItem$ = this.data.getData();
+
+    if (this.coffee$.length === 0 && this.allItem$.length === 0) {
       this.isEmpty = true;
       this.emptyCartMessage = true;
+    } else {
+      this.store('coffee', this.coffee$);
+      this.storeItems('allItems', this.allItem$);
     }
+
     this.getTotal();
+  }
+
+  store(key: string, item: CartCoffee[]) {
+    localStorage.setItem(key, JSON.stringify(item));
+  }
+
+  checkLocalStorage(key: string): boolean {
+    let result = localStorage.getItem(key);
+    if (result) return true;
+    else return false;
+  }
+
+  storeItems(key: string, item: Product[]) {
+    localStorage.setItem(key, JSON.stringify(item));
   }
 
   getTotalAfterEdit(coffee: CartCoffee) {
@@ -139,11 +206,6 @@ export class CartComponent<Type> {
     }, 0);
   }
 
-  editItems(coffee: CartCoffee) {
-    this.selectedCoffee = coffee;
-    this.edit = true;
-  }
-
   increment(coffee: CartCoffee) {
     if (this.selectedCoffee) {
       this.selectedCoffee.quantity++;
@@ -158,22 +220,25 @@ export class CartComponent<Type> {
     }
   }
 
+  editItems(coffee: CartCoffee) {
+    this.scroll('edit-coffee');
+    this.selectedCoffee = coffee;
+    this.edit = true;
+  }
+
   editProduct(product: Product) {
+    this.scroll('edit-product');
     this.selectedItem = product;
     this.edit = true;
   }
 
   incrementItem(product: Product) {
-    if (this.selectedItem) {
-      this.selectedItem.quantity++;
-    }
+    if (this.selectedItem) this.selectedItem.quantity++;
   }
 
   decrementItem(product: Product) {
     if (this.selectedItem) {
-      if (this.selectedItem.quantity > 0) {
-        this.selectedItem.quantity--;
-      }
+      if (this.selectedItem.quantity > 0) this.selectedItem.quantity--;
     }
   }
 
@@ -181,16 +246,22 @@ export class CartComponent<Type> {
     if (this.selectedCoffee) {
       let index = this.coffee$.indexOf(coffee);
       this.coffee$.splice(index, 1);
+      this.store('coffee', this.coffee$);
     }
     this.selectedCoffee = undefined;
+    this.edit = false;
+    this.getTotal();
   }
 
   deleteItem(product: Product) {
     if (this.selectedItem) {
       let index = this.allItem$.indexOf(product);
       this.allItem$.splice(index, 1);
+      this.storeItems('allItems', this.allItem$);
     }
     this.selectedItem = undefined;
+    this.edit = false;
+    this.getTotal();
   }
 
   async checkout() {
@@ -218,11 +289,32 @@ export class CartComponent<Type> {
 
       this.checkOutSuccess = false;
       this.message = true;
+      localStorage.removeItem('coffee');
+      localStorage.removeItem('allItems');
     }
   }
+  scroll(id: string) {
+    this.scroller.scrollToAnchor(id.toLowerCase());
+  }
 
-  ngOnDestroy() {
-    this.coffee$.splice(0, this.coffee$.length);
-    this.allItem$.splice(0, this.allItem$.length);
+  // ngOnDestroy() {
+  //   this.coffee$.splice(0, this.coffee$.length);
+  //   this.allItem$.splice(0, this.allItem$.length);
+  // }
+
+  getCupSize(size: number) {
+    switch (size) {
+      case 4.5:
+        this.coffeeSize = 'Small';
+        break;
+
+      case 5.5:
+        this.coffeeSize = 'Medium';
+        break;
+
+      default:
+        this.coffeeSize = 'Large';
+        break;
+    }
   }
 }

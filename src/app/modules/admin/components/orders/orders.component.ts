@@ -1,9 +1,7 @@
-import { CartCoffee } from './../../../../components/coffee/coffee.component';
 import { ViewportScroller } from '@angular/common';
 import { DataService } from 'src/app/data.service';
 import { Component } from '@angular/core';
 import { Sale } from 'src/app/components/cart/cart.component';
-import { Product } from '../upload/upload.component';
 
 @Component({
   selector: 'app-orders',
@@ -15,6 +13,8 @@ export class OrdersComponent {
   selectedItem?: Sale;
   totalSales = 0;
   today = '';
+  displayOrder: Sale[] = [];
+  orderCompleted = false;
   constructor(
     private data: DataService<Sale>,
     private scroller: ViewportScroller
@@ -34,6 +34,11 @@ export class OrdersComponent {
     this.selectedItem = product;
   }
 
+  cook() {
+    let current = this.allOrders.shift();
+    if (current) this.displayOrder.push(current);
+  }
+
   scroll(id: string) {
     this.scroller.scrollToAnchor(id);
   }
@@ -41,5 +46,14 @@ export class OrdersComponent {
     this.totalSales = this.allOrders.reduce((accumulator, currentValue) => {
       return accumulator + currentValue.total;
     }, 0);
+  }
+
+  removeOrder(item: Sale) {
+    this.selectedItem = item;
+    let index = this.displayOrder.indexOf(this.selectedItem);
+    if (confirm('Order parpared confirmation')) {
+      this.displayOrder.splice(index, 1);
+      console.table(this.displayOrder);
+    }
   }
 }

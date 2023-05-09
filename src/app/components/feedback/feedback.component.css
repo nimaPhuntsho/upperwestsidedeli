@@ -1,5 +1,62 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap");
 
+.container-fluid {
+  min-height: 60dvh;
+  position: relative;
+}
+
+.feedback-container {
+  position: relative;
+  width: 50%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  animation: slide-down 0.5s;
+}
+
+.feedback-container button {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+.feedback {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.feedback-wrapper {
+  line-height: 1.8rem;
+}
+
+.author {
+  width: 100%;
+  position: relative;
+}
+
+.author p {
+  font-weight: bolder;
+  padding: 0;
+  margin: 0;
+}
+.author .date {
+  font-style: italic;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.author::after {
+  content: "";
+  position: absolute;
+  width: 20%;
+  height: 1px;
+  background-color: black;
+}
+
+.form-wrapper {
+  position: absolute;
+  animation: slide-right 0.5s;
+}
+
 .form-container {
   margin: 5rem 0 5rem 0;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -11,4 +68,29 @@ h1 {
   text-transform: uppercase;
   font-size: 18px;
   text-align: center;
+  font-weight: bolder;
 }
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100px);
+  }
+
+  90% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* @keyframes slide-down {
+  0% {
+    transform: translateY(-100px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+} */

@@ -16,187 +16,210 @@
     </div>
   </div>
 </div>
-<div class="container empty-cart" *ngIf="emptyCartMessage">
-  <p>Cart is emptyt</p>
+<div class="emptycart-wrapper">
+  <div class="container empty-cart" *ngIf="emptyCartMessage">
+    <p>Cart is empty</p>
+  </div>
 </div>
-
-<!-- order review and edit options for coffee -->
-<div
-  class="container"
-  fxLayout="row"
-  id="cart"
-  fxLayoutAlign="center center"
-  *ngIf="checkOutSuccess && !isEmpty"
->
-  <div class="card" style="width: 26rem">
-    <div class="card-body">
-      <div class="item-container">
-        <div class="header">
-          <h1 class="card-title">Your order</h1>
-        </div>
-        <div class="edit" *ngFor="let coffee of coffee$; let i = index">
-          <div class="name">
-            <li class="edit-text">{{ coffee.productName | titlecase }}</li>
-            <li>{{ coffee.quantity }} x {{ coffee.size | currency }}</li>
+<div class="container-fluid" fxLayout="row" fxLayoutAlign="center center">
+  <!-- order review and edit options for coffee -->
+  <div
+    class="container"
+    fxLayout="row"
+    id="cart"
+    fxLayoutAlign="center center"
+    *ngIf="checkOutSuccess && !isEmpty"
+  >
+    <div class="card" style="width: 26rem">
+      <div class="card-body">
+        <div class="item-container">
+          <div class="header">
+            <h1 class="card-title">Your order</h1>
           </div>
-          <div class="item-price">
-            <p>{{ coffee.total | currency }}</p>
-          </div>
-          <div>
-            <li><i (click)="editItems(coffee)" class="bi bi-pencil"></i></li>
-          </div>
-        </div>
-
-        <div *ngIf="selectedCoffee">
-          <div class="edit-section">
-            <div>
-              <li class="edit-text">
-                {{ selectedCoffee.productName | titlecase }}
-              </li>
-            </div>
-            <div class="edit-section-two">
-              <div>
-                <select
-                  [(ngModel)]="selectedCoffee.size"
-                  name="size"
-                  class="form-select"
-                  aria-label=".form-select-sm example"
-                >
-                  <option [value]="4.5">Small</option>
-                  <option [value]="5.5">Medium</option>
-                  <option [value]="6">Large</option>
-                </select>
+          <div class="float">
+            <div class="edit" *ngFor="let coffee of coffee$; let i = index">
+              <div class="name">
+                <li class="edit-text">{{ coffee.productName | titlecase }}</li>
+                <li>{{ coffee.quantity }} x {{ coffee.size | currency }}</li>
               </div>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="increment(selectedCoffee)"
-                  (click)="getTotal()"
-                >
-                  <fa-icon [icon]="addIcon"></fa-icon>
-                </button>
-                <div fxLayout="row" fxLayoutAlign="center center">
-                  <h6 class="quantity">{{ selectedCoffee.quantity }}</h6>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="decrement(selectedCoffee)"
-                  (click)="getTotal()"
-                >
-                  <fa-icon [icon]="minusIcon"></fa-icon>
-                </button>
+              <div class="item-price">
+                <p>{{ coffee.total | currency }}</p>
               </div>
               <div>
-                <button
-                  mat-raised-button
-                  (click)="getTotalAfterEdit(selectedCoffee)"
-                >
-                  Confirm
-                </button>
-              </div>
-              <div>
-                <button
-                  mat-raised-button
-                  (click)="deleteCoffee(selectedCoffee)"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
+                <li>
+                  <i (click)="editItems(coffee)" class="bi bi-pencil"></i>
+                </li>
               </div>
             </div>
-          </div>
-        </div>
 
-        <!-- review/edit order for rest of the product -->
-        <div class="edit" *ngFor="let item of allItem$; let i = index">
-          <div class="name">
-            <li class="edit-text">{{ item.productName | titlecase }}</li>
-            <li>{{ item.quantity }} x {{ item.price | currency }}</li>
-          </div>
-          <div class="item-price">
-            <p>{{ item.total | currency }}</p>
-          </div>
-          <div>
-            <li><i (click)="editProduct(item)" class="bi bi-pencil"></i></li>
-          </div>
-        </div>
+            <!-- review/edit order for rest of the product -->
+            <div class="edit" *ngFor="let item of allItem$; let i = index">
+              <div class="name">
+                <li class="edit-text">{{ item.productName | titlecase }}</li>
+                <li>{{ item.quantity }} x {{ item.price | currency }}</li>
+              </div>
+              <div class="item-price">
+                <p>{{ item.total | currency }}</p>
+              </div>
+              <div>
+                <li>
+                  <i (click)="editProduct(item)" class="bi bi-pencil"></i>
+                </li>
+              </div>
+            </div>
 
-        <!-- edit options for rest of the items-->
-        <div
-          *ngIf="selectedItem"
-          class="edit"
-          fxLayout="column"
-          fxLayoutAlign="center space-evenly"
-        >
-          <div>
-            <li class="edit-text">{{ selectedItem.productName }}</li>
-          </div>
-          <div>
+            <!-- edit options for rest of the items-->
             <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic example"
-              fxLayout="row"
+              *ngIf="selectedItem"
+              class="edit"
+              fxLayout="column"
               fxLayoutAlign="center space-evenly"
+              class="edit-section"
             >
-              <button
-                (click)="incrementItem(selectedItem)"
-                type="button"
-                class="btn btn-primary"
-              >
-                <fa-icon [icon]="addIcon"></fa-icon>
-              </button>
-              <div fxLayout="row" fxLayoutAlign="center center">
-                <h6 class="quantity">{{ selectedItem.quantity }}</h6>
-              </div>
-              <button
-                (click)="decrementItem(selectedItem)"
-                type="button"
-                class="btn btn-primary"
-              >
-                <fa-icon [icon]="minusIcon"></fa-icon>
-              </button>
-
               <div>
-                <button
-                  mat-raised-button
-                  (click)="totalAfterEdit(selectedItem)"
+                <li class="edit-text">{{ selectedItem.productName }}</li>
+              </div>
+              <div>
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic example"
+                  fxLayout="row"
+                  fxLayoutAlign="center space-evenly"
                 >
-                  <i class="bi bi-check2-circle"></i>
-                </button>
-              </div>
+                  <button
+                    (click)="incrementItem(selectedItem)"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    <fa-icon [icon]="addIcon"></fa-icon>
+                  </button>
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <h6 class="quantity">{{ selectedItem.quantity }}</h6>
+                  </div>
+                  <button
+                    (click)="decrementItem(selectedItem)"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    <fa-icon [icon]="minusIcon"></fa-icon>
+                  </button>
 
-              <div>
-                <button (click)="deleteItem(selectedItem)" mat-raised-button>
-                  <i class="bi bi-trash"></i>
-                </button>
+                  <div>
+                    <button
+                      mat-raised-button
+                      (click)="totalAfterEdit(selectedItem)"
+                    >
+                      <i class="bi bi-check2-circle"></i>
+                    </button>
+                  </div>
+
+                  <div>
+                    <button
+                      (click)="deleteItem(selectedItem)"
+                      mat-raised-button
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Edit coffee items -->
+            <div *ngIf="selectedCoffee" id="edit-coffee">
+              <div class="edit-section">
+                <div>
+                  <li class="edit-text">
+                    {{ selectedCoffee.productName | titlecase }}
+                  </li>
+                </div>
+                <div class="edit-section-two">
+                  <div>
+                    <select
+                      [(ngModel)]="selectedCoffee.size"
+                      name="size"
+                      class="form-select"
+                      aria-label=".form-select-sm example"
+                    >
+                      <option [value]="4.5">Small</option>
+                      <option [value]="5.5">Medium</option>
+                      <option [value]="6">Large</option>
+                    </select>
+                  </div>
+                  <div
+                    class="btn-group"
+                    role="group"
+                    aria-label="Basic example"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="increment(selectedCoffee)"
+                      (click)="getTotal()"
+                    >
+                      <fa-icon [icon]="addIcon"></fa-icon>
+                    </button>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                      <h6 class="quantity">{{ selectedCoffee.quantity }}</h6>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="decrement(selectedCoffee)"
+                      (click)="getTotal()"
+                    >
+                      <fa-icon [icon]="minusIcon"></fa-icon>
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      mat-raised-button
+                      (click)="getTotalAfterEdit(selectedCoffee)"
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      mat-raised-button
+                      (click)="deleteCoffee(selectedCoffee)"
+                    >
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="order-total">
-        <div>
-          <h5>Total</h5>
+        <div class="order-total">
+          <div>
+            <h5>Total</h5>
+          </div>
+          <div>
+            <p>{{ cartTotal | currency }}</p>
+          </div>
         </div>
-        <div>
-          <p>{{ cartTotal | currency }}</p>
+        <div class="edit-order" fxLayout="column" fxLayoutAlign="center center">
+          <button
+            routerLink="/menu"
+            [disabled]="edit"
+            color="primary"
+            mat-raised-button
+          >
+            Add more
+          </button>
+          <button
+            [disabled]="edit"
+            color="primary"
+            mat-raised-button
+            (click)="checkout()"
+          >
+            Proceed to payment
+          </button>
         </div>
-      </div>
-      <div class="edit-order" fxLayout="column" fxLayoutAlign="center center">
-        <!-- <button color="primary" (click)="editItems()" mat-raised-button>
-          Edit
-        </button> -->
-        <button
-          [disabled]="edit"
-          color="primary"
-          mat-raised-button
-          (click)="checkout()"
-        >
-          Check out
-        </button>
       </div>
     </div>
   </div>
