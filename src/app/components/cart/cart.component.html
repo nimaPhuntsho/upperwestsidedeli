@@ -1,17 +1,45 @@
+<!-- Customer receipt -->
 <div
-  class="user-message"
   *ngIf="message"
+  class="user-message"
   fxLayout="column"
   fxLayoutAlign="center center"
 >
   <div>
     <p>Thank you, we have received your order.</p>
   </div>
-  <div>
-    <div class="card" style="width: 18rem">
-      <div class="order-number" fxLayout="column" fxLayoutAlign="center center">
-        <h1>Order Number</h1>
-        <h2>{{ this.order.orderID }}</h2>
+  <div class="card" style="width: 22rem">
+    <div class="order-number" fxLayout="column" fxLayoutAlign="start center">
+      <h1>Order Number</h1>
+      <h2>{{ this.order.orderID }}</h2>
+    </div>
+    <!-- coffee items -->
+    <div class="card-body">
+      <div class="coffee-items">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let coffee of order.coffee">
+              <td>{{ coffee.productName | titlecase }}</td>
+              <td>{{ coffee.quantity }} * {{ coffee.size | currency }}</td>
+              <td>{{ coffee.total | currency }}</td>
+            </tr>
+            <tr *ngFor="let item of order.items">
+              <td>{{ item.productName | titlecase }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.total | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <p>Total {{ order.total | currency }}</p>
       </div>
     </div>
   </div>
@@ -202,15 +230,20 @@
             <p>{{ cartTotal | currency }}</p>
           </div>
         </div>
-        <div class="edit-order" fxLayout="column" fxLayoutAlign="center center">
-          <button
-            routerLink="/menu"
-            [disabled]="edit"
-            color="primary"
-            mat-raised-button
-          >
-            Add more
-          </button>
+        <div class="edit-order">
+          <div class="add-cancel">
+            <button
+              routerLink="/menu"
+              [disabled]="edit"
+              color="primary"
+              mat-raised-button
+            >
+              Add more
+            </button>
+            <button (click)="cancelOrder()" color="primary" mat-raised-button>
+              Cancel
+            </button>
+          </div>
           <button
             [disabled]="edit"
             color="primary"
@@ -218,6 +251,12 @@
             (click)="checkout()"
           >
             Proceed to payment
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              *ngIf="spinner"
+            ></span>
           </button>
         </div>
       </div>

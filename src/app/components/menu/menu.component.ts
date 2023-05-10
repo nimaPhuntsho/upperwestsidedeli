@@ -41,6 +41,7 @@ export class MenuComponent {
   ngOnInit() {
     // this.stopOrders();
     this.data.order$.subscribe((item) => (this.numberOfOrders = item));
+    JSON.parse(localStorage.getItem('user')!);
   }
 
   scroll(index: number, category: string) {

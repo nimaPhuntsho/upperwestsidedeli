@@ -53,7 +53,7 @@ import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
-  signInSuccessUrl: 'menu',
+  signInSuccessUrl: 'login',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     {

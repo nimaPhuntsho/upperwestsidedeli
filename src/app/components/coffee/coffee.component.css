@@ -12,6 +12,7 @@
 .card {
   margin: 10px;
   padding: 10px;
+  position: relative;
 }
 
 .card-text {
@@ -29,9 +30,6 @@
   font-size: 25px;
 } */
 
-select {
-  width: 50px;
-}
 .quantity {
   margin: 0 10px 0 10px;
 }
@@ -46,4 +44,43 @@ h2 {
   font-size: 25px;
   letter-spacing: 2px;
   color: rgb(72, 59, 41);
+}
+
+.coffee-extra {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  place-items: center;
+}
+
+.test {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-prompt {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(52, 53, 53);
+  padding: 0.5rem;
+  border-radius: 10px;
+  animation: fade-in 01s;
+  color: rgb(18, 232, 179);
+}
+
+.success-prompt i {
+  font-size: 30px;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

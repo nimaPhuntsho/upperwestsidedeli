@@ -12,7 +12,6 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Customer } from './components/login/login.component';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,7 @@ import { Customer } from './components/login/login.component';
 export class AuthService {
   private name = new Subject<string>();
   message$ = this.name.asObservable();
-  userData: any;
+  userData = '';
   userName = '';
 
   constructor(
@@ -30,9 +29,9 @@ export class AuthService {
   ) {
     this.auth.authState.forEach((user) => {
       if (user) {
-        this.userData = user.getIdToken();
+        user.getIdToken().then((token) => (this.userData = token));
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        //JSON.parse(localStorage.getItem('user')!);
       }
     });
   }
@@ -53,7 +52,14 @@ export class AuthService {
       : false;
   }
 
-  sendName() {
-    this.name.next(this.userName);
+  getJWT() {
+    return this.auth.user.subscribe((current) => current?.getIdToken());
+  }
+
+  async signIn() {
+    const log = await this.auth.signInWithPopup(new GoogleAuthProvider());
+    const result = await log.user?.getIdTokenResult();
+    const tok = result;
+    console.log(tok);
   }
 }

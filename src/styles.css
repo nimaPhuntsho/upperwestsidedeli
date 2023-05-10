@@ -1,5 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url("https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap");
 li {
   list-style-type: none;
   padding: none;
@@ -11,6 +12,7 @@ li {
 
 .card {
   margin: 1rem;
+  position: relative;
 }
 
 .card-body {
@@ -43,4 +45,50 @@ img {
   width: 150px;
   height: 150px;
   object-fit: contain;
+}
+
+.success-prompt {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(52, 53, 53);
+  padding: 0.5rem;
+  border-radius: 10px;
+  animation: fade-in 01s;
+  color: rgb(18, 232, 179);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.success-prompt i {
+  font-size: 25px;
+}
+
+.product-price {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: burlywood;
+  padding: 0.5rem;
+  border-radius: 5px 0 5px 0;
+}
+
+.product-price p {
+  font-family: "Konkhmer Sleokchher", cursive;
+  margin: 0;
+  padding: 0;
+}
+
+.action-items {
+  display: grid;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.btn-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }

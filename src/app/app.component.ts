@@ -8,13 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'upperwestsidedeli';
-  closed: boolean = false;
   constructor(public router: Router) {}
 
-  ngOnInit() {
-    let current = new Date();
-    if (current.getTime() < 10) {
-      alert('shop close');
-    }
-  }
+  ngOnInit() {}
 }

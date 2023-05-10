@@ -18,6 +18,7 @@ import {
   collectionData,
   serverTimestamp,
 } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 export interface CoffeeOrder extends Coffee {
   total: number;
@@ -105,6 +106,19 @@ export class CoffeeComponent {
     };
     this.afs.sendCoffee(order);
     this.orderList[index].success = true;
-    form.reset();
+    // form.reset();
+    this.success = true;
+  }
+
+  resetFields(coffee: CartCoffee) {
+    coffee.quantity = 0;
+    coffee.total = 0;
+    coffee.size = 0;
+  }
+
+  disableSuccessPrompt(coffee: CoffeeOrder) {
+    setTimeout(() => {
+      coffee.success = false;
+    }, 2000);
   }
 }

@@ -21,11 +21,11 @@
             />
           </div>
           <h5 class="card-title">{{ element.productName | titlecase }}</h5>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="action-items">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                class="btn btn-primary"
+                mat-stroked-button
                 (click)="decrement(i)"
                 (click)="getTotal(i)"
               >
@@ -36,31 +36,32 @@
               </div>
               <button
                 type="button"
-                class="btn btn-primary"
+                mat-stroked-button
                 (click)="increment(i)"
                 (click)="getTotal(i)"
               >
                 <fa-icon [icon]="addIcon"></fa-icon>
               </button>
             </div>
-          </div>
-          <p class="card-text">{{ element.price | currency }}</p>
-          <div>
-            <p>{{ element.total | currency }}</p>
-          </div>
-          <div fxLayout="column">
-            <button
-              [disabled]="!element.quantity"
-              color="primary"
-              mat-raised-button
-              (click)="order(i)"
-            >
-              Add to cart
-            </button>
-            <div *ngIf="element.success">
-              <p>Added to cart</p>
+            <div fxLayout="column">
+              <button
+                [disabled]="!element.quantity"
+                color="primary"
+                mat-raised-button
+                (click)="order(i)"
+                (click)="resetFields(element)"
+              >
+                Add to cart <span>{{ element.total | currency }}</span>
+              </button>
             </div>
           </div>
+          <div class="product-price">
+            <p class="card-text">{{ element.price | currency }}</p>
+          </div>
+        </div>
+        <div class="success-prompt" *ngIf="element.success">
+          <i class="bi bi-check2-circle"></i>
+          <span> Added to cart </span>
         </div>
       </div>
     </div>

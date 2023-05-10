@@ -31,6 +31,7 @@ import {
 
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { reload } from 'firebase/auth';
 
 export interface Sale {
   orderID: number;
@@ -73,37 +74,7 @@ export class CartComponent<Type> {
   cartItems: any[] = [];
   myJoin: any[] = [];
   coffeeSize = '';
-
-  fake: CartCoffee[] = [
-    {
-      productName: 'NIMA',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuuuuuuuuuuuuuuuuuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuuuuuuuuuuuuuuuuuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuuuuuuuuuuuuuuuuuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-  ];
+  spinner = false;
 
   fakeTwo: Product[] = [
     {
@@ -117,6 +88,47 @@ export class CartComponent<Type> {
       success: true,
     },
   ];
+
+  fake: CartCoffee[] = [
+    {
+      productName: 'NIMA',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+  ];
+
+  fakeOrder: Sale = {
+    orderID: 1,
+    time: 22,
+    date: 'Date',
+    items: this.fakeTwo,
+    coffee: this.fake,
+    createdAt: serverTimestamp(),
+    total: 111,
+  };
 
   constructor(
     private data: DataService<CartCoffee>,
@@ -266,6 +278,7 @@ export class CartComponent<Type> {
 
   async checkout() {
     if (confirm('Would you like to place the order?')) {
+      this.spinner = true;
       let db = getFirestore();
       const collectionRef = collection(db, 'orders');
       let snapShot = await (await getCountFromServer(collectionRef)).data()
@@ -291,30 +304,31 @@ export class CartComponent<Type> {
       this.message = true;
       localStorage.removeItem('coffee');
       localStorage.removeItem('allItems');
+      this.spinner = false;
     }
   }
   scroll(id: string) {
     this.scroller.scrollToAnchor(id.toLowerCase());
   }
 
-  // ngOnDestroy() {
-  //   this.coffee$.splice(0, this.coffee$.length);
-  //   this.allItem$.splice(0, this.allItem$.length);
-  // }
-
-  getCupSize(size: number) {
-    switch (size) {
+  getCupSize(coffee: CartCoffee) {
+    switch (coffee.size) {
       case 4.5:
         this.coffeeSize = 'Small';
         break;
-
       case 5.5:
         this.coffeeSize = 'Medium';
         break;
-
       default:
         this.coffeeSize = 'Large';
-        break;
+    }
+  }
+
+  cancelOrder() {
+    if (confirm('Are you sure you want to cancel the order?')) {
+      localStorage.removeItem('coffee');
+      localStorage.removeItem('allItems');
+      location.reload();
     }
   }
 }

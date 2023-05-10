@@ -1,6 +1,8 @@
 .container-fluid {
   position: relative;
   width: 70%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 h1 {
@@ -41,6 +43,15 @@ h2 {
 
 .card-animate {
   animation: slide-right 0.5s;
+}
+
+table {
+  height: 70%;
+  overflow: auto;
+}
+
+.product-name {
+  width: 30%;
 }
 
 @keyframes slide-right {

@@ -31,7 +31,6 @@ const routes: Routes = [
   },
   {
     path: 'menu',
-    canActivate: [AuthGuardGuard],
     component: MenuComponent,
     children: [
       {

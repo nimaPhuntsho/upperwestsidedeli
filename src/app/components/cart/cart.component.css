@@ -5,17 +5,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 .container-fluid {
-  min-height: 50dvh;
+  min-height: 70dvh;
 }
 
 .container {
   margin: 30px 0 30px 0;
-  height: auto;
 }
 .card {
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
-    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding: 1rem;
 }
 
 .header {
@@ -87,10 +86,6 @@
 
 .user-message p {
   font-family: "Roboto Mono", monospace;
-}
-
-.order-number {
-  padding: 5rem;
 }
 
 .order-number h1 {
@@ -169,4 +164,16 @@ i {
   border: 1px solid black;
   padding: 2%;
   border-radius: 10px;
+}
+
+.add-cancel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media screen and (width < 500px) {
+  .empty-cart p {
+    font-size: 14px;
+  }
 }

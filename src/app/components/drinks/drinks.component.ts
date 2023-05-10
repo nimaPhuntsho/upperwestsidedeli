@@ -58,4 +58,12 @@ export class DrinksComponent {
     this.data.sendData(order);
     this.drinks[index].success = true;
   }
+
+  resetFields(product: Product) {
+    product.quantity = 0;
+    product.total = 0;
+    setTimeout(() => {
+      product.success = false;
+    }, 2000);
+  }
 }

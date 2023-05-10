@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <div class="container-fluid" fxLayout="row wrap" fxLayoutAlign="start start">
+  <div class="container-fluid">
     <div
       *ngFor="let element of displayOrder"
       class="card card-animate"
@@ -20,18 +20,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let _coffee of element.coffee">
-              <td>{{ _coffee.productName | titlecase }}</td>
+              <td class="product-name">
+                {{ _coffee.productName | titlecase }}
+              </td>
               <td>{{ _coffee.quantity }} * {{ _coffee.size | currency }}</td>
               <td>{{ _coffee.total | currency }}</td>
             </tr>
             <tr *ngFor="let item of element.items">
               <td>{{ item.productName | titlecase }}</td>
-              <td>{{ item.quantity }} * {{ item.price | currency }}</td>
+              <td>{{ item.quantity }}</td>
               <td>{{ item.total | currency }}</td>
             </tr>
           </tbody>
         </table>
-        <div>
+        <div class="order-total">
           <h3>Total : {{ element.total | currency }}</h3>
         </div>
         <div>

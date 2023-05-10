@@ -16,7 +16,7 @@
           <tr>
             <td>
               {{ element.productName | titlecase }}
-              <span class="sold-out" *ngIf="isSoldedOut">
+              <span class="sold-out" *ngIf="!element.availability">
                 <p>(This item is sold out)</p>
               </span>
             </td>
@@ -79,7 +79,12 @@
             </thead>
             <tbody *ngFor="let element of allProducts">
               <tr>
-                <td>{{ element.productName | titlecase }}</td>
+                <td>
+                  {{ element.productName | titlecase }}
+                  <span class="sold-out" *ngIf="!element.availability">
+                    <p>(This item is sold out)</p>
+                  </span>
+                </td>
                 <td>{{ element.category }}</td>
                 <td fxLayout="row" fxLayoutAlign="space-around center">
                   <div>

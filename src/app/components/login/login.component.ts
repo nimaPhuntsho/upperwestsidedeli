@@ -22,8 +22,9 @@ export interface Customer {
 })
 export class LoginComponent {
   currentUser?: string;
-  jwt = '';
+
   hide = false;
+
   constructor(
     private auth: AuthService,
     private data: DataService<Product>,
@@ -34,7 +35,10 @@ export class LoginComponent {
     if (localStorage.getItem('user')) {
       this.hide = true;
     }
-    console.log(this.currentUser);
+  }
+
+  signIn() {
+    this.auth.signIn();
   }
 
   logout(url: string) {
@@ -45,7 +49,14 @@ export class LoginComponent {
   successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
     if (signInSuccessData.authResult.user?.displayName) {
       this.currentUser = signInSuccessData.authResult.user?.displayName;
+      signInSuccessData.authResult.user.getIdToken().then((data) => {
+        console.log(data);
+      });
+
+      console.log(signInSuccessData.authResult.user.displayName);
     }
+
+    console.log('awesome');
   }
 
   errorCallback(errorData: FirebaseUISignInFailure) {}

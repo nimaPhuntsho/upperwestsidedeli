@@ -58,4 +58,12 @@ export class SandwichComponent {
     this.data.sendData(order);
     this.sandwich[index].success = true;
   }
+
+  resetFields(product: Product) {
+    product.quantity = 0;
+    product.total = 0;
+    setTimeout(() => {
+      product.success = false;
+    }, 2000);
+  }
 }
