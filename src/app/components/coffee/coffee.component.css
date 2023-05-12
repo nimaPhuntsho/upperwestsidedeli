@@ -60,22 +60,6 @@ h2 {
   align-items: center;
 }
 
-.success-prompt {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(52, 53, 53);
-  padding: 0.5rem;
-  border-radius: 10px;
-  animation: fade-in 01s;
-  color: rgb(18, 232, 179);
-}
-
-.success-prompt i {
-  font-size: 30px;
-}
-
 @keyframes fade-in {
   0% {
     opacity: 0;

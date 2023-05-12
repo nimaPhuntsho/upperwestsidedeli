@@ -50,6 +50,9 @@ import { FaqComponent } from './components/faq/faq.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
+import { StripeModule } from 'stripe-angular';
+import { SuccessComponent } from './components/success/success.component';
+import { CancelComponent } from './components/cancel/cancel.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -101,6 +104,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FaqComponent,
     FeedbackComponent,
     CartIconComponent,
+    SuccessComponent,
+    CancelComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,6 +131,9 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatDialogModule,
+    StripeModule.forRoot(
+      'pk_test_51N0G96FlNzy8IbvjunvKZF4ROTRMlvRIBSRvuQGKQfYNAYdodzUxuyAOIyX8cgPwBRI0dOMPnmY5blJJw0J7tiM400nKIpSXeN'
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

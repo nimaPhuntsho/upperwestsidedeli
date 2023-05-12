@@ -1,6 +1,3 @@
-import { Coffee } from './../../modules/admin/components/upload/upload.component';
-import { environment } from './../../../environments/environment.development';
-import { firebase } from 'firebaseui-angular';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import {
   addDoc,
@@ -31,7 +28,8 @@ import {
 
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { reload } from 'firebase/auth';
+import { StripeScriptTag } from 'stripe-angular';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 
 export interface Sale {
   orderID: number;
@@ -76,66 +74,67 @@ export class CartComponent<Type> {
   coffeeSize = '';
   spinner = false;
 
-  fakeTwo: Product[] = [
-    {
-      productName: 'Gucci',
-      availability: true,
-      category: 'T-shirt',
-      price: 4000,
-      ingredients: 'cotten',
-      total: 4000,
-      quantity: 1,
-      success: true,
-    },
-  ];
+  // fakeTwo: Product[] = [
+  //   {
+  //     productName: 'Gucci',
+  //     availability: true,
+  //     category: 'T-shirt',
+  //     price: 4000,
+  //     ingredients: 'cotten',
+  //     total: 4000,
+  //     quantity: 1,
+  //     success: true,
+  //   },
+  // ];
 
-  fake: CartCoffee[] = [
-    {
-      productName: 'NIMA',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-    {
-      productName: 'uuuu',
-      category: 'Drink',
-      total: 44,
-      quantity: 45,
-      size: 4.5,
-    },
-  ];
+  // fake: CartCoffee[] = [
+  //   {
+  //     productName: 'NIMA',
+  //     category: 'Drink',
+  //     total: 44,
+  //     quantity: 45,
+  //     size: 4.5,
+  //   },
+  //   {
+  //     productName: 'uuuuu',
+  //     category: 'Drink',
+  //     total: 44,
+  //     quantity: 45,
+  //     size: 4.5,
+  //   },
+  //   {
+  //     productName: 'uuuuuu',
+  //     category: 'Drink',
+  //     total: 44,
+  //     quantity: 45,
+  //     size: 4.5,
+  //   },
+  //   {
+  //     productName: 'uuuu',
+  //     category: 'Drink',
+  //     total: 44,
+  //     quantity: 45,
+  //     size: 4.5,
+  //   },
+  // ];
 
-  fakeOrder: Sale = {
-    orderID: 1,
-    time: 22,
-    date: 'Date',
-    items: this.fakeTwo,
-    coffee: this.fake,
-    createdAt: serverTimestamp(),
-    total: 111,
-  };
+  // fakeOrder: Sale = {
+  //   orderID: 1,
+  //   time: 22,
+  //   date: 'Date',
+  //   items: this.fakeTwo,
+  //   coffee: this.fake,
+  //   createdAt: serverTimestamp(),
+  //   total: 111,
+  // };
 
   constructor(
     private data: DataService<CartCoffee>,
     private dataCroissant: DataService<Product>,
     private fs: Firestore,
     private router: Router,
-    private scroller: ViewportScroller
+    private scroller: ViewportScroller,
+    private stripe: StripeScriptTag
   ) {}
 
   ngOnInit() {
@@ -278,13 +277,14 @@ export class CartComponent<Type> {
 
   async checkout() {
     if (confirm('Would you like to place the order?')) {
+      const functions = getFunctions();
+      const stripeCheckout = httpsCallable(functions, 'stripeCheckout');
+
       this.spinner = true;
       let db = getFirestore();
       const collectionRef = collection(db, 'orders');
       let snapShot = await (await getCountFromServer(collectionRef)).data()
         .count;
-
-      let date = new Date();
       this.order = {
         orderID: snapShot++,
         time: Timestamp.now().toDate().getTime(),
@@ -294,10 +294,18 @@ export class CartComponent<Type> {
         createdAt: serverTimestamp(),
         total: this.cartTotal,
       };
+
       const coffeeData = addDoc(collection(db, 'orders'), this.order);
       const currentRef = doc(db, 'orders', (await coffeeData).id);
       await updateDoc(currentRef, {
         id: currentRef,
+      });
+      stripeCheckout(this.order).then((result) => {
+        this.stripe.StripeInstance.redirectToCheckout({
+          sessionId: String(result.data),
+        }).then((error) => {
+          console.log(error);
+        });
       });
 
       this.checkOutSuccess = false;

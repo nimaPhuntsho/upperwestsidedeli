@@ -1,3 +1,5 @@
+import { CancelComponent } from './components/cancel/cancel.component';
+import { SuccessComponent } from './components/success/success.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AuthGuardGuard } from './auth-guard.guard';
@@ -94,6 +96,14 @@ const routes: Routes = [
   {
     path: 'feedback',
     component: FeedbackComponent,
+  },
+  {
+    path: 'success',
+    component: SuccessComponent,
+  },
+  {
+    path: 'cancel',
+    component: CancelComponent,
   },
   {
     path: 'myadmin',
