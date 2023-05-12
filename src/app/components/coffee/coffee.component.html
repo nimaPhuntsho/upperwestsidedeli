@@ -89,7 +89,7 @@
                   <button
                     type="button"
                     mat-stroked-button
-                    (click)="decrement(i)"
+                    (pointerdown)="decrement(i)"
                     (click)="getTotal(i)"
                     [disabled]="!element.size"
                   >
@@ -102,7 +102,7 @@
                     type="button"
                     mat-stroked-button
                     [disabled]="!element.size"
-                    (click)="increment(i)"
+                    (pointerdown)="increment(i)"
                     (click)="getTotal(i)"
                   >
                     <fa-icon [icon]="addIcon"></fa-icon>

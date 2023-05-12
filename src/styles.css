@@ -92,3 +92,9 @@ img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
+@media screen and (width < 500px) {
+  .card {
+    margin: 3px;
+  }
+}

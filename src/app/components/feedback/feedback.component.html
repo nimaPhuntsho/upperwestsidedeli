@@ -5,11 +5,13 @@
     <div>
       <h1>Recent feedbacks</h1>
     </div>
-    <div class="feedback-wrapper" *ngFor="let element of feedback$">
+    <div class="feedback-wrapper" *ngFor="let element of sortedFeedback">
       <div class="feedback">
         <div class="author">
           <p>{{ element.name | titlecase }}</p>
-          <p class="date">{{ element.date | date : "EEEE, MMMM d, y" }}</p>
+          <p class="date">
+            Posted on | {{ element.date | date : "EEEE, MMMM d, y" }}
+          </p>
         </div>
         <div></div>
         <div class="comment">
@@ -17,7 +19,6 @@
         </div>
       </div>
     </div>
-
     <button
       *ngIf="hideBtn"
       (click)="feedbackForm()"

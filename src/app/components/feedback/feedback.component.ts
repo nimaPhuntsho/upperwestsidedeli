@@ -6,6 +6,7 @@ import {
   serverTimestamp,
   Timestamp,
 } from '@angular/fire/firestore';
+import { async } from '@firebase/util';
 
 export interface Feedback {
   name: string;
@@ -28,6 +29,7 @@ export class FeedbackComponent {
   comment$ = '';
   isSuccess = false;
   feedback$: FeedbackID[] = [];
+  sortedFeedback: FeedbackID[] = [];
   showForm = false;
   hideBtn = true;
   hideFeedbacks = true;
@@ -36,9 +38,10 @@ export class FeedbackComponent {
   ngOnInit() {
     this.data.getFeedbacks().then((data) => {
       data?.subscribe((feedback) => {
-        feedback.forEach((element) => {
+        this.feedback$ = feedback;
+        this.feedback$.forEach((element) => {
           if (element.isPosted) {
-            this.feedback$.push(element);
+            this.sortedFeedback.push(element);
           }
         });
       });
@@ -63,5 +66,13 @@ export class FeedbackComponent {
     this.showForm = true;
     this.hideBtn = false;
     this.hideFeedbacks = false;
+  }
+
+  async filterPost(feedbacks: FeedbackID[]) {
+    await feedbacks.filter((element) => {
+      if (element.isPosted) {
+        this.sortedFeedback.push(element);
+      }
+    });
   }
 }

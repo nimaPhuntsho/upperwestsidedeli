@@ -6,10 +6,16 @@
         <div class="cards" *ngFor="let element of feedback$">
           <div>
             <div>
-              <p class="author">{{ element.name | titlecase }}</p>
+              <p class="author">
+                {{ element.name | titlecase }}
+                <span *ngIf="element.isPosted"
+                  ><i class="bi bi-file-earmark-post-fill"></i
+                ></span>
+              </p>
             </div>
             <div>
               <p>{{ element.comment }}</p>
+              <p class="date">Posted on {{ element.date }}</p>
             </div>
             <div
               class="actions-wrapper"

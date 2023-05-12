@@ -29,3 +29,25 @@ p {
 h1 {
   text-align: center;
 }
+
+.date {
+  font-style: italic;
+  font-size: 15px;
+}
+
+i {
+  color: red;
+  position: relative;
+}
+
+i:hover::after {
+  content: "Posted";
+  position: absolute;
+  bottom: 100%;
+  font-style: normal;
+  font-weight: normal;
+  color: aliceblue;
+  background-color: rgb(42, 62, 81);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
