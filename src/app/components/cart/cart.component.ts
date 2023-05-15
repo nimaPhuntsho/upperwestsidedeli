@@ -1,3 +1,7 @@
+import { CheckoutDialogComponent } from './../../checkout-dialog/checkout-dialog.component';
+import { DialogComponent } from './../../dialog/dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
+import { async } from '@firebase/util';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import {
   addDoc,
@@ -30,6 +34,8 @@ import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StripeScriptTag } from 'stripe-angular';
 import { getFunctions, httpsCallable } from 'firebase/functions';
+import { StripeService } from 'ngx-stripe';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface Sale {
   orderID: number;
@@ -74,59 +80,59 @@ export class CartComponent<Type> {
   coffeeSize = '';
   spinner = false;
 
-  // fakeTwo: Product[] = [
-  //   {
-  //     productName: 'Gucci',
-  //     availability: true,
-  //     category: 'T-shirt',
-  //     price: 4000,
-  //     ingredients: 'cotten',
-  //     total: 4000,
-  //     quantity: 1,
-  //     success: true,
-  //   },
-  // ];
+  fakeTwo: Product[] = [
+    {
+      productName: 'Gucci',
+      availability: true,
+      category: 'T-shirt',
+      price: 4000,
+      ingredients: 'cotten',
+      total: 4000,
+      quantity: 1,
+      success: true,
+    },
+  ];
 
-  // fake: CartCoffee[] = [
-  //   {
-  //     productName: 'NIMA',
-  //     category: 'Drink',
-  //     total: 44,
-  //     quantity: 45,
-  //     size: 4.5,
-  //   },
-  //   {
-  //     productName: 'uuuuu',
-  //     category: 'Drink',
-  //     total: 44,
-  //     quantity: 45,
-  //     size: 4.5,
-  //   },
-  //   {
-  //     productName: 'uuuuuu',
-  //     category: 'Drink',
-  //     total: 44,
-  //     quantity: 45,
-  //     size: 4.5,
-  //   },
-  //   {
-  //     productName: 'uuuu',
-  //     category: 'Drink',
-  //     total: 44,
-  //     quantity: 45,
-  //     size: 4.5,
-  //   },
-  // ];
+  fake: CartCoffee[] = [
+    {
+      productName: 'NIMA',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+    {
+      productName: 'uuuu',
+      category: 'Drink',
+      total: 44,
+      quantity: 45,
+      size: 4.5,
+    },
+  ];
 
-  // fakeOrder: Sale = {
-  //   orderID: 1,
-  //   time: 22,
-  //   date: 'Date',
-  //   items: this.fakeTwo,
-  //   coffee: this.fake,
-  //   createdAt: serverTimestamp(),
-  //   total: 111,
-  // };
+  fakeOrder: Sale = {
+    orderID: 1,
+    time: 22,
+    date: 'Date',
+    items: this.fakeTwo,
+    coffee: this.fake,
+    createdAt: serverTimestamp(),
+    total: 111,
+  };
 
   constructor(
     private data: DataService<CartCoffee>,
@@ -134,7 +140,8 @@ export class CartComponent<Type> {
     private fs: Firestore,
     private router: Router,
     private scroller: ViewportScroller,
-    private stripe: StripeScriptTag
+    private stripe: StripeService, // public dialogRef: MatDialogRef<DialogComponent>
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -163,6 +170,18 @@ export class CartComponent<Type> {
     }
 
     this.getTotal();
+  }
+
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(DialogComponent, {
+      width: '250px',
+      height: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
   store(key: string, item: CartCoffee[]) {
@@ -276,44 +295,49 @@ export class CartComponent<Type> {
   }
 
   async checkout() {
-    if (confirm('Would you like to place the order?')) {
-      const functions = getFunctions();
-      const stripeCheckout = httpsCallable(functions, 'stripeCheckout');
+    let dialogCheckRef = this.dialog.open(CheckoutDialogComponent);
+    dialogCheckRef.afterClosed().subscribe(async (result) => {
+      if (result === 'true') {
+        const functions = getFunctions();
+        const stripeCheckout = httpsCallable(functions, 'stripeCheckout');
 
-      this.spinner = true;
-      let db = getFirestore();
-      const collectionRef = collection(db, 'orders');
-      let snapShot = await (await getCountFromServer(collectionRef)).data()
-        .count;
-      this.order = {
-        orderID: snapShot++,
-        time: Timestamp.now().toDate().getTime(),
-        date: Timestamp.now().toDate().toDateString(),
-        items: this.allItem$,
-        coffee: this.coffee$,
-        createdAt: serverTimestamp(),
-        total: this.cartTotal,
-      };
+        this.spinner = true;
+        let db = getFirestore();
+        const collectionRef = collection(db, 'orders');
+        let snapShot = await (await getCountFromServer(collectionRef)).data()
+          .count;
+        this.order = {
+          orderID: snapShot++,
+          time: Timestamp.now().toDate().getTime(),
+          date: Timestamp.now().toDate().toDateString(),
+          items: this.allItem$,
+          coffee: this.coffee$,
+          createdAt: serverTimestamp(),
+          total: this.cartTotal,
+        };
 
-      const coffeeData = addDoc(collection(db, 'orders'), this.order);
-      const currentRef = doc(db, 'orders', (await coffeeData).id);
-      await updateDoc(currentRef, {
-        id: currentRef,
-      });
-      stripeCheckout(this.order).then((result) => {
-        this.stripe.StripeInstance.redirectToCheckout({
-          sessionId: String(result.data),
-        }).then((error) => {
-          console.log(error);
+        stripeCheckout(this.order).then((res) => {
+          this.stripe
+            .redirectToCheckout({
+              sessionId: String(res.data),
+            })
+            .subscribe((result) => {
+              console.log(result);
+            });
         });
-      });
 
-      this.checkOutSuccess = false;
-      this.message = true;
-      localStorage.removeItem('coffee');
-      localStorage.removeItem('allItems');
-      this.spinner = false;
-    }
+        const coffeeData = addDoc(collection(db, 'orders'), this.order);
+        const currentRef = doc(db, 'orders', (await coffeeData).id);
+        await updateDoc(currentRef, {
+          id: currentRef,
+        });
+        this.checkOutSuccess = false;
+        this.message = true;
+        localStorage.removeItem('coffee');
+        localStorage.removeItem('allItems');
+        this.spinner = false;
+      }
+    });
   }
   scroll(id: string) {
     this.scroller.scrollToAnchor(id.toLowerCase());
@@ -333,10 +357,13 @@ export class CartComponent<Type> {
   }
 
   cancelOrder() {
-    if (confirm('Are you sure you want to cancel the order?')) {
-      localStorage.removeItem('coffee');
-      localStorage.removeItem('allItems');
-      location.reload();
-    }
+    let dialogRef = this.dialog.open(DialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'true') {
+        localStorage.removeItem('coffee');
+        localStorage.removeItem('allItems');
+        location.reload();
+      }
+    });
   }
 }

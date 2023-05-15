@@ -1,3 +1,5 @@
+import { Sale } from 'src/app/components/cart/cart.component';
+import { Order } from './components/croissant/croissant.component';
 import {
   ProductID,
   CoffeeID,
@@ -15,6 +17,7 @@ import {
   Firestore,
   collectionData,
   updateDoc,
+  serverTimestamp,
 } from '@angular/fire/firestore';
 import { inject, Injectable, Type } from '@angular/core';
 import {
@@ -24,29 +27,65 @@ import {
   getDocs,
   addDoc,
   doc,
-  Timestamp,
-  increment,
   orderBy,
   CollectionReference,
   deleteDoc,
 } from 'firebase/firestore';
-import { BehaviorSubject, Observable, retry, timestamp } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Customer } from './components/login/login.component';
-import { Sale } from './components/cart/cart.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService<Type> {
+  fakeTwo: Product[] = [
+    {
+      productName: '',
+      availability: true,
+      category: '',
+      price: 0,
+      ingredients: '',
+      total: 0,
+      quantity: 0,
+      success: true,
+    },
+  ];
+
+  fake: CartCoffee[] = [
+    {
+      productName: '',
+      category: '',
+      total: 0,
+      quantity: 0,
+      size: 0,
+    },
+  ];
+
+  fakeOrder: Sale = {
+    orderID: 0,
+    time: 0,
+    date: '',
+    items: this.fakeTwo,
+    coffee: this.fake,
+    createdAt: serverTimestamp(),
+    total: 0,
+  };
   cartItem$: Product[] = [];
   coffee$: CartCoffee[] = [];
   docRef?: CollectionReference<Product>;
-  private observableOne: BehaviorSubject<Type[]> = new BehaviorSubject<Type[]>(
-    []
-  );
+  private completedOrder: BehaviorSubject<Sale> = new BehaviorSubject<Sale>({
+    orderID: 0,
+    time: 0,
+    date: '',
+    items: [],
+    coffee: [],
+    createdAt: serverTimestamp(),
+    total: 0,
+  });
   private observableTwo: BehaviorSubject<Type[]> = new BehaviorSubject<Type[]>(
     []
   );
+  currentSale = this.completedOrder.asObservable();
 
   private numberOfItems = new BehaviorSubject<number>(0);
   order$ = this.numberOfItems.asObservable();
@@ -252,5 +291,9 @@ export class DataService<Type> {
 
   getCoffeeCart() {
     return this.coffee$;
+  }
+
+  changeSale(sale: Sale) {
+    this.completedOrder.next(sale);
   }
 }

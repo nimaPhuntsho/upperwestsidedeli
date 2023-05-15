@@ -33,7 +33,12 @@
               <div class="coffee-extra">
                 <mat-form-field appearance="fill">
                   <mat-label>Size</mat-label>
-                  <mat-select [(ngModel)]="element.size" name="size">
+                  <mat-select
+                    [(ngModel)]="element.size"
+                    name="size"
+                    (mouseleave)="getTotal(i)"
+                    required=""
+                  >
                     <mat-option [value]="element.price.small">
                       Small {{ element.price.small | currency }}
                     </mat-option>
@@ -69,7 +74,11 @@
               <div class="coffee-extra">
                 <mat-form-field>
                   <mat-label>Extras</mat-label>
-                  <mat-select [(ngModel)]="element.extra$" name="extras">
+                  <mat-select
+                    [(ngModel)]="element.extra$"
+                    name="extras"
+                    (mouseleave)="getTotal(i)"
+                  >
                     <mat-option [value]="element.extra.coconut">
                       Coconut {{ element.extra.coconut | currency }}
                     </mat-option>

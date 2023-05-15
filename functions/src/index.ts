@@ -10,18 +10,6 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
 //stripe cloud functions
 exports.stripeCheckout = functions.https.onCall(async (data, context) => {
-  // let uid = data.uid;
-  // let db = admin.firestore();
-  // let querySnapshot = await db
-  //   .collection('orders')
-  //   .where('uid', '==', uid)
-  //   .get();
-
-  // if (querySnapshot.docs.length > 0) {
-  //   let order = querySnapshot.docs[0];
-  //   let price = order.data().total;
-  // } else console.log('No such data ');
-
   const stripe = new Stripe(
     'sk_test_51N0G96FlNzy8IbvjVvC8cbIxAZdbY3VMOnOw8ceJKboLcrf5oVlEpbGP68Tr5T6odLkpsp60NS0ngii1A9GjPG9J00gvP6RMTe',
     {
@@ -31,24 +19,24 @@ exports.stripeCheckout = functions.https.onCall(async (data, context) => {
 
   try {
     let itemPrice = data.total;
+    let storeName = 'Upper West Side Deli | BNE';
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
           quantity: 1,
           price_data: {
-            // product_data: {
-            //   name: itemName,
-            //   description: itemDescritpion,
-            // },
-            currency: 'usd',
+            product_data: {
+              name: storeName,
+            },
+            currency: 'aud',
             unit_amount: itemPrice * 100,
           },
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:4200/success',
-      cancel_url: 'http://localhost:4200/cancel',
+      success_url: 'http://upperwestsidedeli.web.app/check-out',
+      cancel_url: 'http://upperwestsidedeli.web.app/cancel',
     });
     const result = await session;
     return result.id;
