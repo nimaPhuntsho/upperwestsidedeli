@@ -1,3 +1,4 @@
+import { PaymentService } from './../../payment.service';
 import { CheckoutDialogComponent } from './../../checkout-dialog/checkout-dialog.component';
 import { DialogComponent } from './../../dialog/dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -20,6 +21,7 @@ import {
   collection,
   FieldValue,
   getCountFromServer,
+  getDoc,
   Timestamp,
   updateDoc,
 } from 'firebase/firestore';
@@ -43,7 +45,6 @@ export interface Sale {
   date: string;
   items: Product[];
   coffee: CartCoffee[];
-  createdAt: FieldValue;
   total: number;
 }
 
@@ -130,12 +131,12 @@ export class CartComponent<Type> {
     date: 'Date',
     items: this.fakeTwo,
     coffee: this.fake,
-    createdAt: serverTimestamp(),
     total: 111,
   };
 
   constructor(
     private data: DataService<CartCoffee>,
+    private dataSale: PaymentService,
     private dataCroissant: DataService<Product>,
     private fs: Firestore,
     private router: Router,
@@ -312,25 +313,22 @@ export class CartComponent<Type> {
           date: Timestamp.now().toDate().toDateString(),
           items: this.allItem$,
           coffee: this.coffee$,
-          createdAt: serverTimestamp(),
           total: this.cartTotal,
         };
 
-        stripeCheckout(this.order).then((res) => {
-          this.stripe
-            .redirectToCheckout({
-              sessionId: String(res.data),
-            })
-            .subscribe((result) => {
-              console.log(result);
-            });
+        const coffeeData = await addDoc(collection(db, 'orders'), this.order);
+        const currentRef = doc(db, 'orders', coffeeData.id);
+        await updateDoc(currentRef, {
+          id: currentRef.id,
         });
 
-        const coffeeData = addDoc(collection(db, 'orders'), this.order);
-        const currentRef = doc(db, 'orders', (await coffeeData).id);
-        await updateDoc(currentRef, {
-          id: currentRef,
-        });
+        const payment = await stripeCheckout(currentRef.id);
+        const paymentSession = await this.stripe
+          .redirectToCheckout({
+            sessionId: String(payment.data),
+          })
+          .subscribe((err) => console.log(err));
+
         this.checkOutSuccess = false;
         this.message = true;
         localStorage.removeItem('coffee');

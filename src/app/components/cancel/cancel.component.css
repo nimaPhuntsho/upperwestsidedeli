@@ -1,0 +1,11 @@
+.container {
+  min-height: 60dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 20px;
+  color: rgb(164, 87, 87);
+}

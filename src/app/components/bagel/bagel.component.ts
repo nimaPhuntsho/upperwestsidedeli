@@ -22,7 +22,6 @@ export class BagelComponent {
     this.data.getProducts('products', 'Bagel').then((bagel) => {
       bagel?.subscribe((item) => {
         this.bagel = item;
-        console.log(this.bagel);
       });
     });
   }
@@ -53,8 +52,6 @@ export class BagelComponent {
       price: this.bagel[index].price,
       success: false,
     };
-    // this.cartList.push(order);
-    // this.data.sendData(this.cartList);
     this.data.sendData(order);
     this.bagel[index].success = true;
   }

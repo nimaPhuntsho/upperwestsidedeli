@@ -1,13 +1,11 @@
 import { Sale } from 'src/app/components/cart/cart.component';
-import { Order } from './components/croissant/croissant.component';
 import {
   ProductID,
   CoffeeID,
 } from './modules/admin/components/update/update.component';
 import { Feedback, FeedbackID } from './components/feedback/feedback.component';
-import { firebase } from 'firebaseui-angular';
 import { Admin } from './modules/admin/components/adminlogin/adminlogin.component';
-import { CoffeeOrder, CartCoffee } from './components/coffee/coffee.component';
+import { CartCoffee } from './components/coffee/coffee.component';
 import {
   Product,
   Coffee,
@@ -38,53 +36,37 @@ import { Customer } from './components/login/login.component';
   providedIn: 'root',
 })
 export class DataService<Type> {
-  fakeTwo: Product[] = [
-    {
-      productName: '',
-      availability: true,
-      category: '',
-      price: 0,
-      ingredients: '',
-      total: 0,
-      quantity: 0,
-      success: true,
-    },
-  ];
-
-  fake: CartCoffee[] = [
-    {
-      productName: '',
-      category: '',
-      total: 0,
-      quantity: 0,
-      size: 0,
-    },
-  ];
-
-  fakeOrder: Sale = {
-    orderID: 0,
-    time: 0,
-    date: '',
-    items: this.fakeTwo,
-    coffee: this.fake,
-    createdAt: serverTimestamp(),
-    total: 0,
-  };
   cartItem$: Product[] = [];
   coffee$: CartCoffee[] = [];
   docRef?: CollectionReference<Product>;
-  private completedOrder: BehaviorSubject<Sale> = new BehaviorSubject<Sale>({
+  private completedOrder = new BehaviorSubject<Sale>({
     orderID: 0,
     time: 0,
     date: '',
-    items: [],
-    coffee: [],
-    createdAt: serverTimestamp(),
+    items: [
+      {
+        productName: '',
+        category: '',
+        price: 0,
+        availability: false,
+        ingredients: '',
+        total: 0,
+        quantity: 0,
+        success: false,
+      },
+    ],
+    coffee: [
+      {
+        productName: '',
+        size: 0,
+        quantity: 0,
+        total: 0,
+        category: '',
+      },
+    ],
     total: 0,
   });
-  private observableTwo: BehaviorSubject<Type[]> = new BehaviorSubject<Type[]>(
-    []
-  );
+  private observableTwo = new BehaviorSubject<Type[]>([]);
   currentSale = this.completedOrder.asObservable();
 
   private numberOfItems = new BehaviorSubject<number>(0);
@@ -130,7 +112,7 @@ export class DataService<Type> {
     try {
       const userProfileCollection = query(
         collection(this.fs, 'orders'),
-        orderBy('createdAt')
+        orderBy('time')
       );
       return collectionData(userProfileCollection) as Observable<Sale[]>;
     } catch (error) {
@@ -295,5 +277,9 @@ export class DataService<Type> {
 
   changeSale(sale: Sale) {
     this.completedOrder.next(sale);
+  }
+
+  getOrder() {
+    return this.completedOrder.asObservable();
   }
 }

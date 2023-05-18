@@ -24,6 +24,7 @@ export class OrdersComponent {
     this.data.getAllOrders().then((orders) => {
       orders?.subscribe((element) => {
         this.allOrders = element;
+        console.log(this.allOrders);
       });
     });
 
