@@ -1,4 +1,3 @@
-import { faL } from '@fortawesome/free-solid-svg-icons';
 import { Component } from '@angular/core';
 import { Order, PaymentService } from './../../payment.service';
 
@@ -24,7 +23,6 @@ export class SuccessComponent {
       this.id = storedId;
       console.log(this.id);
     }
-    this.placeholder = false;
 
     this.dataSale.getAllProducts().then((res) => {
       res?.subscribe(async (data) => {
@@ -32,6 +30,7 @@ export class SuccessComponent {
         result.forEach((element) => {
           if (element.id === this.id && element.paymentStatus === 'paid') {
             this.currentOrder = element;
+            this.placeholder = false;
           }
         });
       });
