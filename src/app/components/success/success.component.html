@@ -1,48 +1,67 @@
 <!-- Customer receipt -->
-<!-- <div
-  *ngIf="message"
+
+<div
+  *ngIf="currentOrder?.paymentStatus"
   class="user-message"
   fxLayout="column"
-  fxLayoutAlign="center center"
+  fxLayoutAlign="start center"
 >
-  <div>
-    <p>Thank you, we have received your order.</p>
-  </div>
-  <div class="card" style="width: 22rem">
-    <div class="order-number" fxLayout="column" fxLayoutAlign="start center">
-      <h1>Order Number</h1>
-      <h2>{{ this.order.orderID }}</h2>
-    </div> -->
-<!-- coffee items -->
-<!-- <div class="card-body">
-      <div class="coffee-items">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let coffee of order.coffee">
-              <td>{{ coffee.productName | titlecase }}</td>
-              <td>{{ coffee.quantity }} * {{ coffee.size | currency }}</td>
-              <td>{{ coffee.total | currency }}</td>
-            </tr>
-            <tr *ngFor="let item of order.items">
-              <td>{{ item.productName | titlecase }}</td>
-              <td>{{ item.quantity }}</td>
-              <td>{{ item.total | currency }}</td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="placeholder-wrapper" *ngIf="placeholder">
+    <div class="place-holder" fxLayout="column" fxLayoutAlign="center center">
+      <div class="head">
+        <h1>Please wait, while we place your order</h1>
       </div>
-      <div>
-        <p>Total {{ order.total | currency }}</p>
+      <div class="spinner">
+        <span
+          class="spinner-border spinner-border-md"
+          role="status"
+          aria-hidden="true"
+        ></span>
       </div>
     </div>
   </div>
-</div> -->
-<h1>SUCCESS</h1>
-<p>{{ id }}</p>
+  <div
+    class="confirmation-wrapper"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <div class="confirmation">
+      <p>Thank you, we have received your order.</p>
+    </div>
+    <div class="card" style="width: 22rem">
+      <div class="order-number" fxLayout="column" fxLayoutAlign="start center">
+        <h1>Order Number</h1>
+        <h2>{{ this.currentOrder?.orderID }}</h2>
+      </div>
+      <!-- coffee items -->
+      <div class="card-body">
+        <div class="coffee-items">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let coffee of this.currentOrder?.coffee">
+                <td>{{ coffee.productName | titlecase }}</td>
+                <td>{{ coffee.size | currency }} * {{ coffee.quantity }}</td>
+                <td>{{ coffee.total | currency }}</td>
+              </tr>
+              <tr *ngFor="let item of this.currentOrder?.items">
+                <td>{{ item.productName | titlecase }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.total | currency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <p>Total {{ this.currentOrder?.total | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,5 @@
-import { PaymentService } from './../../payment.service';
-import { CartCoffee } from './../coffee/coffee.component';
-import { Sale } from 'src/app/components/cart/cart.component';
-import { Product } from './../../modules/admin/components/upload/upload.component';
-import { DataService } from 'src/app/data.service';
-import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs';
+import { Component } from '@angular/core';
+import { Order, PaymentService } from './../../payment.service';
 
 @Component({
   selector: 'app-success',
@@ -13,24 +8,28 @@ import { delay } from 'rxjs';
 })
 export class SuccessComponent {
   id = '';
-  myInter: Sale | undefined;
-  constructor(private data: PaymentService) {}
+  currentOrder: Order | undefined;
+  placeholder = false;
+
+  constructor(private dataSale: PaymentService) {}
   ngOnInit() {
-    // this.data.currentOrder.subscribe((res) => {
-    //   console.log(res);
-    // });
-
-    try {
-      this.data.getName().subscribe((name: string) => {
-        this.id = name;
-        console.log(this.id);
-      });
-
-      this.data.currentName.subscribe((element) => {
-        console.log(element);
-      });
-    } catch (error) {
-      console.log(error);
+    let storedId = localStorage.getItem('orderId');
+    if (storedId) {
+      this.id = storedId;
+      console.log(this.id);
     }
+
+    this.placeholder = true;
+    this.dataSale.getAllProducts().then((res) => {
+      res?.subscribe(async (data) => {
+        const result = await data;
+        result.forEach((element) => {
+          if (element.id === this.id && element.paymentStatus === 'paid') {
+            this.currentOrder = element;
+            this.placeholder = false;
+          }
+        });
+      });
+    });
   }
 }

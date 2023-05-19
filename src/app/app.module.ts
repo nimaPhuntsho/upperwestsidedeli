@@ -54,8 +54,8 @@ import { SuccessComponent } from './components/success/success.component';
 import { CancelComponent } from './components/cancel/cancel.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { DialogComponent } from './dialog/dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CheckoutDialogComponent } from './checkout-dialog/checkout-dialog.component';
+import { PaymentService } from './payment.service';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -140,7 +140,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       'pk_test_51N0G96FlNzy8IbvjunvKZF4ROTRMlvRIBSRvuQGKQfYNAYdodzUxuyAOIyX8cgPwBRI0dOMPnmY5blJJw0J7tiM400nKIpSXeN'
     ),
   ],
-  providers: [],
+  providers: [PaymentService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

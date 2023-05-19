@@ -21,6 +21,7 @@ import { DrinksComponent } from './components/drinks/drinks.component';
 import { SandwichComponent } from './components/sandwich/sandwich.component';
 import { BagelComponent } from './components/bagel/bagel.component';
 import { BeerComponent } from './components/beer/beer.component';
+import { OrderSuccessComponent } from './components/order-success/order-success.component';
 
 const routes: Routes = [
   {

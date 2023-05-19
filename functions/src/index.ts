@@ -44,8 +44,8 @@ exports.stripeCheckout = functions.https.onCall(async (data, context) => {
           },
         ],
         mode: 'payment',
-        success_url: 'https://upperwestsidedeli.web.app/success',
-        cancel_url: 'https://upperwestsidedeli.web.app/cancel',
+        success_url: 'http://localhost:4200/success',
+        cancel_url: 'http://localhost:4200/cancel',
       });
       const result = session.id;
       return result;

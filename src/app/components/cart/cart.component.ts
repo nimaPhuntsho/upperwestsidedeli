@@ -1,40 +1,20 @@
 import { PaymentService } from './../../payment.service';
 import { CheckoutDialogComponent } from './../../checkout-dialog/checkout-dialog.component';
 import { DialogComponent } from './../../dialog/dialog.component';
-import { MatDialogRef } from '@angular/material/dialog';
-import { async } from '@firebase/util';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
-import {
-  addDoc,
-  collectionData,
-  doc,
-  Firestore,
-  getFirestore,
-  increment,
-  serverTimestamp,
-} from '@angular/fire/firestore';
-import { CoffeeOrder, CartCoffee } from './../coffee/coffee.component';
+import { addDoc, doc, Firestore, getFirestore } from '@angular/fire/firestore';
+import { CartCoffee } from './../coffee/coffee.component';
 import { DataService } from './../../data.service';
-import { Component, OnInit, OnDestroy, Type } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   collection,
-  FieldValue,
   getCountFromServer,
-  getDoc,
   Timestamp,
   updateDoc,
 } from 'firebase/firestore';
-import { merge, Observable, combineLatest, forkJoin, map } from 'rxjs';
-import {
-  faBagShopping,
-  faPlus,
-  faMinus,
-} from '@fortawesome/free-solid-svg-icons';
-
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { StripeScriptTag } from 'stripe-angular';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { StripeService } from 'ngx-stripe';
 import { MatDialog } from '@angular/material/dialog';
@@ -141,7 +121,7 @@ export class CartComponent<Type> {
     private fs: Firestore,
     private router: Router,
     private scroller: ViewportScroller,
-    private stripe: StripeService, // public dialogRef: MatDialogRef<DialogComponent>
+    private stripe: StripeService,
     public dialog: MatDialog
   ) {}
 
@@ -316,12 +296,16 @@ export class CartComponent<Type> {
           total: this.cartTotal,
         };
 
+        //add the order into the database and then retrieve the document reference.
         const coffeeData = await addDoc(collection(db, 'orders'), this.order);
         const currentRef = doc(db, 'orders', coffeeData.id);
         await updateDoc(currentRef, {
           id: currentRef.id,
         });
 
+        localStorage.setItem('orderId', currentRef.id);
+
+        //creating a stripe checkout session
         const payment = await stripeCheckout(currentRef.id);
         const paymentSession = await this.stripe
           .redirectToCheckout({
@@ -329,6 +313,7 @@ export class CartComponent<Type> {
           })
           .subscribe((err) => console.log(err));
 
+        //deleting the order from local storage
         this.checkOutSuccess = false;
         this.message = true;
         localStorage.removeItem('coffee');

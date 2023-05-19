@@ -39,35 +39,8 @@ export class DataService<Type> {
   cartItem$: Product[] = [];
   coffee$: CartCoffee[] = [];
   docRef?: CollectionReference<Product>;
-  private completedOrder = new BehaviorSubject<Sale>({
-    orderID: 0,
-    time: 0,
-    date: '',
-    items: [
-      {
-        productName: '',
-        category: '',
-        price: 0,
-        availability: false,
-        ingredients: '',
-        total: 0,
-        quantity: 0,
-        success: false,
-      },
-    ],
-    coffee: [
-      {
-        productName: '',
-        size: 0,
-        quantity: 0,
-        total: 0,
-        category: '',
-      },
-    ],
-    total: 0,
-  });
+
   private observableTwo = new BehaviorSubject<Type[]>([]);
-  currentSale = this.completedOrder.asObservable();
 
   private numberOfItems = new BehaviorSubject<number>(0);
   order$ = this.numberOfItems.asObservable();
@@ -273,13 +246,5 @@ export class DataService<Type> {
 
   getCoffeeCart() {
     return this.coffee$;
-  }
-
-  changeSale(sale: Sale) {
-    this.completedOrder.next(sale);
-  }
-
-  getOrder() {
-    return this.completedOrder.asObservable();
   }
 }

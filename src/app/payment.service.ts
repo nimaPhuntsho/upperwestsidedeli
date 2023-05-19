@@ -1,65 +1,45 @@
+import { CartCoffee } from './components/coffee/coffee.component';
+import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Observable } from 'rxjs/internal/Observable';
-import { Sale } from './components/cart/cart.component';
+import { Firestore, collectionData } from '@angular/fire/firestore';
+import { collection, query } from 'firebase/firestore';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface Order {
+  id: string;
+  orderID: number;
+  paymentStatus: string;
+  coffee: CartCoffee[];
+  items: Product[];
+  total: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
-  private completedOrder = new BehaviorSubject<Sale>({
-    orderID: 0,
-    time: 0,
-    date: '',
-    items: [
-      {
-        productName: '',
-        category: '',
-        price: 0,
-        availability: false,
-        ingredients: '',
-        total: 0,
-        quantity: 0,
-        success: false,
-      },
-    ],
-    coffee: [
-      {
-        productName: '',
-        size: 0,
-        quantity: 0,
-        total: 0,
-        category: '',
-      },
-    ],
-    total: 0,
-  });
-  currentSale = this.completedOrder.asObservable();
+  private orderId: BehaviorSubject<string> = new BehaviorSubject<string>(
+    'default id'
+  );
+  currentId: Observable<string> = this.orderId.asObservable();
 
-  private orderSubject: BehaviorSubject<Sale> = new BehaviorSubject<Sale>({
-    orderID: 0,
-    time: 0,
-    date: '',
-    items: [],
-    coffee: [],
-    total: 0,
-  } as Sale);
-  public currentOrder: Observable<Sale> = this.orderSubject.asObservable();
+  constructor(private fs: Firestore) {}
 
-  private name: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  currentName: Observable<string> = this.name.asObservable();
-
-  constructor() {}
-
-  changeName(name_: string) {
-    this.name.next(name_);
+  changeID(id: string) {
+    this.orderId.next(id);
   }
 
-  getName() {
-    return this.name.asObservable();
+  getID(): Observable<string> {
+    return this.orderId;
   }
 
-  changeOrder(order: Sale) {
-    this.orderSubject.next(order);
+  async getAllProducts() {
+    try {
+      const userProfileCollection = await query(collection(this.fs, 'orders'));
+      return collectionData(userProfileCollection) as Observable<Order[]>;
+    } catch (error) {
+      console.log(error);
+    }
+    return;
   }
 }
