@@ -11,10 +11,12 @@ export class SuccessComponent {
   today = '';
   currentOrder: Order | undefined;
   placeholder = false;
+  receipt = false;
 
   constructor(private dataSale: PaymentService) {}
   ngOnInit() {
     this.placeholder = true;
+    this.receipt = false;
     let now = new Date();
     this.today = now.toDateString();
 
@@ -30,6 +32,7 @@ export class SuccessComponent {
         result.forEach((element) => {
           if (element.id === this.id && element.paymentStatus === 'paid') {
             this.currentOrder = element;
+            this.receipt = true;
             this.placeholder = false;
           }
         });
