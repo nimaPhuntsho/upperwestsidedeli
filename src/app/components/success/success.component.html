@@ -1,11 +1,6 @@
 <!-- Customer receipt -->
 
-<div
-  *ngIf="currentOrder?.paymentStatus"
-  class="user-message"
-  fxLayout="column"
-  fxLayoutAlign="start center"
->
+<div class="user-message" fxLayout="column" fxLayoutAlign="start center">
   <div class="placeholder-wrapper" *ngIf="placeholder">
     <div class="place-holder" fxLayout="column" fxLayoutAlign="center center">
       <div class="head">
@@ -29,9 +24,21 @@
       <p>Thank you, we have received your order.</p>
     </div>
     <div class="card" style="width: 22rem">
-      <div class="order-number" fxLayout="column" fxLayoutAlign="start center">
-        <h1>Order Number</h1>
-        <h2>{{ this.currentOrder?.orderID }}</h2>
+      <div class="business-header-wrapper">
+        <div class="business-heaeder">
+          <li>TAX INVOICE</li>
+          <li>SSP Australia Catering Pty Ltd</li>
+          <li>Upper West Side Deli</li>
+          <li>Brisbane Domestic Airport, QLD</li>
+          <li>Ph : +6129699700</li>
+          <li>ABN : 75134475924</li>
+          <li>{{ today }}</li>
+          <li>
+            <span class="order-number"
+              >Order no : {{ this.currentOrder?.orderID }}</span
+            >
+          </li>
+        </div>
       </div>
       <!-- coffee items -->
       <div class="card-body">
@@ -59,7 +66,7 @@
           </table>
         </div>
         <div>
-          <p>Total {{ this.currentOrder?.total | currency }}</p>
+          <p>Total Paid - {{ this.currentOrder?.total | currency }}</p>
         </div>
       </div>
     </div>
