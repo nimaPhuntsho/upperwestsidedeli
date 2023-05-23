@@ -106,7 +106,6 @@ export class CoffeeComponent {
     };
     this.afs.sendCoffee(order);
     this.orderList[index].success = true;
-    // form.reset();
     this.success = true;
   }
 

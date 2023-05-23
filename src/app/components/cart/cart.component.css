@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 .container-fluid {
+  margin-top: 7rem;
   min-height: 70dvh;
 }
 

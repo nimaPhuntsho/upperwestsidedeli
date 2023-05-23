@@ -1,4 +1,10 @@
-<div class="footer" fxLayout="column" fxLayoutAlign="center center">
+<div
+  class="footer"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  fxLayout.xs="row"
+  fxLayoutAlign.xs="center center"
+>
   <div>
     <img
       src="../../../assets/images/UPPER WESTSIDE DELI.png"
@@ -15,6 +21,8 @@
   >
     <li routerLink="privacy">Privacy and Policy</li>
     <li fxHide.lt-sm="true">|</li>
+    <li routerLink="about">Ahout us</li>
+    <li fxHide.lt-sm="true">|</li>
     <li routerLink="contact">Contact</li>
     <li fxHide.lt-sm="true">|</li>
     <li routerLink="faq">FAQ</li>
@@ -22,7 +30,12 @@
     <li routerLink="feedback">Feedback</li>
   </div>
 </div>
-<div class="copyright" fxLayout="row wrap" fxLayoutAlign="center center">
+<div
+  class="copyright"
+  fxLayout="row wrap"
+  fxLayoutAlign="center center"
+  fxLayout.xs="column"
+>
   <li>&copy; Copyright {{ year }}, Upper Westside Deli</li>
   <span class="sign">Brisbane AU</span>
 </div>

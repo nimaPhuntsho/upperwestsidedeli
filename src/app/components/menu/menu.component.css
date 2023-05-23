@@ -3,8 +3,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+
 .container {
   padding: 5rem 0 5rem 0;
+  z-index: -10;
+  margin-top: 5rem;
+  min-height: 100dvh;
 }
 
 .card {
@@ -30,7 +35,7 @@ fa-icon {
 }
 
 h1 {
-  font-family: "Pacifico", cursive;
+  font-family: "Dancing Script", cursive;
   padding: 30px;
   letter-spacing: 2px;
   word-spacing: 10px;
@@ -43,15 +48,14 @@ img {
   object-fit: contain;
 }
 
-/* .head {
-  font-family: "Pathway Gothic One", sans-serif;
-  color: black;
-  padding: 0;
-  margin: 0;
-} */
-
 .card-title {
   font-family: "Josefin Sans", sans-serif;
+}
+
+.cart {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
 }
 
 @media screen and (width < 500px) {

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
+
 .container-fluid {
   position: relative;
   width: 70%;
@@ -7,6 +9,7 @@
 
 h1 {
   font-size: 25px;
+  font-family: "Jost", sans-serif;
 }
 
 h2 {

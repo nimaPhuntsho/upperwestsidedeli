@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
 
 .price {
   font-family: "Righteous", cursive;
@@ -36,7 +37,7 @@
 
 h1 {
   text-align: center;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Dancing Script", cursive;
 }
 
 h2 {
@@ -50,14 +51,6 @@ h2 {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   place-items: center;
-}
-
-.test {
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 @keyframes fade-in {

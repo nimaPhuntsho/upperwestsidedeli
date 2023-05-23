@@ -8,49 +8,67 @@
   </div>
   <div>
     <fa-icon
-      (click)="sidenav.toggle()"
-      (click)="removeBarIcon()"
       [icon]="faBars"
-      *ngIf="activeBar"
+      (click)="toogle()"
+      (click)="sidenav.toggle()"
+      *ngIf="!active"
     ></fa-icon>
     <fa-icon
       [icon]="faXmark"
-      (click)="addBarIcon()"
+      (click)="toogle()"
       (click)="sidenav.toggle()"
-      *ngIf="activeClose"
+      *ngIf="active"
     ></fa-icon>
   </div>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav [mode]="'side'">
-    <li
-      routerLink="update"
-      (click)="addBarIcon()"
-      routerLink="orders"
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
       (click)="sidenav.close()"
+      (click)="clear()"
     >
-      Orders
-    </li>
-    <li
-      routerLink="update"
-      (click)="addBarIcon()"
-      *ngIf="activeClose"
+      <fa-icon [icon]="order"></fa-icon>
+      <li routerLink="update" routerLink="orders">Orders</li>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
       (click)="sidenav.close()"
+      (click)="clear()"
     >
-      Update
-    </li>
-    <li
-      routerLink="update"
-      (click)="addBarIcon()"
-      routerLink="upload"
+      <fa-icon [icon]="update"></fa-icon>
+      <li routerLink="update">Update</li>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
       (click)="sidenav.close()"
+      (click)="clear()"
     >
-      Upload
-    </li>
-    <li routerLink="review" (click)="addBarIcon()" (click)="sidenav.close()">
-      Feedbacks
-    </li>
-    <!-- <button mat-raised-button color="primary">OFFLINE</button> -->
+      <fa-icon [icon]="upload"></fa-icon>
+      <li routerLink="update" routerLink="upload">Upload</li>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      (click)="sidenav.close()"
+      (click)="clear()"
+    >
+      <fa-icon [icon]="review"></fa-icon>
+      <li routerLink="review">Feedbacks</li>
+    </div>
+
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      (click)="sidenav.close()"
+      (click)="clear()"
+    >
+      <fa-icon [icon]="analysis"></fa-icon>
+      <li routerLink="review">Data Analysis</li>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <app-review *ngIf="router.url.includes('review')"></app-review>

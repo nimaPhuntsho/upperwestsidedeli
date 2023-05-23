@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
+
 .form-check {
   padding: 1rem;
 }
@@ -14,4 +16,8 @@
 .sold-out p {
   color: rgb(224, 70, 70);
   font-style: italic;
+}
+
+h1 {
+  font-family: "Jost", sans-serif;
 }

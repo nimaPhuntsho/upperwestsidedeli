@@ -1,6 +1,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import url("https://fonts.googleapis.com/css2?family=Konkhmer+Sleokchher&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+
 li {
   list-style-type: none;
   padding: none;
@@ -24,7 +26,7 @@ li {
 
 h1 {
   text-align: center;
-  font-family: "Josefin Sans", sans-serif;
+  font-family: "Dancing Script", cursive;
 }
 
 .card-wrapper {

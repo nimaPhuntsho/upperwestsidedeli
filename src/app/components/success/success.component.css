@@ -3,7 +3,7 @@
 }
 
 .card {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .confirmation {
@@ -11,7 +11,8 @@
 }
 
 .user-message {
-  min-height: 50dvh;
+  min-height: 80vh;
+  margin-top: 7rem;
 }
 
 .placeholder-wrapper {

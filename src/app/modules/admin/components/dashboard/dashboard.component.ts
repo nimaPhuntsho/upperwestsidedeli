@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faXmark,
+  faPlus,
+  faFilePen,
+  faArrowUpShortWide,
+  faMessage,
+  faChartLine,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,21 +18,24 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 export class DashboardComponent {
   faBars = faBars;
   faXmark = faXmark;
+  upload = faPlus;
+  update = faFilePen;
+  order = faArrowUpShortWide;
+  review = faMessage;
+  analysis = faChartLine;
+
   route: string = '';
-  activeBar: boolean = true;
-  activeClose: boolean = false;
+  active = false;
 
   constructor(public router: Router) {
     this.route = this.router.url;
   }
 
-  removeBarIcon() {
-    this.activeBar = false;
-    this.activeClose = true;
+  toogle() {
+    this.active = !this.active;
   }
 
-  addBarIcon() {
-    this.activeClose = false;
-    this.activeBar = true;
+  clear() {
+    this.active = false;
   }
 }

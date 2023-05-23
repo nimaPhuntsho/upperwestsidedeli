@@ -19,3 +19,11 @@
 .error::before {
   content: "*";
 }
+
+h1 {
+  font-family: "Jost", sans-serif;
+}
+
+.upload {
+  margin-top: 2rem;
+}

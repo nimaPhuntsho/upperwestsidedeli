@@ -1,56 +1,82 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 .container-fluid {
-  height: 500px;
-}
-.logo-wrapper {
-  background-color: rgb(1, 4, 6);
+  background-color: rgb(27, 26, 26);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 }
 
-.menu-wrapper {
-  background-color: rgb(45, 44, 55);
-  padding: 10px;
+.menu {
+  width: 20%;
+}
+
+.responsive-menu {
+  width: 100%;
+  height: 100dvh;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgb(35, 34, 34);
+  padding: 1rem;
+  animation: slide-down 0.5s;
+}
+
+.close-up {
+  animation: slide-up 0.4s;
 }
 
 li {
-  padding: 10px;
   font-family: "Fira Sans Condensed", sans-serif;
   cursor: pointer;
   color: rgb(228, 218, 218);
 }
 
-.logo {
-  text-align: right;
+.links li {
+  padding: 0.2rem;
 }
 
-.logo h1 {
-  font-family: "Bebas Neue", cursive;
-  color: aliceblue;
-  letter-spacing: 2px;
-  text-align: left;
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
+  word-spacing: 0.2rem;
 }
 
-.logo h2 {
-  font-family: "Josefin Sans", sans-serif;
-  color: rgb(157, 79, 79);
-  font-size: 20px;
+.foods {
+  font-family: "Anton", sans-serif;
+  color: rgb(165, 0, 0);
+  font-size: 35px;
 }
 
 img {
-  width: 100%;
-  object-fit: contain;
+  width: 80px;
+  height: 60px;
 }
 
-.active {
-  color: rgb(162, 190, 155);
-  transform: scale(1.1);
-  transition: transform 0.5s;
-}
+/* .active::after {
+  content: "";
+  height: 3px;
+  width: 70%;
+  background-color: burlywood;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  animation: fade-out 1s;
+} */
 
 i {
   font-size: 23px;
+  color: antiquewhite;
 }
 .login-wrapper {
   padding: 1rem;
@@ -75,17 +101,9 @@ fa-icon {
   font-size: 25px;
 }
 
-@media screen and (width < 500px) {
-  .container-fluid {
-    height: 100px;
-    padding: 1rem;
-  }
-
-  .logo h1,
-  .logo h2 {
-    font-size: 16px;
-
-    margin: 0;
+@media screen and (width < 900px) {
+  .menu {
+    width: 30%;
   }
 }
 
@@ -95,5 +113,27 @@ fa-icon {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 100dvh;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    height: 100dvh;
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
   }
 }

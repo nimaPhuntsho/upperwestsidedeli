@@ -14,37 +14,23 @@ import {
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  constructor(public router: Router, private data: DataService<Product>) {}
-  menuBar = faBars;
-  close = faXmark;
-  closeBtn = false;
-  bar = true;
-  sideNav = false;
-  hide = true;
-  cart = faCartShopping;
-  cartItemCount = 0;
+  close = false;
+  hamburger = true;
+  show = false;
+  closeAnimation = false;
+  constructor() {}
 
-  ngOnInit() {
-    this.cartItemCount = this.data.getCartLength();
-    console.log(this.cartItemCount);
+  ngOnInit() {}
+
+  toggle() {
+    this.close = !this.close;
+    this.hamburger = !this.hamburger;
+    this.show = !this.show;
   }
 
-  displayClose() {
-    this.closeBtn = true;
-    this.bar = false;
-    this.sideNav = true;
-    this.hide = false;
-  }
-
-  displayBar() {
-    this.bar = true;
-    this.closeBtn = false;
-    this.sideNav = false;
-  }
-
-  closeSideBar() {
-    this.sideNav = false;
-    this.bar = true;
-    this.closeBtn = false;
+  clear() {
+    this.show = false;
+    this.close = false;
+    this.hamburger = true;
   }
 }

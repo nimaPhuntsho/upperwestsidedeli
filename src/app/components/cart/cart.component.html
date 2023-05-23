@@ -1,9 +1,7 @@
-<div class="emptycart-wrapper">
-  <div class="container empty-cart" *ngIf="emptyCartMessage">
-    <p>Cart is empty</p>
+<div class="container-fluid" fxLayout="row" fxLayoutAlign="center start">
+  <div class="emptycart-wrapper" *ngIf="emptyCartMessage">
+    <p>You have nothing in the cart</p>
   </div>
-</div>
-<div class="container-fluid" fxLayout="row" fxLayoutAlign="center center">
   <!-- order review and edit options for coffee -->
   <div
     class="container"

@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import * as firebaseui from 'firebaseui';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReviewComponent } from './components/review/review.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -75,6 +76,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatCheckboxModule,
+    MatRadioModule,
   ],
 })
 export class AdminModule {}

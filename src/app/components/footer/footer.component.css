@@ -22,10 +22,8 @@ img {
 }
 
 .items {
-  border: 1px solid rgb(140, 96, 96);
   padding: 10px;
   width: 70%;
-  border-radius: 5px;
 }
 
 .sign {
@@ -33,4 +31,11 @@ img {
   font-size: 30px;
   color: aliceblue;
   margin-left: 0.5rem;
+}
+
+@media screen and (width < 500px) {
+  img {
+    width: 70px;
+    height: 50px;
+  }
 }

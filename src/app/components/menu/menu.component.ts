@@ -1,3 +1,5 @@
+import { CartCoffee } from './../coffee/coffee.component';
+import { Coffee } from './../../modules/admin/components/upload/upload.component';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { AuthService } from './../../auth.service';
 import { ViewportScroller } from '@angular/common';
@@ -30,6 +32,7 @@ export class MenuComponent {
     'Pies',
   ];
   selectedCategory?: number;
+  cartLength = [];
 
   constructor(
     private scroller: ViewportScroller,
@@ -42,6 +45,8 @@ export class MenuComponent {
     // this.stopOrders();
     this.data.order$.subscribe((item) => (this.numberOfOrders = item));
     JSON.parse(localStorage.getItem('user')!);
+    let liveCoffeeOrders = localStorage.getItem('coffee');
+    let liveItems = localStorage.getItem('allItems');
   }
 
   scroll(index: number, category: string) {

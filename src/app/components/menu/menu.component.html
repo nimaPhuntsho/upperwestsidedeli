@@ -30,18 +30,11 @@
       </div>
     </div>
   </div>
-  <!-- <div class="cart" fxLayout="row" fxLayoutAlign="center center">
-    <button class="btn btn-primary position-relative">
-      <i class="bi bi-bag" routerLink="check-out">
-        <span
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-        >
-          {{ numberOfOrders }}
-          <span class="visually-hidden">unread messages</span>
-        </span>
-      </i>
+  <router-outlet></router-outlet>
+  <!-- Cart -->
+  <div class="cart" fxLayout="row" fxLayoutAlign="end center">
+    <button class="btn btn-primary" color="primary" routerLink="/check-out">
+      <i class="bi bi-minecart"></i>
     </button>
-  </div> -->
+  </div>
 </div>
-
-<router-outlet></router-outlet>
