@@ -67,7 +67,7 @@
       (click)="clear()"
     >
       <fa-icon [icon]="analysis"></fa-icon>
-      <li routerLink="review">Data Analysis</li>
+      <li routerLink="analysis">Data Analysis</li>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -75,5 +75,6 @@
     <app-orders *ngIf="router.url.includes('orders')"></app-orders>
     <app-upload *ngIf="router.url.includes('upload')"></app-upload>
     <app-update *ngIf="router.url.includes('update')"></app-update>
+    <app-analytics *ngIf="router.url.includes('analysis')"></app-analytics>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,4 +1,33 @@
-<div class="container">
+<div class="container-fluid" fxLayout="column" fxLayoutAlign="start center">
+  <h1>Data Analysis</h1>
+  <div class="container" fxLayout="row wrap" fxLayoutAlign="center start">
+    <div
+      class="card completed-orders"
+      style="width: 18rem"
+      (click)="completedOrder()"
+    >
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center start">
+        <h2>Completed orders</h2>
+        <p>View all the completed orders here.</p>
+      </div>
+    </div>
+    <div class="card completed-orders" style="width: 18rem">
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center start">
+        <h2>Sales on Graph</h2>
+        <p>View sales on graphical representation</p>
+      </div>
+    </div>
+    <div class="card completed-orders" style="width: 18rem">
+      <div class="card-body" fxLayout="column" fxLayoutAlign="center start">
+        <h2>Completed orders</h2>
+        <p>View all the completed orders here.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Completed orders will be rendered accordingly -->
+
+<div class="container" *ngIf="completed">
   <div class="orders">
     <h1>Orders</h1>
     <table class="table table-bordered">
@@ -9,22 +38,21 @@
           <th class="center">Time</th>
           <th class="center">Total</th>
           <th class="center">Payment Status</th>
-          <th class="center">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let element of allOrders">
-          <td class="center" *ngIf="!element.isComplete">
+          <td class="center" *ngIf="element.isComplete">
             {{ element.orderID }}
           </td>
-          <td *ngIf="!element.isComplete">
+          <td *ngIf="element.isComplete">
             <div>
               <table class="table table-bordered">
                 <thead>
                   <tr>
                     <th class="center">Product name</th>
                     <th class="center">Quantity</th>
-                    <th class="center">Size</th>
+                    <th class="center">Size/ Unit price</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,40 +70,17 @@
               </table>
             </div>
           </td>
-          <td *ngIf="!element.isComplete" class="center">
-            {{ element.time | date : "h:mm:ss a" }}
+          <td *ngIf="element.isComplete" class="center">
+            {{ element.time | date : "MMM d, y, h:mm:ss a" }}
           </td>
-          <td *ngIf="!element.isComplete" class="center">
+          <td *ngIf="element.isComplete" class="center">
             {{ element.total | currency }}
           </td>
-          <td *ngIf="!element.isComplete" class="center">
+          <td *ngIf="element.isComplete" class="center">
             {{ element.paymentStatus | titlecase }}
-          </td>
-          <td *ngIf="!element.isComplete" class="center">
-            <div>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  (click)="completed(element.id)"
-                />
-                <label class="form-check-label"> Mark as completed </label>
-              </div>
-              <!-- <button mat-raised-button color="primary">
-                <fa-icon [icon]="delete"></fa-icon> Remove
-              </button> -->
-            </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p class="success" *ngIf="success">
-    Order completion confirmation! You can view all the completed orders in the
-    COMPLETED ORDERS SECTIONS
-  </p>
-</div>
-
-<div class="container">
-  <div class="order-wrapper"></div>
 </div>

@@ -58,6 +58,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { CheckoutDialogComponent } from './checkout-dialog/checkout-dialog.component';
 import { PaymentService } from './payment.service';
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
+import { OrderCompleteDialogComponent } from './order-complete-dialog/order-complete-dialog.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -114,6 +115,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     DialogComponent,
     CheckoutDialogComponent,
     FeedbackDialogComponent,
+    OrderCompleteDialogComponent,
   ],
   imports: [
     BrowserModule,

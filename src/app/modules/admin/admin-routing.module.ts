@@ -1,3 +1,4 @@
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { ReviewComponent } from './components/review/review.component';
 import { FeedbackComponent } from './../../components/feedback/feedback.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'review',
         component: ReviewComponent,
+      },
+      {
+        path: 'analysis',
+        component: AnalyticsComponent,
       },
       {
         path: '',

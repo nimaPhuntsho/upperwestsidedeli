@@ -1,12 +1,18 @@
+import { CartCoffee } from './../../../../components/coffee/coffee.component';
+import { OrderCompleteDialogComponent } from './../../../../order-complete-dialog/order-complete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { doc, getFirestore, updateDoc } from '@angular/fire/firestore';
 import { ViewportScroller } from '@angular/common';
 import { DataService } from 'src/app/data.service';
 import { Component } from '@angular/core';
 import { Sale } from 'src/app/components/cart/cart.component';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { retry } from 'rxjs';
 
 export interface OrderUid extends Sale {
   id: string;
-  isCompleted: boolean;
+  isComplete: boolean;
+  paymentStatus: string;
 }
 
 @Component({
@@ -21,19 +27,18 @@ export class OrdersComponent {
   today = '';
   displayOrder: OrderUid[] = [];
   orderCompleted = false;
+  delete = faTrashCan;
+  success = false;
   constructor(
     private data: DataService<Sale>,
-    private scroller: ViewportScroller
+    private scroller: ViewportScroller,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.data.getAllOrders().then((orders) => {
       orders?.subscribe((element) => {
-        element.filter((sale) => {
-          if (sale.isCompleted == false || sale.isCompleted == undefined) {
-            this.allOrders.push(sale);
-          }
-        });
+        this.allOrders = element;
       });
     });
     this.today = new Date().toDateString();
@@ -45,7 +50,7 @@ export class OrdersComponent {
 
   cook() {
     let current = this.allOrders.shift();
-    if (current && !current.isCompleted) this.displayOrder.push(current);
+    if (current && !current.isComplete) this.displayOrder.push(current);
   }
 
   scroll(id: string) {
@@ -57,15 +62,35 @@ export class OrdersComponent {
     }, 0);
   }
 
-  async completed(order: OrderUid) {
-    // console.log(id);
-    // let db = getFirestore();
-    // const ref = doc(db, 'orders', id);
-    // await updateDoc(ref, {
-    //   isComplete: true,
-    // });
-    // let index = this.displayOrder.indexOf(order);
-    // this.displayOrder.splice(index, 1);
-    this.allOrders.includes(order);
+  completed(id: string) {
+    let dialogRef = this.dialog.open(OrderCompleteDialogComponent);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === 'true') {
+        let db = getFirestore();
+        const ref = doc(db, 'orders', id);
+        await updateDoc(ref, {
+          isComplete: true,
+        });
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+        }, 6200);
+      }
+    });
+  }
+
+  getSize(size: number): string {
+    switch (size) {
+      case 4.5:
+        return 'Small';
+        break;
+
+      case 5.5:
+        return 'Medium';
+        break;
+      default:
+        return 'Large';
+    }
+    return '';
   }
 }

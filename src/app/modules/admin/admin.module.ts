@@ -23,6 +23,7 @@ import * as firebaseui from 'firebaseui';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReviewComponent } from './components/review/review.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -60,6 +61,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     DashboardComponent,
     AdminloginComponent,
     ReviewComponent,
+    AnalyticsComponent,
   ],
   imports: [
     CommonModule,

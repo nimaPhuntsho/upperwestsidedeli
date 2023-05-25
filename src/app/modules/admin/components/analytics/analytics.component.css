@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.container-fluid {
+  margin-top: 3rem;
+}
+
+h1 {
+  font-family: "Bebas Neue", cursive;
+}
+
+h2 {
+  font-size: 23px;
+}
+
+.card:hover {
+  border: 1px solid rgb(105, 105, 154);
+  cursor: pointer;
+}
+
+.span-3 {
+  width: 30%;
+}
+
+.center {
+  text-align: center;
+}
