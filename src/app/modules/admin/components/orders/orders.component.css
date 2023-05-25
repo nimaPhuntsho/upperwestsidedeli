@@ -57,6 +57,10 @@ table {
   width: 30%;
 }
 
+button {
+  border-radius: 100px;
+}
+
 @keyframes slide-right {
   0% {
     transform: translateX(-100px);

@@ -2,8 +2,6 @@
 
 .container-fluid {
   min-height: 90dvh;
-  position: relative;
-  overflow: auto;
   margin-top: 5rem;
 }
 
@@ -55,8 +53,11 @@
   background-color: black;
 }
 
+.form {
+  position: relative;
+}
+
 .form-wrapper {
-  position: absolute;
   animation: slide-right 0.5s;
 }
 
@@ -72,6 +73,11 @@ h1 {
   font-size: 18px;
   text-align: center;
   font-weight: bolder;
+}
+
+.success {
+  position: absolute;
+  top: 100%;
 }
 
 @keyframes slide-right {

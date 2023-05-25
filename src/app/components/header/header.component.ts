@@ -3,9 +3,8 @@ import { DataService } from 'src/app/data.service';
 import { Component, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  faBars,
-  faXmark,
-  faCartShopping,
+  faHouseChimney,
+  faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,6 +17,8 @@ export class HeaderComponent {
   hamburger = true;
   show = false;
   closeAnimation = false;
+  home = faHouseChimney;
+  location = faLocationDot;
   constructor() {}
 
   ngOnInit() {}

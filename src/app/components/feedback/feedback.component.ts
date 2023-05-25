@@ -1,3 +1,5 @@
+import { FeedbackDialogComponent } from './../../feedback-dialog/feedback-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/data.service';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -33,33 +35,34 @@ export class FeedbackComponent {
   showForm = false;
   hideBtn = true;
   hideFeedbacks = true;
-  constructor(private data: DataService<Feedback>) {}
+  constructor(private data: DataService<Feedback>, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.data.getFeedbacks().then((data) => {
       data?.subscribe((feedback) => {
         this.feedback$ = feedback;
-        this.feedback$.forEach((element) => {
-          if (element.isPosted) {
-            this.sortedFeedback.push(element);
-          }
-        });
       });
     });
   }
 
   postFeedbacks(form: NgForm) {
-    let feedback: Feedback = {
-      name: this.name$,
-      comment: this.comment$,
-      date: Timestamp.now().toDate().toDateString(),
-    };
-    this.data.sendFeedback(feedback);
-    form.reset();
-    this.isSuccess = true;
-    this.showForm = false;
-    this.hideBtn = true;
-    this.hideFeedbacks = true;
+    let dialogRef = this.dialog.open(FeedbackDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'true') {
+        let feedback: Feedback = {
+          name: this.name$,
+          comment: this.comment$,
+          date: Timestamp.now().toDate().toDateString(),
+        };
+        this.data.sendFeedback(feedback);
+        form.reset();
+        this.isSuccess = true;
+        this.showForm = false;
+        this.hideBtn = true;
+        this.hideFeedbacks = true;
+        this.clear();
+      }
+    });
   }
 
   feedbackForm() {
@@ -74,5 +77,11 @@ export class FeedbackComponent {
         this.sortedFeedback.push(element);
       }
     });
+  }
+
+  clear() {
+    setTimeout(() => {
+      this.isSuccess = false;
+    }, 2200);
   }
 }

@@ -1,3 +1,4 @@
+import { Order } from './components/croissant/croissant.component';
 import { Sale } from 'src/app/components/cart/cart.component';
 import {
   ProductID,
@@ -31,6 +32,7 @@ import {
 } from 'firebase/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Customer } from './components/login/login.component';
+import { OrderUid } from './modules/admin/components/orders/orders.component';
 
 @Injectable({
   providedIn: 'root',
@@ -87,7 +89,7 @@ export class DataService<Type> {
         collection(this.fs, 'orders'),
         orderBy('time')
       );
-      return collectionData(userProfileCollection) as Observable<Sale[]>;
+      return collectionData(userProfileCollection) as Observable<OrderUid[]>;
     } catch (error) {
       console.log(error);
     }

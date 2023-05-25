@@ -105,14 +105,14 @@ export class CartComponent<Type> {
     },
   ];
 
-  fakeOrder: Sale = {
-    orderID: 1,
-    time: 22,
-    date: 'Date',
-    items: this.fakeTwo,
-    coffee: this.fake,
-    total: 111,
-  };
+  // fakeOrder: Sale = {
+  //   orderID: 1,
+  //   time: 22,
+  //   date: 'Date',
+  //   items: this.fakeTwo,
+  //   coffee: this.fake,
+  //   total: 111,
+  // };
 
   constructor(
     private data: DataService<CartCoffee>,

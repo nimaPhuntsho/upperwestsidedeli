@@ -1,12 +1,11 @@
 <!-- Feedbacks posted by Admin -->
-
-<div class="container-fluid" fxLayout="row" fxLayoutAlign="center">
-  <div *ngIf="hideFeedbacks" class="feedback-container">
+<div class="container-fluid" fxLayout="column" fxLayoutAlign="center center">
+  <div class="feedback-container">
     <div>
       <h1>Recent feedbacks</h1>
     </div>
-    <div class="feedback-wrapper" *ngFor="let element of sortedFeedback">
-      <div class="feedback">
+    <div class="feedback-wrapper" *ngFor="let element of feedback$">
+      <div class="feedback" *ngIf="element.isPosted">
         <div class="author">
           <p>{{ element.name | titlecase }}</p>
           <p class="date">
@@ -19,19 +18,10 @@
         </div>
       </div>
     </div>
-    <button
-      *ngIf="hideBtn"
-      (click)="feedbackForm()"
-      color="primary"
-      mat-raised-button
-    >
-      Send your feedback
-    </button>
   </div>
 
   <!-- Feedback form for customers-->
   <div
-    *ngIf="showForm"
     class="container form-wrapper"
     fxLayout="row wrap"
     fxLayoutAlign="center center"
@@ -49,6 +39,7 @@
               type="text"
               class="form-control"
               [(ngModel)]="name$"
+              required=""
             />
           </div>
           <div>
@@ -60,6 +51,7 @@
               rows="10"
               class="form-control"
               [(ngModel)]="comment$"
+              required=""
             ></textarea>
           </div>
         </form>
@@ -67,10 +59,13 @@
           color="primary"
           mat-raised-button
           (click)="postFeedbacks(feedback)"
+          [disabled]="feedback.invalid"
         >
           Send
         </button>
-        <p *ngIf="isSuccess">We have received your feedback, THANK YOU</p>
+        <p class="success" *ngIf="isSuccess">
+          We have received your feedback, THANK YOU
+        </p>
       </div>
     </div>
   </div>

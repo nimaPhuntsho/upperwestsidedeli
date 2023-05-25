@@ -1,11 +1,11 @@
 <div
   class="footer"
   fxLayout="column"
-  fxLayoutAlign="center center"
+  fxLayoutAlign="space-between center"
   fxLayout.xs="row"
-  fxLayoutAlign.xs="center center"
+  fxLayoutAlign.lt-sm="center center"
 >
-  <div>
+  <div class="logo-container">
     <img
       src="../../../assets/images/UPPER WESTSIDE DELI.png"
       alt="logo"
@@ -18,16 +18,32 @@
     fxLayout="row"
     fxLayoutAlign="space-evenly center"
     fxLayout.lt-sm="column"
+    fxLayoutAlign.lt-sm="center start"
   >
-    <li routerLink="privacy">Privacy and Policy</li>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+      <fa-icon fxHide.gt-xs="true" [icon]="policy"></fa-icon>
+      <li routerLink="privacy">Privacy and Policy</li>
+    </div>
     <li fxHide.lt-sm="true">|</li>
-    <li routerLink="about">Ahout us</li>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+      <fa-icon fxHide.gt-xs="true" [icon]="about"></fa-icon>
+      <li routerLink="about">Ahout us</li>
+    </div>
     <li fxHide.lt-sm="true">|</li>
-    <li routerLink="contact">Contact</li>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+      <fa-icon fxHide.gt-xs="true" [icon]="contact"></fa-icon>
+      <li routerLink="contact">Contact</li>
+    </div>
     <li fxHide.lt-sm="true">|</li>
-    <li routerLink="faq">FAQ</li>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+      <fa-icon fxHide.gt-xs="true" [icon]="faq"></fa-icon>
+      <li routerLink="faq">FAQ</li>
+    </div>
     <li fxHide.lt-sm="true">|</li>
-    <li routerLink="feedback">Feedback</li>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
+      <fa-icon fxHide.gt-xs="true" [icon]="feedback"></fa-icon>
+      <li routerLink="feedback">Feedback</li>
+    </div>
   </div>
 </div>
 <div

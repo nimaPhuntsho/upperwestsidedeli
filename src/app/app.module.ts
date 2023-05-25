@@ -57,6 +57,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { DialogComponent } from './dialog/dialog.component';
 import { CheckoutDialogComponent } from './checkout-dialog/checkout-dialog.component';
 import { PaymentService } from './payment.service';
+import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -112,6 +113,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     CancelComponent,
     DialogComponent,
     CheckoutDialogComponent,
+    FeedbackDialogComponent,
   ],
   imports: [
     BrowserModule,

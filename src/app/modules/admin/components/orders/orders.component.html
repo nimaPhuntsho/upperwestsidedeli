@@ -38,14 +38,16 @@
         </div>
         <div>
           <mat-radio-group>
-            <mat-radio-button value="true">Order completed</mat-radio-button>
+            <mat-radio-button value="true" (click)="completed(element)"
+              >Order completed</mat-radio-button
+            >
           </mat-radio-group>
         </div>
       </div>
     </div>
     <div class="card prepare-btn" style="width: 12rem">
       <div class="card-body">
-        <h1>Live number of orders</h1>
+        <h1>Incoming orders</h1>
         {{ allOrders.length }}
         <div>
           <button color="primary" mat-raised-button (click)="cook()">

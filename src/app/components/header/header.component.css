@@ -96,11 +96,6 @@ span {
   font-style: normal;
 }
 
-fa-icon {
-  color: rgb(195, 227, 255);
-  font-size: 25px;
-}
-
 @media screen and (width < 900px) {
   .menu {
     width: 30%;

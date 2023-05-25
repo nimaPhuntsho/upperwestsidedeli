@@ -12,7 +12,12 @@
     fxLayoutAlign="space-between center"
     fxHide.xs="true"
   >
-    <li routerLink="/home" routerLinkActive="active">HOME</li>
+    <li routerLink="/home" routerLinkActive="active">
+      <fa-icon [icon]="home"></fa-icon>
+    </li>
+    <li routerLink="/home" routerLinkActive="active">
+      <fa-icon [icon]="location"></fa-icon>
+    </li>
     <li>
       <button color="primary" mat-raised-button routerLink="menu">
         ORDER NOW
@@ -30,7 +35,14 @@
     [class.close-up]="closeAnimation"
   >
     <div class="links">
-      <li routerLink="/home" (click)="clear()" (click)="clear()">HOME</li>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <li><fa-icon [icon]="home"></fa-icon></li>
+        <li routerLink="/home" (click)="clear()" (click)="clear()">HOME</li>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <li><fa-icon [icon]="location"></fa-icon></li>
+        <li routerLink="/home" (click)="clear()" (click)="clear()">LOCATION</li>
+      </div>
       <li>
         <button
           color="primary"
