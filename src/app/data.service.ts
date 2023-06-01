@@ -31,7 +31,6 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Customer } from './components/login/login.component';
 import { OrderUid } from './modules/admin/components/orders/orders.component';
 
 @Injectable({
@@ -154,11 +153,6 @@ export class DataService<Type> {
   async deleteFeedback(id: string) {
     let db = getFirestore();
     await deleteDoc(doc(db, 'feedbacks', id));
-  }
-
-  async addUser(user: Customer) {
-    let db = getFirestore();
-    const docRef = await addDoc(collection(db, 'Users'), user);
   }
 
   async deleteItems(id: string) {

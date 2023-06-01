@@ -41,7 +41,6 @@ import {
   Firestore,
 } from '@angular/fire/firestore';
 import { PrivacyComponent } from './components/privacy/privacy.component';
-import { LoginComponent } from './components/login/login.component';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import * as firebaseui from 'firebaseui';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -59,6 +58,10 @@ import { CheckoutDialogComponent } from './checkout-dialog/checkout-dialog.compo
 import { PaymentService } from './payment.service';
 import { FeedbackDialogComponent } from './feedback-dialog/feedback-dialog.component';
 import { OrderCompleteDialogComponent } from './order-complete-dialog/order-complete-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -105,7 +108,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     CroissantComponent,
     CartComponent,
     PrivacyComponent,
-    LoginComponent,
     UsersComponent,
     FaqComponent,
     FeedbackComponent,
@@ -144,6 +146,10 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     NgxStripeModule.forRoot(
       'pk_test_51N0G96FlNzy8IbvjunvKZF4ROTRMlvRIBSRvuQGKQfYNAYdodzUxuyAOIyX8cgPwBRI0dOMPnmY5blJJw0J7tiM400nKIpSXeN'
     ),
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
   ],
   providers: [PaymentService],
   bootstrap: [AppComponent],

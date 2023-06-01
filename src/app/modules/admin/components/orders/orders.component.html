@@ -22,7 +22,7 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th class="center">Product name</th>
+                    <th class="center">Product Name</th>
                     <th class="center">Quantity</th>
                     <th class="center">Size</th>
                   </tr>
@@ -50,7 +50,10 @@
           </td>
           <td *ngIf="!element.isComplete" class="center">
             {{ element.paymentStatus | titlecase }}
+            <span *ngIf="element.isComplete">Pending</span>
           </td>
+          <ng-template #pending>Pending</ng-template>
+
           <td *ngIf="!element.isComplete" class="center">
             <div>
               <div class="form-check">
@@ -61,9 +64,6 @@
                 />
                 <label class="form-check-label"> Mark as completed </label>
               </div>
-              <!-- <button mat-raised-button color="primary">
-                <fa-icon [icon]="delete"></fa-icon> Remove
-              </button> -->
             </div>
           </td>
         </tr>

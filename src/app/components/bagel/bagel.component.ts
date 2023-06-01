@@ -48,7 +48,7 @@ export class BagelComponent {
       quantity: this.bagel[index].quantity,
       availability: this.bagel[index].availability,
       ingredients: this.bagel[index].ingredients,
-      category: '',
+      category: 'bagel',
       price: this.bagel[index].price,
       success: false,
     };

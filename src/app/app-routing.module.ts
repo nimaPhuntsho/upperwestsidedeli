@@ -4,7 +4,6 @@ import { FeedbackComponent } from './components/feedback/feedback.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { UsersComponent } from './components/users/users.component';
-import { LoginComponent } from './components/login/login.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PiesComponent } from './components/pies/pies.component';
@@ -82,10 +81,7 @@ const routes: Routes = [
     path: 'privacy',
     component: PrivacyComponent,
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
+
   {
     path: 'user',
     component: UsersComponent,

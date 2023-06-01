@@ -24,3 +24,22 @@ h2 {
 .center {
   text-align: center;
 }
+
+.completed-orders {
+  position: relative;
+}
+
+.total p {
+  font-weight: bolder;
+  padding: 0.5rem;
+  background-color: rgb(101, 101, 119);
+  color: rgb(252, 248, 241);
+}
+
+.date {
+  color: rgb(218, 71, 71);
+}
+
+form {
+  width: 60%;
+}

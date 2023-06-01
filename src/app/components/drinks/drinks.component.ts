@@ -49,7 +49,7 @@ export class DrinksComponent {
       quantity: this.drinks[index].quantity,
       availability: this.drinks[index].availability,
       ingredients: this.drinks[index].ingredients,
-      category: '',
+      category: 'drinks',
       price: this.drinks[index].price,
       success: false,
     };

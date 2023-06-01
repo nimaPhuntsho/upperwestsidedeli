@@ -11,23 +11,21 @@
         <p>View all the completed orders here.</p>
       </div>
     </div>
-    <div class="card completed-orders" style="width: 18rem">
+    <div
+      class="card completed-orders"
+      style="width: 18rem"
+      (click)="salesReport()"
+    >
       <div class="card-body" fxLayout="column" fxLayoutAlign="center start">
-        <h2>Sales on Graph</h2>
-        <p>View sales on graphical representation</p>
-      </div>
-    </div>
-    <div class="card completed-orders" style="width: 18rem">
-      <div class="card-body" fxLayout="column" fxLayoutAlign="center start">
-        <h2>Completed orders</h2>
-        <p>View all the completed orders here.</p>
+        <h2>Sales report</h2>
+        <p>View all the daily sales records here</p>
       </div>
     </div>
   </div>
 </div>
 <!-- Completed orders will be rendered accordingly -->
 
-<div class="container" *ngIf="completed">
+<div class="container completed-orders" *ngIf="completed">
   <div class="orders">
     <h1>Orders</h1>
     <table class="table table-bordered">
@@ -84,3 +82,124 @@
     </table>
   </div>
 </div>
+
+<div *ngIf="report" fxLayout="column" fxLayoutAlign="center center">
+  <h2>Select the product and date to get the sales details</h2>
+  <form
+    action=""
+    #sales="ngForm"
+    fxLayout="row"
+    fxLayoutAlign="space-evenly center"
+  >
+    <div class="select-product">
+      <mat-form-field>
+        <mat-label>Select product</mat-label>
+        <mat-select
+          name="product"
+          id="product"
+          [(ngModel)]="selectedCategory"
+          required=""
+        >
+          <mat-option *ngFor="let element of products" [value]="element">
+            {{ element | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter">
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          (dateChange)="onDateChange($event)"
+          required=""
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        [disabled]="sales.invalid"
+        mat-raised-button
+        (click)="generateReport()"
+      >
+        Generate report
+      </button>
+    </div>
+  </form>
+  <div class="container">
+    <div fxLayout="column" *ngIf="success">
+      <h2>
+        All coffee sales on
+        <span class="date">{{ selectDate | date : "MMMM d, y" }}</span>
+      </h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Size</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let coffee of sortedCoffee">
+            <td>{{ coffee.productName | titlecase }}</td>
+            <td>{{ coffee.quantity }}</td>
+            <td>{{ getSize(coffee.size) }}</td>
+            <td>{{ coffee.total | currency }}</td>
+          </tr>
+        </tbody>
+        <div fxLayout="row" class="total">
+          <p>Total sales</p>
+          <p>{{ total | currency }}</p>
+        </div>
+      </table>
+    </div>
+    <div fxLayout="column" *ngIf="productSuccess">
+      <h2>
+        All sales on
+        <span class="date">{{ selectDate | date : "MMMM d, y" }}</span>
+      </h2>
+      <table class="table table-bordered" *ngIf="productSuccess">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of sortedProduct">
+            <td>{{ item.productName | titlecase }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency }}</td>
+            <td>{{ item.total | currency }}</td>
+          </tr>
+        </tbody>
+        <div fxLayout="row" class="total">
+          <p>Total sales</p>
+          <p>{{ itemTotal | currency }}</p>
+        </div>
+      </table>
+    </div>
+    <!-- <p *ngIf="error">
+      No data matches your query, please enter valid date and product
+    </p> -->
+  </div>
+</div>
+
+<!-- <div fxLayout="row" class="total">
+  <p>Total sales</p>
+  <p>{{ itemTotal | currency }}</p>
+</div> -->
+<!-- <h2>
+  All coffee sales on <span class="date">{{ selectDate }}</span>
+</h2> -->

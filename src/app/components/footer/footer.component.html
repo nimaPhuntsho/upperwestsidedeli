@@ -1,9 +1,10 @@
 <div
   class="footer"
-  fxLayout="column"
-  fxLayoutAlign="space-between center"
-  fxLayout.xs="row"
-  fxLayoutAlign.lt-sm="center center"
+  fxLayout="row"
+  fxLayoutAlign="space-evenly start"
+  fxLayout.xs="column"
+  fxLayoutAlign.lt-sm="center start"
+  fxLayoutGap.lt-sm="1rem"
 >
   <div class="logo-container">
     <img
@@ -15,34 +16,45 @@
   </div>
   <div
     class="items"
-    fxLayout="row"
-    fxLayoutAlign="space-evenly center"
+    fxLayout="column"
+    fxLayoutAlign="space-evenly start"
     fxLayout.lt-sm="column"
     fxLayoutAlign.lt-sm="center start"
   >
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-      <fa-icon fxHide.gt-xs="true" [icon]="policy"></fa-icon>
+      <fa-icon [icon]="policy"></fa-icon>
       <li routerLink="privacy">Privacy and Policy</li>
     </div>
-    <li fxHide.lt-sm="true">|</li>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-      <fa-icon fxHide.gt-xs="true" [icon]="about"></fa-icon>
+      <fa-icon [icon]="about"></fa-icon>
       <li routerLink="about">Ahout us</li>
     </div>
-    <li fxHide.lt-sm="true">|</li>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-      <fa-icon fxHide.gt-xs="true" [icon]="contact"></fa-icon>
+      <fa-icon [icon]="contact"></fa-icon>
       <li routerLink="contact">Contact</li>
     </div>
-    <li fxHide.lt-sm="true">|</li>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-      <fa-icon fxHide.gt-xs="true" [icon]="faq"></fa-icon>
+      <fa-icon [icon]="faq"></fa-icon>
       <li routerLink="faq">FAQ</li>
     </div>
-    <li fxHide.lt-sm="true">|</li>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="0.5rem">
-      <fa-icon fxHide.gt-xs="true" [icon]="feedback"></fa-icon>
+      <fa-icon [icon]="feedback"></fa-icon>
       <li routerLink="feedback">Feedback</li>
+    </div>
+  </div>
+  <div>
+    <div>
+      <h1 class="social">Follow us</h1>
+    </div>
+    <div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <fa-icon [icon]="facebook"></fa-icon>
+        <li>Facebook</li>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <fa-icon [icon]="instagram"></fa-icon>
+        <li>Instagram</li>
+      </div>
     </div>
   </div>
 </div>

@@ -49,7 +49,7 @@ export class BeerComponent {
       quantity: this.beer[index].quantity,
       availability: this.beer[index].availability,
       ingredients: this.beer[index].ingredients,
-      category: '',
+      category: 'beer',
       price: this.beer[index].price,
       success: false,
     };

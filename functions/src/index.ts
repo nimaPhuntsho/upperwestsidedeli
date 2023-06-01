@@ -1,3 +1,4 @@
+import { getAuth } from '@angular/fire/auth';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import Stripe from 'stripe';
@@ -101,3 +102,17 @@ exports.stripeWebhook = functions.https.onRequest(async (request, response) => {
     console.log('Order created with ID:', docRef);
   }
 });
+
+admin
+  .auth()
+  .getUserByEmail('dhirajkc031@gmail.com')
+  .then((user) => {
+    if (user.emailVerified) {
+      return admin.auth().setCustomUserClaims(user.uid, {
+        admin: true,
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });

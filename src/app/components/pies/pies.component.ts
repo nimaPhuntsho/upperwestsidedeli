@@ -48,7 +48,7 @@ export class PiesComponent {
       quantity: this.pies[index].quantity,
       availability: this.pies[index].availability,
       ingredients: this.pies[index].ingredients,
-      category: '',
+      category: 'pies',
       price: this.pies[index].price,
       success: false,
     };

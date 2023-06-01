@@ -1,3 +1,4 @@
+import { AuthGuardGuard } from './../../auth-guard.guard';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { ReviewComponent } from './components/review/review.component';
 import { FeedbackComponent } from './../../components/feedback/feedback.component';
@@ -14,6 +15,10 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
       {
         path: 'upload',
         component: UploadComponent,
@@ -33,6 +38,10 @@ const routes: Routes = [
       {
         path: 'analysis',
         component: AnalyticsComponent,
+      },
+      {
+        path: 'adlogin',
+        component: AdminloginComponent,
       },
       {
         path: '',

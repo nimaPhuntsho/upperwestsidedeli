@@ -49,7 +49,7 @@ export class SandwichComponent {
       quantity: this.sandwich[index].quantity,
       availability: this.sandwich[index].availability,
       ingredients: this.sandwich[index].ingredients,
-      category: '',
+      category: 'sandwich',
       price: this.sandwich[index].price,
       success: false,
     };

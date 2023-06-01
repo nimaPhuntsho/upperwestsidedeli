@@ -24,6 +24,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReviewComponent } from './components/review/review.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -79,6 +84,12 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatCheckboxModule,
     MatRadioModule,
+    MatDatepickerModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatSelectModule,
   ],
 })
 export class AdminModule {}

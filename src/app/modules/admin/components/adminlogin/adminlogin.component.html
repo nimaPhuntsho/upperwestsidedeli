@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column" fxLayoutAlign="center center">
+<!-- <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <h1>
     This is an admin log in page, if you are a customer click
     <span style="color: blue" routerlink="login">here</span>
@@ -23,7 +23,28 @@
       ></firebase-ui>
     </div>
   </div>
+</div> -->
+<div class="login-wrapper">
+  <div class="header" fxLayout="row" fxLayoutAlign="center start">
+    <h1>
+      This is an admin portal, if you are a customer click
+      <span style="color: blue" routerlink="login">here</span>
+    </h1>
+    <div
+      class="gmail-login"
+      fxLayout="column"
+      fxLayoutAlign="space-around center"
+    >
+      <div class="logo-container">
+        <img src="../../../assets/images/UPPER WESTSIDE DELI.png" alt="logo" />
+      </div>
+      <button mat-raised-button (click)="signInGoogle()">
+        Log in with Gmail
+      </button>
+    </div>
+  </div>
 </div>
+
 <button (click)="logout('myadmin')">Log out</button>
-<button (click)="get()">Admin</button>
+<!-- <button (click)="get()">Admin</button> -->
 <router-outlet></router-outlet>

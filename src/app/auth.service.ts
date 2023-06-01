@@ -11,7 +11,13 @@ import {
   User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, retry } from 'rxjs';
+
+export interface UserModel {
+  username: string;
+  firstName: string;
+  admin: boolean;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +27,7 @@ export class AuthService {
   message$ = this.name.asObservable();
   userData = '';
   userName = '';
+  user: UserModel | undefined;
 
   constructor(
     private auth: AngularFireAuth,
@@ -29,11 +36,18 @@ export class AuthService {
   ) {
     this.auth.authState.forEach((user) => {
       if (user) {
-        user.getIdToken().then((token) => (this.userData = token));
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        //JSON.parse(localStorage.getItem('user')!);
+        user.getIdToken().then((token) => {
+          this.userData = token;
+          const jwt = this.userData.split('.')[1];
+          localStorage.setItem('admin', JSON.stringify(jwt));
+          this.user = this.getUser(token);
+        });
       }
     });
+  }
+
+  getUser(token: string): UserModel {
+    return JSON.parse(atob(token.split('.')[1])) as UserModel;
   }
 
   logout(url: string) {
@@ -43,8 +57,8 @@ export class AuthService {
     this.router.navigate([url]);
   }
 
-  isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
+  isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('admin')!);
     return user !== null &&
       user.emailVerified !== false &&
       user.phoneNumber !== false
@@ -61,5 +75,15 @@ export class AuthService {
     const result = await log.user?.getIdTokenResult();
     const tok = result;
     console.log(tok);
+  }
+
+  googleLogin() {
+    this.auth.signInWithPopup(new GoogleAuthProvider()).then((result) => {
+      result.user?.getIdToken().then((jwt) => {
+        const token = jwt;
+        localStorage.setItem('admin', token);
+        this.user = this.getUser(token);
+      });
+    });
   }
 }

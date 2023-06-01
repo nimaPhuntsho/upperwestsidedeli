@@ -6,6 +6,7 @@ import {
   faQuestion,
   faComments,
 } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -19,6 +20,8 @@ export class FooterComponent {
   contact = faPhone;
   faq = faQuestion;
   feedback = faComments;
+  facebook = faFacebookF;
+  instagram = faInstagram;
 
   ngOnInit() {
     this.getYear();

@@ -17,14 +17,6 @@ li {
   cursor: pointer;
 }
 
-img {
-  margin: 10px;
-}
-
-.items {
-  padding: 10px;
-}
-
 .sign {
   font-family: "Libre Barcode 39 Text", cursive;
   font-size: 30px;
@@ -37,15 +29,15 @@ fa-icon {
   width: 20px;
 }
 
+.social {
+  color: rgb(194, 216, 236);
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
 @media screen and (width < 600px) {
   img {
     width: 70px;
     height: 50px;
-  }
-}
-
-@media screen and (width > 600px) {
-  .items {
-    width: 80%;
   }
 }
