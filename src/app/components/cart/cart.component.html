@@ -17,8 +17,12 @@
             <h1 class="card-title">Order review</h1>
           </div>
           <div class="float">
-            <div class="edit" *ngFor="let coffee of coffee$; let i = index">
-              <div class="name">
+            <div
+              class="edit"
+              fxLayoutAlign="space-around start"
+              *ngFor="let coffee of coffee$; let i = index"
+            >
+              <div class="name" fxLayout="column" fxLayoutAlign="center start">
                 <li class="edit-text">{{ coffee.productName | titlecase }}</li>
                 <li>{{ coffee.quantity }} x {{ coffee.size | currency }}</li>
               </div>
@@ -33,8 +37,13 @@
             </div>
 
             <!-- review/edit order for rest of the product -->
-            <div class="edit" *ngFor="let item of allItem$; let i = index">
-              <div class="name">
+            <div
+              class="edit"
+              fxLayout="row"
+              fxLayoutAlign="space-around start"
+              *ngFor="let item of allItem$; let i = index"
+            >
+              <div class="name" fxLayout="column" fxLayoutAlign="center start">
                 <li class="edit-text">{{ item.productName | titlecase }}</li>
                 <li>{{ item.quantity }} x {{ item.price | currency }}</li>
               </div>
@@ -90,7 +99,7 @@
                       mat-raised-button
                       (click)="totalAfterEdit(selectedItem)"
                     >
-                      <i class="bi bi-check2-circle"></i>
+                      <i class="bi bi-check-lg"></i>
                     </button>
                   </div>
 
@@ -114,85 +123,84 @@
                     {{ selectedCoffee.productName | titlecase }}
                   </li>
                 </div>
-                <div class="edit-section-two">
-                  <div>
-                    <select
-                      [(ngModel)]="selectedCoffee.size"
-                      name="size"
-                      class="form-select"
-                      aria-label=".form-select-sm example"
-                    >
-                      <option [value]="4.5">Small</option>
-                      <option [value]="5.5">Medium</option>
-                      <option [value]="6">Large</option>
-                    </select>
-                  </div>
-                  <div
-                    class="btn-group"
-                    role="group"
-                    aria-label="Basic example"
-                  >
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="increment(selectedCoffee)"
-                      (click)="getTotal()"
-                    >
-                      <fa-icon [icon]="addIcon"></fa-icon>
-                    </button>
-                    <div fxLayout="row" fxLayoutAlign="center center">
-                      <h6 class="quantity">{{ selectedCoffee.quantity }}</h6>
+                <div class="edit-section-two" fxLayout="column">
+                  <div fxLayout="column">
+                    <div>
+                      <select
+                        [(ngModel)]="selectedCoffee.size"
+                        name="size"
+                        class="form-select"
+                        aria-label=".form-select-sm example"
+                      >
+                        <option [value]="4.5">Small</option>
+                        <option [value]="5.5">Medium</option>
+                        <option [value]="6">Large</option>
+                      </select>
                     </div>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="decrement(selectedCoffee)"
-                      (click)="getTotal()"
+                    <div
+                      class="btn-group"
+                      role="group"
+                      aria-label="Basic example"
+                      fxLayout="row"
+                      fxLayoutGap="2%"
                     >
-                      <fa-icon [icon]="minusIcon"></fa-icon>
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      mat-raised-button
-                      (click)="getTotalAfterEdit(selectedCoffee)"
-                    >
-                      Confirm
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      mat-raised-button
-                      (click)="deleteCoffee(selectedCoffee)"
-                    >
-                      <i class="bi bi-trash"></i>
-                    </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="decrement(selectedCoffee)"
+                        (click)="getTotal()"
+                      >
+                        <fa-icon [icon]="minusIcon"></fa-icon>
+                      </button>
+                      <div fxLayout="row" fxLayoutAlign="center center">
+                        <h6 class="quantity">{{ selectedCoffee.quantity }}</h6>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="increment(selectedCoffee)"
+                        (click)="getTotal()"
+                      >
+                        <fa-icon [icon]="addIcon"></fa-icon>
+                      </button>
+                      <div fxLayout="row" fxLayoutGap="2%">
+                        <button
+                          mat-raised-button
+                          (click)="getTotalAfterEdit(selectedCoffee)"
+                          color="primary"
+                        >
+                          <i class="bi bi-check-lg"></i>
+                        </button>
+                        <button
+                          mat-raised-button
+                          (click)="deleteCoffee(selectedCoffee)"
+                          color="primary"
+                        >
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="order-total">
-          <div>
-            <h5>Total</h5>
-          </div>
-          <div>
-            <p>{{ cartTotal | currency }}</p>
-          </div>
-        </div>
+        <!-- <div class="order-total" fxLayout="row">
+          <p>Total</p>
+          <p>{{ cartTotal | currency }}</p>
+        </div> -->
         <div class="edit-order">
           <div class="add-cancel">
             <button
               routerLink="/menu"
               [disabled]="edit"
-              color="primary"
+              color="accent"
               mat-raised-button
             >
               Add more
             </button>
-            <button (click)="cancelOrder()" color="primary" mat-raised-button>
+            <button (click)="cancelOrder()" color="accent" mat-raised-button>
               Cancel
             </button>
           </div>
@@ -203,7 +211,8 @@
             (click)="checkout()"
             id="checkout-button"
           >
-            Proceed to payment
+            Checkout
+            <span> {{ cartTotal | currency }} </span>
             <span
               class="spinner-border spinner-border-sm"
               role="status"

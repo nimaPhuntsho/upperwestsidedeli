@@ -32,8 +32,8 @@ export class MenuComponent {
     'Pies',
   ];
   selectedCategory?: number;
-  cartLength = [];
-
+  cartLength: Product[] = [];
+  length = 0;
   constructor(
     private scroller: ViewportScroller,
     public router: Router,
@@ -43,10 +43,9 @@ export class MenuComponent {
 
   ngOnInit() {
     // this.stopOrders();
-    this.data.order$.subscribe((item) => (this.numberOfOrders = item));
-    JSON.parse(localStorage.getItem('user')!);
-    let liveCoffeeOrders = localStorage.getItem('coffee');
-    let liveItems = localStorage.getItem('allItems');
+    // JSON.parse(localStorage.getItem('user')!);
+    this.cartLength = JSON.parse(localStorage.getItem('allItems')!);
+    this.length = this.cartLength.length;
   }
 
   scroll(index: number, category: string) {

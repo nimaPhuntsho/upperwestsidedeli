@@ -1,5 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+
 .order-number {
   font-size: 22px;
+  font-weight: bold;
+}
+
+.tax {
+  font-weight: bold;
 }
 
 .card {
@@ -23,8 +30,25 @@
 
 .head h1 {
   font-size: 18px;
+  font-family: "Poppins", sans-serif;
 }
 
+.business-header {
+  padding: 1rem;
+}
 .business-header li {
+  text-align: center;
+}
+
+img {
+  width: 70px;
+  height: 60px;
+}
+
+.logo {
+  width: 100%;
+}
+
+.total-paid {
   font-weight: bold;
 }

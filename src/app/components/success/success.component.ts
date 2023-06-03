@@ -39,4 +39,19 @@ export class SuccessComponent {
       });
     });
   }
+
+  getSize(size: number): string {
+    switch (size) {
+      case 4.5:
+        return 'Small';
+        break;
+
+      case 5.5:
+        return 'Medium';
+        break;
+      default:
+        return 'Large';
+    }
+    return '';
+  }
 }

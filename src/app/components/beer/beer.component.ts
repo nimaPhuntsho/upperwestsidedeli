@@ -53,10 +53,10 @@ export class BeerComponent {
       price: this.beer[index].price,
       success: false,
     };
-    // this.cartList.push(order);
-    // this.data.sendData(this.cartList);
     this.data.sendData(order);
     this.beer[index].success = true;
+    // this.data.updateBadgeNumber();
+    // localStorage.setItem('cart', JSON.stringify(order));
   }
 
   resetFields(product: Product) {

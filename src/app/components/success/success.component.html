@@ -25,9 +25,20 @@
       <p>Thank you, we have received your order.</p>
     </div>
     <div class="card" style="width: 22rem">
-      <div class="business-header-wrapper">
+      <div
+        class="business-header-wrapper"
+        fxLayout="column"
+        fxLayoutAlign="start center"
+      >
+        <div class="logo" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="logo-container">
+            <img src="../../../assets/images/LOGO_black.png" alt="logo" />
+          </div>
+          <div>
+            <li class="tax">TAX INVOICE</li>
+          </div>
+        </div>
         <div class="business-header">
-          <li>TAX INVOICE</li>
           <li>SSP Australia Catering Pty Ltd</li>
           <li>Upper West Side Deli</li>
           <li>Brisbane Domestic Airport, QLD</li>
@@ -44,7 +55,7 @@
       <!-- coffee items -->
       <div class="card-body">
         <div class="coffee-items">
-          <table class="table">
+          <table class="table table-striped">
             <thead>
               <tr>
                 <th>Item</th>
@@ -55,7 +66,7 @@
             <tbody>
               <tr *ngFor="let coffee of this.currentOrder?.coffee">
                 <td>{{ coffee.productName | titlecase }}</td>
-                <td>{{ coffee.size | currency }} * {{ coffee.quantity }}</td>
+                <td>{{ getSize(coffee.size) }} * {{ coffee.quantity }}</td>
                 <td>{{ coffee.total | currency }}</td>
               </tr>
               <tr *ngFor="let item of this.currentOrder?.items">
@@ -65,9 +76,9 @@
               </tr>
             </tbody>
           </table>
-        </div>
-        <div>
-          <p>Total Paid - {{ this.currentOrder?.total | currency }}</p>
+          <div class="total-paid" fxLayout="row" fxLayoutAlign="start center">
+            <p>Total Paid - {{ this.currentOrder?.total | currency }}</p>
+          </div>
         </div>
       </div>
     </div>

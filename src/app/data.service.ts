@@ -42,8 +42,12 @@ export class DataService<Type> {
   docRef?: CollectionReference<Product>;
 
   private observableTwo = new BehaviorSubject<Type[]>([]);
-
   private numberOfItems = new BehaviorSubject<number>(0);
+  private badgeNumberSubject: BehaviorSubject<number> =
+    new BehaviorSubject<number>(0);
+  public badgeNumber$: Observable<number> =
+    this.badgeNumberSubject.asObservable();
+
   order$ = this.numberOfItems.asObservable();
   joined: any[] = [];
 
@@ -243,4 +247,8 @@ export class DataService<Type> {
   getCoffeeCart() {
     return this.coffee$;
   }
+
+  // updateBadgeNumber(badgeNumber: number) {
+  //   this.badgeNumberSubject.next(badgeNumber);
+  // }
 }
