@@ -1,9 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+mat-toolbar {
+  padding: 3rem;
+}
+
 mat-sidenav {
   width: 200px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  padding: 2rem;
 }
 
 h1 {
@@ -12,8 +15,16 @@ h1 {
   letter-spacing: 4px;
 }
 
-mat-sidenav-content {
+mat-sidenav-container {
   min-height: 100dvh;
+}
+
+.mat-menu {
+  width: 150px;
+}
+
+fa-icon {
+  padding: 10px;
 }
 
 .side-bar {
@@ -24,5 +35,18 @@ mat-sidenav-content {
 
 li {
   padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout {
+  font-size: 15px;
+}
+
+.nav-list {
+  padding: 1rem;
+}
+.nav-list:hover {
+  background-color: antiquewhite;
   cursor: pointer;
 }

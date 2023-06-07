@@ -16,10 +16,6 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: 'dashboard',
-        component: DashboardComponent,
-      },
-      {
         path: 'upload',
         component: UploadComponent,
       },

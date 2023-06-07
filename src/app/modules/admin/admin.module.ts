@@ -29,6 +29,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { LogoutDailogComponent } from './components/logout-dailog/logout-dailog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -67,6 +70,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AdminloginComponent,
     ReviewComponent,
     AnalyticsComponent,
+    LogoutDailogComponent,
   ],
   imports: [
     CommonModule,
@@ -90,6 +94,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatFormFieldModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
   ],
 })
 export class AdminModule {}

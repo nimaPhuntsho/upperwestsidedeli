@@ -360,7 +360,6 @@ export class CartComponent<Type> {
       if (result === 'true') {
         localStorage.removeItem('coffee');
         localStorage.removeItem('allItems');
-        location.reload();
       }
     });
   }

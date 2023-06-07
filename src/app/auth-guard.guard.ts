@@ -1,11 +1,10 @@
-import { AuthService } from './auth.service';
+import { AuthService, UserModel } from './auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -18,9 +17,6 @@ export class AuthGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.auth.user?.admin) {
-      this.router.navigate(['coffee']);
-    }
-    return true;
+    return this.auth.user?.admin ? true : false;
   }
 }

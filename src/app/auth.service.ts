@@ -1,3 +1,4 @@
+import { addDoc, getFirestore } from '@angular/fire/firestore';
 import { Product } from 'src/app/modules/admin/components/upload/upload.component';
 import { DataService } from 'src/app/data.service';
 import { Injectable, inject } from '@angular/core';
@@ -11,64 +12,69 @@ import {
   User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject, retry } from 'rxjs';
+import { BehaviorSubject, Subject, retry, Observable } from 'rxjs';
 
 export interface UserModel {
-  username: string;
+  userId: string;
   firstName: string;
   admin: boolean;
+}
+
+export interface MyAdmin {
+  uid: string;
+  emial: string;
+  role: boolean;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private name = new Subject<string>();
-  message$ = this.name.asObservable();
   userData = '';
   userName = '';
   user: UserModel | undefined;
+  upperAdmin = false;
+
+  admin$: Observable<MyAdmin> | undefined;
 
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
     private data: DataService<Product>
   ) {
+    let db = getFirestore();
     this.auth.authState.forEach((user) => {
       if (user) {
         user.getIdToken().then((token) => {
           this.userData = token;
           const jwt = this.userData.split('.')[1];
-          localStorage.setItem('admin', JSON.stringify(jwt));
-          this.user = this.getUser(token);
+          // localStorage.setItem('admin', JSON.stringify(jwt));
+          this.user = this.getUser(token) as UserModel;
         });
       }
     });
   }
 
   getUser(token: string): UserModel {
-    return JSON.parse(atob(token.split('.')[1])) as UserModel;
+    const payLoad = JSON.parse(window.atob(token.split('.')[1]));
+    const user: UserModel = {
+      userId: payLoad.user_id,
+      firstName: payLoad.name,
+      admin: payLoad.admin,
+    };
+    return user;
   }
 
-  logout(url: string) {
+  logout() {
     this.auth.signOut().then(() => {
       localStorage.removeItem('user');
     });
-    this.router.navigate([url]);
+    this.router.navigate(['login']);
   }
 
-  isAdmin(): boolean {
-    const user = JSON.parse(localStorage.getItem('admin')!);
-    return user !== null &&
-      user.emailVerified !== false &&
-      user.phoneNumber !== false
-      ? true
-      : false;
-  }
-
-  getJWT() {
-    return this.auth.user.subscribe((current) => current?.getIdToken());
-  }
+  // getJWT() {
+  //   return this.auth.user.subscribe((current) => current?.getIdToken());
+  // }
 
   async signIn() {
     const log = await this.auth.signInWithPopup(new GoogleAuthProvider());
@@ -78,11 +84,18 @@ export class AuthService {
   }
 
   googleLogin() {
-    this.auth.signInWithPopup(new GoogleAuthProvider()).then((result) => {
-      result.user?.getIdToken().then((jwt) => {
-        const token = jwt;
+    let db = getFirestore();
+    this.auth.signInWithPopup(new GoogleAuthProvider()).then(async (result) => {
+      result.user?.getIdToken().then((token) => {
         localStorage.setItem('admin', token);
-        this.user = this.getUser(token);
+        this.user = this.getUser(token) as UserModel;
+        if (this.user.admin) {
+          this.router.navigate(['myadmin']);
+        } else {
+          alert('Invalid username and password');
+          localStorage.removeItem('admin');
+          this.router.navigate(['login']);
+        }
       });
     });
   }

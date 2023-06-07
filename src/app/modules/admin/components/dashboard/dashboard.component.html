@@ -1,4 +1,5 @@
 <mat-toolbar
+  class="tool-bar"
   color="primary"
   fxLayout="row"
   fxLayoutAlign="space-between center"
@@ -6,7 +7,7 @@
   <div>
     <h1>Upper Westside Deli</h1>
   </div>
-  <div>
+  <!-- <div>
     <fa-icon
       [icon]="faBars"
       (click)="toogle()"
@@ -19,53 +20,51 @@
       (click)="sidenav.toggle()"
       *ngIf="active"
     ></fa-icon>
+  </div> -->
+
+  <!-- Logout btn -->
+  <!-- <div class="logout" fxLayout="row" fxLayoutAlign="start center">
+    <fa-icon [icon]="logout"></fa-icon>
+    <li>Logout</li>
+  </div> -->
+
+  <div fxLayoutGap="1%">
+    <button mat-button [mat-menu-trigger-for]="menu">
+      <i class="bi bi-caret-down-fill"></i>Hi, {{ userName }}
+    </button>
+    <mat-menu #menu="matMenu" fxLayout="row">
+      <button (click)="adminLogout()" class="mat-menu" mat-menu-item>
+        <fa-icon [icon]="logout"></fa-icon>Log out
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="'side'">
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="sidenav.close()"
-      (click)="clear()"
-    >
+  <mat-sidenav
+    #sidenav
+    [mode]="'side'"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    opened=""
+  >
+    <div class="nav-list" fxLayout="row" fxLayoutAlign="start center">
       <fa-icon [icon]="order"></fa-icon>
       <li routerLink="update" routerLink="orders">Orders</li>
     </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="sidenav.close()"
-      (click)="clear()"
-    >
+    <div class="nav-list" fxLayout="row" fxLayoutAlign="start center">
       <fa-icon [icon]="update"></fa-icon>
       <li routerLink="update">Update</li>
     </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="sidenav.close()"
-      (click)="clear()"
-    >
+    <div class="nav-list" fxLayout="row" fxLayoutAlign="start center">
       <fa-icon [icon]="upload"></fa-icon>
       <li routerLink="update" routerLink="upload">Upload</li>
     </div>
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="sidenav.close()"
-      (click)="clear()"
-    >
+    <div class="nav-list" fxLayout="row" fxLayoutAlign="start center">
       <fa-icon [icon]="review"></fa-icon>
       <li routerLink="review">Feedbacks</li>
     </div>
 
-    <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
-      (click)="sidenav.close()"
-      (click)="clear()"
-    >
+    <div class="nav-list" fxLayout="row" fxLayoutAlign="start center">
       <fa-icon [icon]="analysis"></fa-icon>
       <li routerLink="analysis">Analysis</li>
     </div>

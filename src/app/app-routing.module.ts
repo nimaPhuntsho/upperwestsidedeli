@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { CancelComponent } from './components/cancel/cancel.component';
 import { SuccessComponent } from './components/success/success.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
@@ -21,6 +22,7 @@ import { SandwichComponent } from './components/sandwich/sandwich.component';
 import { BagelComponent } from './components/bagel/bagel.component';
 import { BeerComponent } from './components/beer/beer.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
+import { Auth } from '@angular/fire/auth';
 
 const routes: Routes = [
   {
@@ -103,7 +105,12 @@ const routes: Routes = [
     component: CancelComponent,
   },
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: 'myadmin',
+    //canActivate: [AuthGuardGuard],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
