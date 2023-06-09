@@ -12,6 +12,7 @@ export class LoginComponent {
 
   signInGoogle() {
     this.auth.googleLogin();
+    let now = new Date();
   }
 
   logout() {
