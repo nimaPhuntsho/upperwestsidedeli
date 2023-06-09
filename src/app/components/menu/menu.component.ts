@@ -41,12 +41,7 @@ export class MenuComponent {
     private auth: AuthService
   ) {}
 
-  ngOnInit() {
-    // this.stopOrders();
-    // JSON.parse(localStorage.getItem('user')!);
-    this.cartLength = JSON.parse(localStorage.getItem('allItems')!);
-    this.length = this.cartLength.length;
-  }
+  ngOnInit() {}
 
   scroll(index: number, category: string) {
     this.scroller.scrollToAnchor(category.toLowerCase());

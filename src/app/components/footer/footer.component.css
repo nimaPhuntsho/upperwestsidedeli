@@ -17,6 +17,10 @@ li {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
 .sign {
   font-family: "Libre Barcode 39 Text", cursive;
   font-size: 30px;

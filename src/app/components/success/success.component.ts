@@ -23,7 +23,6 @@ export class SuccessComponent {
     let storedId = localStorage.getItem('orderId');
     if (storedId) {
       this.id = storedId;
-      console.log(this.id);
     }
 
     this.dataSale.getAllProducts().then((res) => {

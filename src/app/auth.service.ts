@@ -48,7 +48,7 @@ export class AuthService {
         user.getIdToken().then((token) => {
           this.userData = token;
           const jwt = this.userData.split('.')[1];
-          // localStorage.setItem('admin', JSON.stringify(jwt));
+          localStorage.setItem('admin', JSON.stringify(jwt));
           this.user = this.getUser(token) as UserModel;
         });
       }
@@ -92,7 +92,7 @@ export class AuthService {
         if (this.user.admin) {
           this.router.navigate(['myadmin']);
         } else {
-          alert('Invalid username and password');
+          alert('Invalid log in credentials');
           localStorage.removeItem('admin');
           this.router.navigate(['login']);
         }

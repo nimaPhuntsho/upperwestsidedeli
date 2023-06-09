@@ -9,7 +9,5 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent {
   constructor(private auth: AuthService) {}
 
-  ngOnInit() {
-    console.log(this.auth.upperAdmin);
-  }
+  ngOnInit() {}
 }
