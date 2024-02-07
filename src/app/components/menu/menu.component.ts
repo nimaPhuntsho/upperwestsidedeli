@@ -23,7 +23,7 @@ export class MenuComponent {
   products = [];
   numberOfOrders = 0;
   category = [
-    'Coffee',
+    'Sandwich',
     'Beer',
     'Croissant',
     'Bagel',

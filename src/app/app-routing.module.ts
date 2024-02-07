@@ -110,7 +110,7 @@ const routes: Routes = [
   },
   {
     path: 'myadmin',
-    canActivate: [AuthGuardGuard],
+    // canActivate: [AuthGuardGuard],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
